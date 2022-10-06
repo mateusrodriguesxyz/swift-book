@@ -50,7 +50,7 @@ prefix-expression --> in-out-expression
 ### Expressão In-Out
 
 Uma *expressão _in-out_* marca uma variável 
-que está sendo passda 
+que está sendo passada 
 como um argumento in-out para uma expressão de chamada de função.
 
 ```
