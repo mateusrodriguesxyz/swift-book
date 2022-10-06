@@ -456,10 +456,7 @@ O operador `is` checa em tempo de execução se a *expression*
 pode ser usada como do *type* específico.
 O operador retorna _true_ se a *expression* pode ser usada como o *type* específico;
 caso contrário, retorna _false_.
-The `is` operator checks at runtime whether the *expression*
-can be cast to the specified *type*.
-It returns _true_ if the *expression* can be cast to the specified *type*;
-otherwise, it returns _false_.
+
 
 @Comment {
   - test: `triviallyTrueIsAndAs`
@@ -492,7 +489,7 @@ otherwise, it returns _false_.
   ```
 }
 
-O operador _as_ performa uma instância
+O operador `as` performa uma instância
 quando se sabe em tempo de compilação
 que a instância sempre funciona, 
 assim como _upcasting_ e _bridging_.
