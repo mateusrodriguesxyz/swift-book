@@ -47,27 +47,26 @@ prefix-expression --> in-out-expression
 ```
 
 
-### In-Out Expression
+### Expressão In-Out
 
-An *in-out expression* marks a variable
-that's being passed
-as an in-out argument to a function call expression.
+Uma *expressão _in-out_* marca uma variável 
+que está sendo passda 
+como um argumento in-out para uma expressão de chamada de função.
 
 ```
 &<#expression#>
 ```
 
+Para mais informações sobre parâmetros in-out e para ver um exemplo,
+veja <doc:Functions#In-Out-Parameters>.
 
-For more information about in-out parameters and to see an example,
-see <doc:Functions#In-Out-Parameters>.
-
-In-out expressions are also used
-when providing a non-pointer argument
-in a context where a pointer is needed,
-as described in <doc:Expressions#Implicit-Conversion-to-a-Pointer-Type>.
+Expressões in-out também são usadas
+quando se provêm um argumento que não é um ponteiro
+em um contexto onde um ponteiro é necessário,
+como descrito em <doc:Expressions#Implicit-Conversion-to-a-Pointer-Type>.
 
 ```
-Grammar of an in-out expression
+Gramática de uma expressão in-out
 
 in-out-expression --> ``&`` identifier
 ```
