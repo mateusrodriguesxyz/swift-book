@@ -173,7 +173,7 @@ o Ás de Espada possui o valor de `1` ou `11`.
 
 ## Referenciando Tipos Aninhados
 
-Para usar um tipo aninhado fora do seu contexto de definição
+Para usar um tipo aninhado fora do seu contexto de definição,
 prefixe seu nome com o nome do tipo em que está aninhado:
 
 ```swift
