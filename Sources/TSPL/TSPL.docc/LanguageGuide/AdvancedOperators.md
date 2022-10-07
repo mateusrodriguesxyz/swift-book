@@ -396,26 +396,26 @@ wraps around from the maximum valid integer value back to the minimum,
 and overflow in the negative direction
 wraps around from the minimum value to the maximum.
 
-## Precedence and Associativity
+## Precedência e Associatividade
 
-Operator *precedence* gives some operators higher priority than others;
-these operators are applied first.
+A *precedência* do operador dá a alguns operadores prioridade mais alta do que a outros;
+esses operadores são aplicados primeiro.
 
-Operator *associativity* defines how operators of the same precedence
-are grouped together ---
-either grouped from the left, or grouped from the right.
-Think of it as meaning “they associate with the expression to their left,”
-or “they associate with the expression to their right.”
+A *associatividade* do operador define como os operadores de mesma precedência
+estão agrupados ---
+agrupados à esquerda ou à direita.
+Pense nisso como significando “eles associam com a expressão à sua esquerda”,
+ou “associam-se à expressão à sua direita”.
 
-It's important to consider
-each operator's precedence and associativity
-when working out the order in which a compound expression will be calculated.
-For example,
-operator precedence explains why the following expression equals `17`.
+É importante considerar
+a precedência e associatividade de cada operador
+ao calcular a ordem na qual uma expressão composta será executada.
+Por exemplo,
+a precedência do operador explica por que a seguinte expressão é igual a `17`.
 
 ```swift
 2 + 3 % 4 * 5
-// this equals 17
+// isso é igual a 17
 ```
 
 
@@ -423,26 +423,26 @@ operator precedence explains why the following expression equals `17`.
 
 
 
-If you read strictly from left to right,
-you might expect the expression to be calculated as follows:
+Se você ler estritamente da esquerda para a direita,
+você pode esperar que a expressão seja calculada da seguinte forma:
 
-- `2` plus `3` equals `5`
-- `5` remainder `4` equals `1`
-- `1` times `5` equals `5`
+- `2` mais `3` é igual a `5`
+- `5` módulo `4` é igual a `1`
+- `1` vezes `5` é igual a `5`
 
-However, the actual answer is `17`, not `5`.
-Higher-precedence operators are evaluated before lower-precedence ones.
-In Swift, as in C,
-the remainder operator (`%`) and the multiplication operator (`*`)
-have a higher precedence than the addition operator (`+`).
-As a result, they're both evaluated before the addition is considered.
+No entanto, a resposta certa é `17`, não `5`.
+Os operadores de maior precedência são avaliados antes dos de menor precedência.
+Em Swift, como em C,
+o operador de módulo (`%`) e o operador de multiplicação (`*`)
+têm uma precedência maior do que o operador de adição (`+`).
+Como resultado, ambos são avaliados antes que a adição seja considerada.
 
-However, remainder and multiplication have the *same* precedence as each other.
-To work out the exact evaluation order to use,
-you also need to consider their associativity.
-Remainder and multiplication both associate with the expression to their left.
-Think of this as adding implicit parentheses around these parts of the expression,
-starting from their left:
+No entanto, módulo e multiplicação têm a *mesma* precedência.
+Para descobrir a ordem exata de avaliação a ser usada,
+você também precisa considerar sua associatividade.
+O módulo e a multiplicação associam-se à expressão à sua esquerda.
+Pense nisso como adicionar parênteses implícitos em torno dessas partes da expressão,
+começando pela esquerda:
 
 ```swift
 2 + ((3 % 4) * 5)
@@ -453,7 +453,7 @@ starting from their left:
 
 
 
-`(3 % 4)` is `3`, so this is equivalent to:
+`(3 % 4)` é `3`, então isso é equivalente a:
 
 ```swift
 2 + (3 * 5)
@@ -464,7 +464,7 @@ starting from their left:
 
 
 
-`(3 * 5)` is `15`, so this is equivalent to:
+`(3 * 5)` é `15`, então isso é equivalente a:
 
 ```swift
 2 + 15
@@ -475,17 +475,17 @@ starting from their left:
 
 
 
-This calculation yields the final answer of `17`.
+Este cálculo produz a resposta final de `17`.
 
-For information about the operators provided by the Swift standard library,
-including a complete list of the operator precedence groups and associativity settings,
-see [Operator Declarations](https://developer.apple.com/documentation/swift/operator_declarations).
+Para obter informações sobre os operadores fornecidos pela biblioteca padrão do Swift,
+incluindo uma lista completa dos grupos de precedência do operador e configurações de associatividade,
+Veja [Operator Declarations](https://developer.apple.com/documentation/swift/operator_declarations).
 
-> Note: Swift's operator precedences and associativity rules are simpler and more predictable
-> than those found in C and Objective-C.
-> However, this means that they aren't exactly the same as in C-based languages.
-> Be careful to ensure that operator interactions still behave in the way you intend
-> when porting existing code to Swift.
+> Nota: as precedências de operadores e as regras de associatividade do Swift são mais simples e previsíveis
+> do que os encontrados em C e Objective-C.
+> No entanto, isso significa que eles não são exatamente os mesmos que em linguagens baseadas em C.
+> Tenha cuidado em garantir que as interações dos operadores ainda se comportem da maneira esperada
+> ao portar um código para o Swift.
 
 ## Operator Methods
 
