@@ -601,49 +601,49 @@ let alsoPositive = -negative
 
 
 
-### Compound Assignment Operators
+### Operadores de Atribuição Composta
 
-*Compound assignment operators* combine assignment (`=`) with another operation.
-For example, the addition assignment operator (`+=`)
-combines addition and assignment into a single operation.
-You mark a compound assignment operator's left input parameter type as `inout`,
-because the parameter's value will be modified directly from within the operator method.
+*Operadores de atribuição composta* combinam atribuição ('=') com outra operação.
+Por exemplo, o operador de atribuição de adição ('+=')
+combina adição e atribuição em uma única operação
+Você marca o tipo de parâmetro de entrada esquerdo de um operador de atribuição composto como 'inout',
+pois o valor do parâmetro será modificado diretamente de dentro do método o operador.
 
-The example below implements
-an addition assignment operator method for `Vector2D` instances:
+O exemplo abaixo implementa
+um operador de atribuição de adição para instâncias 'Vector2D':
 
-```swift
+'''swift
 extension Vector2D {
     static func += (left: inout Vector2D, right: Vector2D) {
         left = left + right
     }
 }
-```
+'''
 
 
 
 
-Because an addition operator was defined earlier,
-you don't need to reimplement the addition process here.
-Instead, the addition assignment operator method
-takes advantage of the existing addition operator method,
-and uses it to set the left value to be the left value plus the right value:
+Como um operador de adição foi definido anteriormente,
+você não precisa reimplementar o processo de adição aqui.
+Nesse caso, o método do operador de atribuição de adição
+aproveita do método de operador de adição existente,
+e o uso para definir o valor esquerdo como o valor esquerdo somado ao valor direito:
 
-```swift
+'''swift
 var original = Vector2D(x: 1.0, y: 2.0)
 let vectorToAdd = Vector2D(x: 3.0, y: 4.0)
 original += vectorToAdd
-// original now has values of (4.0, 6.0)
-```
+// agora, original tem os valores de (4.0, 6.0)
+'''
 
 
 
 
-> Note: It isn't possible to overload the default
-> assignment operator (`=`).
-> Only the compound assignment operators can be overloaded.
-> Similarly, the ternary conditional operator
-> (`a ? b : c`) can't be overloaded.
+> Nota: Não é possível sobrecarregar o padrão
+> operador de atribuição (‘=‘)
+> Somente os operadores de tribuição compostos podem ser sobrecarregados.
+> Igualmente, o operador condicional ternário
+> ('a ? b : c') não podem ser sobrecarregados.
 
 
 
