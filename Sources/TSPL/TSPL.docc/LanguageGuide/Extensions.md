@@ -44,11 +44,11 @@ Você também pode estender um tipo genérico para adicionar funcionalidade cond
 
 > Nota: Se você definir uma extensão para adicionar uma nova funcionalidade a um tipo existente, a nova funcionalidade estará disponível em todas as instâncias existentes desse tipo, mesmo que tenham sido criadas antes da definição da extensão.
 
-## Computed Properties
+## Propriedades Computadas
 
-Extensions can add computed instance properties and computed type properties to existing types.
-This example adds five computed instance properties to Swift's built-in `Double` type,
-to provide basic support for working with distance units:
+Extensões podem adicionar propriedades computadas de instância e propriedades computadas de tipo a tipos existentes. 
+Este exemplo adiciona cinco propriedades computadas de instância ao tipo built-in `Double` do Swift,
+para fornecer suporte básico para trabalhar com unidades à distância:
 
 ```swift
 extension Double {
@@ -59,39 +59,36 @@ extension Double {
    var ft: Double { return self / 3.28084 }
 }
 let oneInch = 25.4.mm
-print("One inch is \(oneInch) meters")
-// Prints "One inch is 0.0254 meters"
+print("Uma polegada é \(oneInch) metros")
+// imprime "Uma polegada é 0.0254 metros"
 let threeFeet = 3.ft
-print("Three feet is \(threeFeet) meters")
-// Prints "Three feet is 0.914399970739201 meters"
+print("Três pés é \(threeFeet) metros")
+// Imprime "Três pés é 0.914399970739201 metros"
 ```
 
+Estas propriedades computadas expressam que o valor de um `Double`
+deve ser considerado como uma certa unidade de comprimento.
+Apesar de serem implementadas como propriedades computadas,
+os nomes destas propriedades podem ser anexados a um
+literal de ponto flutuante com sintaxe de ponto,
+como uma forma de usar aquele valor literal para realizar conversões a distância.
 
+Neste exemplo, um `Double` de valor `1.0` é coonsiderado para representar "um metro".
+E é por isso que a propriedade computada `m` reforta `self` ---
+a expressão `1.m` é considerada para calcular um `Double`de valor `1.0`.
 
+Outras unidades requerem alguma conversão para serem expressas como um valor medido em metros. 
+Um quilometro é mesma coisa de 1.000 metros,
+então a propriedade computada `km` multiplica o valor por `1_000.00`
+para convertê-lo em um numero expresso em metros. 
+Similarmente, temos 3,28084 pés em metros,
+e então a propriedade computada `ft` divide o valor "Double" subjacente
+por  `3.28084` para convertê-lo de pés para metros. 
 
-These computed properties express that a `Double` value
-should be considered as a certain unit of length.
-Although they're implemented as computed properties,
-the names of these properties can be appended to
-a floating-point literal value with dot syntax,
-as a way to use that literal value to perform distance conversions.
-
-In this example, a `Double` value of `1.0` is considered to represent “one meter”.
-This is why the `m` computed property returns `self` ---
-the expression `1.m` is considered to calculate a `Double` value of `1.0`.
-
-Other units require some conversion to be expressed as a value measured in meters.
-One kilometer is the same as 1,000 meters,
-so the `km` computed property multiplies the value by `1_000.00`
-to convert into a number expressed in meters.
-Similarly, there are 3.28084 feet in a meter,
-and so the `ft` computed property divides the underlying `Double` value
-by `3.28084`, to convert it from feet to meters.
-
-These properties are read-only computed properties,
-and so they're expressed without the `get` keyword, for brevity.
-Their return value is of type `Double`,
-and can be used within mathematical calculations wherever a `Double` is accepted:
+Essas propriedades são propriedades computadas apenas de leitura,
+então elas são expressadas sem a palavra-chave `get`, para fins de abreviação. 
+Seu retorno é do tipo `Double	` e pode ser
+usado dentro de cálculos matemáticos sempre que um `Double` é aceito:
 
 ```swift
 let aMarathon = 42.km + 195.m
@@ -99,14 +96,8 @@ print("A marathon is \(aMarathon) meters long")
 // Prints "A marathon is 42195.0 meters long"
 ```
 
-
-
-
-> Note: Extensions can add new computed properties, but they can't add stored properties,
-> or add property observers to existing properties.
-
-
-
+> Note: Extensões podem adicionar notas propriedades cmoputadas, mas não podem
+> propriedades guardadas ou adicionar observadores em propriedades existentes.
 
 
 ## Initializers
