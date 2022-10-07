@@ -109,27 +109,30 @@ print("A marathon is \(aMarathon) meters long")
 
 
 
-## Initializers
+## Inicializadores
 
-Extensions can add new initializers to existing types.
-This enables you to extend other types to accept
-your own custom types as initializer parameters,
-or to provide additional initialization options
-that were not included as part of the type's original implementation.
+Extensões podem adicionar novos inicializadores a tipos existentes.
+Isso permite você extender outros tipos para aceitar
+seus próprios tipos personalizados como parâmetros de inicialização,
+ou então para providenciar opções adicionais de inicialização
+que antes não eram parte da implementação original do tipo. 
 
-Extensions can add new convenience initializers to a class,
-but they can't add new designated initializers or deinitializers to a class.
-Designated initializers and deinitializers
-must always be provided by the original class implementation.
+Extensões podem adicionar novos inicializadores de conveniência a uma classe,
+mas eles não podem adicionar nosos inicializadores designados ou desinicializadores a uma classe.
+Inicializadores designados e desinicializadores
+devem sempre ser providenciados pela implementação original da classe. 
 
-If you use an extension to add an initializer to a value type that provides
-default values for all of its stored properties
-and doesn't define any custom initializers,
-you can call the default initializer and memberwise initializer for that value type
-from within your extension's initializer.
-This wouldn't be the case if you had written the initializer
-as part of the value type's original implementation,
-as described in <doc:Initialization#Initializer-Delegation-for-Value-Types>.
+Se você usa uma extensão para adicionar um inicializador a um tipo de valor que 
+provê valores padrões para todas as suas propriedades armazenadas 
+e não define nenhum inicializador customizado,
+você pode chamar o inicializador padrão e inicializador _memberwise_  para o
+tipo de valor de dentro de seu inicializador da extensão. 
+
+Este não seria o caso se você tivesse escrito o inicializador 
+como parte da implementação original do tipo de valor,
+como descrito em <doc:Initialization#Initializer-Delegation-for-Value-Types>.
+
+-------------------------------------------------------------------------------------------------------- > > estou aqui
 
 If you use an extension to add an initializer to a structure
 that was declared in another module,
