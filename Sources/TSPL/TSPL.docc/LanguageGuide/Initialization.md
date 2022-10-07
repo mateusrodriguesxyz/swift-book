@@ -145,19 +145,19 @@ with input parameters and optional property types,
 or by assigning constant properties during initialization,
 as described in the following sections.
 
-### Initialization Parameters
+### Parâmetros de Inicialização
 
-You can provide *initialization parameters* as part of an initializer's definition,
-to define the types and names of values that customize the initialization process.
-Initialization parameters have the same capabilities and syntax
-as function and method parameters.
+Você pode fornecer *parâmetros de inicialização* como parte da definição de um inicializador,
+para definir os tipos e nomes de valores que personalizam o processo de inicialização.
+Os parâmetros de inicialização têm os mesmos recursos e sintaxe
+de parâmetros de funções e métodos.
 
-The following example defines a structure called `Celsius`,
-which stores temperatures expressed in degrees Celsius.
-The `Celsius` structure implements two custom initializers called
-`init(fromFahrenheit:)` and `init(fromKelvin:)`,
-which initialize a new instance of the structure
-with a value from a different temperature scale:
+O exemplo a seguir define uma estrutura chamada `Celsius`,
+que armazena temperaturas expressas em graus Celsius.
+A estrutura `Celsius` implementa dois inicializadores personalizados chamados
+`init(fromFahrenheit:)` e `init(fromKelvin:)`,
+que inicializam uma nova instância da estrutura
+com um valor de uma escala de temperatura diferente:
 
 ```swift
 struct Celsius {
@@ -198,13 +198,13 @@ let freezingPointOfWater = Celsius(fromKelvin: 273.15)
   ```
 }
 
-The first initializer has a single initialization parameter
-with an argument label of `fromFahrenheit` and a parameter name of `fahrenheit`.
-The second initializer has a single initialization parameter
-with an argument label of `fromKelvin` and a parameter name of `kelvin`.
-Both initializers convert their single argument into
-the corresponding Celsius value
-and store this value in a property called `temperatureInCelsius`.
+O primeiro inicializador tem um único parâmetro de inicialização
+com argumento de título `fromFahrenheit` e um nome de parâmetro `fahrenheit`.
+O segundo inicializador tem um único parâmetro de inicialização
+com argumento de título `fromKelvin` e um nome de parâmetro  `kelvin`.
+Os dois inicializadores convertem seus únicos argumentos no
+valor Celsius correspondente
+e armazenam esse valor numa propriedade chamada `temperatureInCelsius`.
 
 @Comment {
   TODO: I need to provide an example of default values for initializer parameters,
