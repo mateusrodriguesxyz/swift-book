@@ -47,7 +47,7 @@ prefix-expression --> in-out-expression
 ```
 
 
-### Expressão In-Out
+### Expressão _In-Out_
 
 Uma *expressão _in-out_* marca uma variável 
 que está sendo passada 
