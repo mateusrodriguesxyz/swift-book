@@ -66,7 +66,7 @@ em um contexto onde um ponteiro é necessário,
 como descrito em <doc:Expressions#Implicit-Conversion-to-a-Pointer-Type>.
 
 ```
-Gramática de uma expressão in-out
+Gramática de uma expressão _in-out_
 
 in-out-expression --> ``&`` identifier
 ```
