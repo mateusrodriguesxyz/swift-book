@@ -60,7 +60,7 @@ como um argumento _in-out_ para uma expressão de chamada de função.
 Para mais informações sobre parâmetros _in-out_ e para ver um exemplo,
 veja <doc:Functions#In-Out-Parameters>.
 
-Expressões in-out também são usadas
+Expressões _in-out_ também são usadas
 quando se provê um argumento que não é um ponteiro
 em um contexto onde um ponteiro é necessário,
 como descrito em <doc:Expressions#Implicit-Conversion-to-a-Pointer-Type>.
