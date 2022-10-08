@@ -57,7 +57,7 @@ como um argumento _in-out_ para uma expressão de chamada de função.
 &<#expression#>
 ```
 
-Para mais informações sobre parâmetros in-out e para ver um exemplo,
+Para mais informações sobre parâmetros _in-out_ e para ver um exemplo,
 veja <doc:Functions#In-Out-Parameters>.
 
 Expressões in-out também são usadas
