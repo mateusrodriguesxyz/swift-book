@@ -61,7 +61,7 @@ Para mais informações sobre parâmetros in-out e para ver um exemplo,
 veja <doc:Functions#In-Out-Parameters>.
 
 Expressões in-out também são usadas
-quando se provêm um argumento que não é um ponteiro
+quando se provê um argumento que não é um ponteiro
 em um contexto onde um ponteiro é necessário,
 como descrito em <doc:Expressions#Implicit-Conversion-to-a-Pointer-Type>.
 
