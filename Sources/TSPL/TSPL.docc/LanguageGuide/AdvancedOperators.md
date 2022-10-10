@@ -556,18 +556,18 @@ to make the vector `(5.0, 5.0)`, as illustrated below.
 ![](vectorAddition)
 
 
-### Prefix and Postfix Operators
+### Operadores Prefixo e Pós-Fixo
 
-The example shown above demonstrates a custom implementation of a binary infix operator.
-Classes and structures can also provide implementations
-of the standard *unary operators*.
-Unary operators operate on a single target.
-They're *prefix* if they precede their target (such as `-a`)
-and *postfix* operators if they follow their target (such as `b!`).
+O Exemplo mostrado abaixo demonstra uma implementação customizada de um
+operador binário infíxo.
+Classes e estruturas também podem prover implementações 
+dos *operadores unários* padrões.
+Operadores unários operam em um único alvo.
+Eles são *prefixos* se precedem seu alvo (assim como `-a`)
+e *pós-fixos* os que sucedem o seu alvo (assim como `b!`).
 
-You implement a prefix or postfix unary operator by writing
-the `prefix` or `postfix` modifier
-before the `func` keyword when declaring the operator method:
+Implementa-se um operador unário prefixo ou pós-fixo por escrever o modificador `prefix` ou `postfix`
+antes da palavra-chave `func` quando se declara um método de operador:
 
 ```swift
 extension Vector2D {
@@ -580,15 +580,13 @@ extension Vector2D {
 
 
 
-The example above implements the unary minus operator
-(`-a`) for `Vector2D` instances.
-The unary minus operator is a prefix operator,
-and so this method has to be qualified with the `prefix` modifier.
+O exemplo acima implementa o operador unário menos (`-a`)
+para intâncias `Vector2D`.
+O operador unário menos é um operador prefixo,
+então esse método deve ser arguido com o modificador `prefix`.
 
-For simple numeric values, the unary minus operator converts
-positive numbers into their negative equivalent and vice versa.
-The corresponding implementation for `Vector2D` instances
-performs this operation on both the `x` and `y` properties:
+Para valores numéricos simples, o operador unário menos converte números positivos em seus equivalentes negativos e vice-versa.
+A implementação correspondente para instâncias _Vector2D_ performam essa operação em ambas propriedades `x` e `y`.
 
 ```swift
 let positive = Vector2D(x: 3.0, y: 4.0)
