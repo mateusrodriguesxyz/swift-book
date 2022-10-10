@@ -96,8 +96,8 @@ print("A marathon is \(aMarathon) meters long")
 // Prints "A marathon is 42195.0 meters long"
 ```
 
-> Note: Extensões podem adicionar notas propriedades cmoputadas, mas não podem
-> propriedades guardadas ou adicionar observadores em propriedades existentes.
+> Note: Extensões podem adicionar novas propriedades computadas, mas não podem adicionar 
+> propriedades guardadas, ou adicionar observadores em propriedades existentes.
 
 
 ## Initializers
