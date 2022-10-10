@@ -66,7 +66,7 @@ print("Três pés é \(threeFeet) metros")
 // Imprime "Três pés é 0.914399970739201 metros"
 ```
 
-Estas propriedades computadas expressam que o valor de um `Double`
+Estas propriedades computadas expressam que o valor de um `_Double_`
 deve ser considerado como uma certa unidade de comprimento.
 Apesar de serem implementadas como propriedades computadas,
 os nomes destas propriedades podem ser anexados a um
