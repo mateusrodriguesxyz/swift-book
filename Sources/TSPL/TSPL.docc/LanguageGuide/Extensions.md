@@ -48,7 +48,7 @@ Você também pode estender um tipo genérico para adicionar funcionalidade cond
 
 Extensões podem adicionar propriedades computadas de instância e propriedades computadas de tipo a tipos existentes. 
 Este exemplo adiciona cinco propriedades computadas de instância ao tipo built-in `_Double_` do Swift,
-para fornecer suporte básico para trabalhar com unidades à distância:
+para fornecer suporte básico para trabalhar com unidades de distância:
 
 ```swift
 extension Double {
