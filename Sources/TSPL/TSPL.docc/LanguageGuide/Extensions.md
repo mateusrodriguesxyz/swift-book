@@ -100,36 +100,38 @@ print("A maratona é de \(aMarathon) metros")
 > propriedades guardadas, ou adicionar observadores em propriedades existentes.
 
 
-## Initializers
+## Inicializadores
 
-Extensions can add new initializers to existing types.
-This enables you to extend other types to accept
-your own custom types as initializer parameters,
-or to provide additional initialization options
-that were not included as part of the type's original implementation.
+Extensões podem adicionar novos inicializadores a tipos existentes.
+Isso permite você extender outros tipos para aceitar
+seus próprios tipos personalizados como parâmetros de inicialização,
+ou então para providenciar opções adicionais de inicialização
+que antes não eram parte da implementação original do tipo. 
 
-Extensions can add new convenience initializers to a class,
-but they can't add new designated initializers or deinitializers to a class.
-Designated initializers and deinitializers
-must always be provided by the original class implementation.
+Extensões podem adicionar novos inicializadores de conveniência a uma classe,
+mas eles não podem adicionar nosos inicializadores designados ou desinicializadores a uma classe.
+Inicializadores designados e desinicializadores
+devem sempre ser providenciados pela implementação original da classe. 
 
-If you use an extension to add an initializer to a value type that provides
-default values for all of its stored properties
-and doesn't define any custom initializers,
-you can call the default initializer and memberwise initializer for that value type
-from within your extension's initializer.
-This wouldn't be the case if you had written the initializer
-as part of the value type's original implementation,
-as described in <doc:Initialization#Initializer-Delegation-for-Value-Types>.
+Se você usa uma extensão para adicionar um inicializador a um tipo de valor que 
+provê valores padrões para todas as suas propriedades armazenadas 
+e não define nenhum inicializador customizado,
+você pode chamar o inicializador padrão e inicializador _memberwise_  para o
+tipo de valor de dentro de seu inicializador da extensão. 
 
-If you use an extension to add an initializer to a structure
-that was declared in another module,
-the new initializer can't access `self` until it calls
-an initializer from the defining module.
+Este não seria o caso se você tivesse escrito o inicializador 
+como parte da implementação original do tipo de valor,
+como descrito em <doc:Initialization#Initializer-Delegation-for-Value-Types>.
 
-The example below defines a custom `Rect` structure to represent a geometric rectangle.
-The example also defines two supporting structures called `Size` and `Point`,
-both of which provide default values of `0.0` for all of their properties:
+Se você usa uma extensão para adicionar um inicializador a uma estrutura
+que foi declarada em outro módulo,
+o novo inicializador não pode acessar `self` até
+ele chamar um inicializador do módulo definidor. 
+
+O exemplo abaixo define uma estrutura `Rect` customizada para representar um retângulo geométrico.
+O exemplo também define duas estrutura de suporte chamadas `Size` e `Point`,
+Ambos provêm valores padrões de `0.0` para todas as suas propriedades: 
+
 
 ```swift
 struct Size {
@@ -144,13 +146,11 @@ struct Rect {
 }
 ```
 
+Por causa da estrutura `Rect` prover valores padrões para todas as suas propriedades,
+ela recebe um inicializador padrão e um inicializador _memberwise_ automaticamente,
+como descrito em <doc:Initialization#Default-Initializers>.
+Estes inicializadores podem ser usados para criar novas instâncias `Rect`:
 
-
-
-Because the `Rect` structure provides default values for all of its properties,
-it receives a default initializer and a memberwise initializer automatically,
-as described in <doc:Initialization#Default-Initializers>.
-These initializers can be used to create new `Rect` instances:
 
 ```swift
 let defaultRect = Rect()
@@ -159,10 +159,8 @@ let memberwiseRect = Rect(origin: Point(x: 2.0, y: 2.0),
 ```
 
 
-
-
-You can extend the `Rect` structure to provide an additional initializer
-that takes a specific center point and size:
+Você pode extender a estrutura `Rect` para prover um inicializador adicional
+que recebe um tamanho e ponto central específico:
 
 ```swift
 extension Rect {
@@ -176,12 +174,10 @@ extension Rect {
 
 
 
-
-This new initializer starts by calculating an appropriate origin point based on
-the provided `center` point and `size` value.
-The initializer then calls the structure's automatic memberwise initializer
-`init(origin:size:)`, which stores the new origin and size values
-in the appropriate properties:
+Esse novo inicializador inicia calculando um ponto de origem apropriados baseado 
+no ponto `center` e valor `size` dados. 
+O inicializador então chama o inicializador _memberwise_ automático da estrutura `init(origin:size:)`,
+que armazena a nova origem e valor do tamanho nas propriedades adequadas:
 
 ```swift
 let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
@@ -190,11 +186,9 @@ let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
 ```
 
 
-
-
-> Note: If you provide a new initializer with an extension,
-> you are still responsible for making sure that each instance is fully initialized
-> once the initializer completes.
+> Nome: se você provê um novo inicializardor com uma extensão,
+> você ainda é responsável por certificar-se que cada instância foi completamente inicializada
+> uma vez que o inicializador tenha completado. 
 
 ## Methods
 
