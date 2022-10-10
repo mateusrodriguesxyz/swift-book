@@ -71,7 +71,7 @@ deve ser considerado como uma certa unidade de comprimento.
 Apesar de serem implementadas como propriedades computadas,
 os nomes destas propriedades podem ser anexados a um
 literal de ponto flutuante com sintaxe de ponto,
-como uma forma de usar aquele valor literal para realizar conversões a distância.
+como uma forma de usar aquele valor literal para realizar conversões de distância.
 
 Neste exemplo, um `Double` de valor `1.0` é coonsiderado para representar "um metro".
 E é por isso que a propriedade computada `m` reforta `self` ---
