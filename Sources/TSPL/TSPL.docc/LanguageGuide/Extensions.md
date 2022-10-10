@@ -86,7 +86,7 @@ e então a propriedade computada `ft` divide o valor "Double" subjacente
 por  `3.28084` para convertê-lo de pés para metros. 
 
 Essas propriedades são propriedades computadas apenas para leitura,
-então elas são expressadas sem a palavra-chave `get`, para fins de abreviação. 
+então elas são expressadas sem a palavra-chave `_get_`, para fins de abreviação. 
 Seu retorno é do tipo `Double	` e pode ser
 usado dentro de cálculos matemáticos sempre que um `Double` é aceito:
 
