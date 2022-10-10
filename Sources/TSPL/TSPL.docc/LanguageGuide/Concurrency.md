@@ -1,58 +1,58 @@
 
 
-# Concurrency
+# Concorrência
 
-Swift has built-in support for writing asynchronous and parallel code
-in a structured way.
-*Asynchronous code* can be suspended and resumed later,
-although only one piece of the program executes at a time.
-Suspending and resuming code in your program
-lets it continue to make progress
-on short-term operations like updating its UI
-while continuing to work on long-running operations
-like fetching data over the network or parsing files.
-*Parallel code* means multiple pieces of code run simultaneously ---
-for example, a computer with a four-core processor
-can run four pieces of code at the same time,
-with each core carrying out one of the tasks.
-A program that uses parallel and asynchronous code
-carries out multiple operations at a time;
-it suspends operations that are waiting for an external system,
-and makes it easier to write this code in a memory-safe way.
+Swift tem suporte por padrão para escrita de código assíncrono e paralelo
+de forma estruturada.
+*Código assíncrono* pode ser suspenso e retomado posteriormente,
+embora apenas uma parte do programa seja executada por vez.
+Suspender e retomar código em seu programa
+permite que ele continue a progredir
+em operações de curto prazo, como atualizar a interface do usuário,
+enquanto continua a trabalhar em operações de longa duração
+como buscar dados pela rede ou analisar arquivos.
+*Código paralelo* significa vários pedaços de código executando simultaneamente ---
+por exemplo, um computador com um processador de quatro núcleos
+pode executar quatro pedaços de código ao mesmo tempo,
+com cada núcleo realizando uma das tarefas.
+Um programa que usa código paralelo e assíncrono
+realiza várias operações ao mesmo tempo;
+suspende as operações que estão à espera de um sistema externo,
+e torna mais fácil escrever esse código de maneira segura para a memória (_memory-safe_).
 
-The additional scheduling flexibility from parallel or asynchronous code
-also comes with a cost of increased complexity.
-Swift lets you express your intent
-in a way that enables some compile-time checking ---
-for example, you can use actors to safely access mutable state.
-However, adding concurrency to slow or buggy code
-isn't a guarantee that it will become fast or correct.
-In fact, adding concurrency might even make your code harder to debug.
-However, using Swift's language-level support for concurrency
-in code that needs to be concurrent
-means Swift can help you catch problems at compile time.
+A flexibilidade adicional de agendamento de código paralelo ou assíncrono
+também vem com um custo de maior complexidade.
+Swift permite que você expresse sua intenção
+de uma forma que permite que haja verificação em tempo de compilação ---
+por exemplo, você pode usar _actors_ para acessar com segurança um estado mutável.
+No entanto, adicionar concorrência a um código lento ou com bugs
+não é uma garantia de que se tornará rápido ou correto.
+Na verdade, adicionar concorrência pode até tornar seu código mais difícil de depurar.
+No entanto, usar o suporte da linguagem para concorrência
+em um código que precisa ser concorrente
+permite que o Swift te ajude a detectar problemas em tempo de compilação.
 
-The rest of this chapter uses the term *concurrency*
-to refer to this common combination of asynchronous and parallel code.
+O resto desse capitulo usa o termo *concorrência*
+para se referir a essa combinação frequente de código assícnrono e paralelo.
 
-> Note: If you've written concurrent code before,
-> you might be used to working with threads.
-> The concurrency model in Swift is built on top of threads,
-> but you don't interact with them directly.
-> An asynchronous function in Swift
-> can give up the thread that it's running on,
-> which lets another asynchronous function run on that thread
-> while the first function is blocked.
-> When an asynchronous function resumes,
-> Swift doesn't make any guarantee about which thread
-> that function will run on.
+> Nota: Se você já escreveu código concorrente antes,
+> você pode ter o costume de trabalhar com threads.
+> O modelo de concorrência em Swift é construído em cima de threads,
+> mas você não interage diretamente com elas.
+> Uma função assíncrona em Swift
+> pode desistir da thread em que está sendo executada,
+> o que permite que outra função assíncrona seja executada nessa thread
+> enquanto a primeira função está bloqueada.
+> Quando uma função assíncrona é retomada,
+> Swift não garante qual thread
+> essa função será executada.
 
-Although it's possible to write concurrent code
-without using Swift's language support,
-that code tends to be harder to read.
-For example, the following code downloads a list of photo names,
-downloads the first photo in that list,
-and shows that photo to the user:
+Embora seja possível escrever código concorrente
+sem usar o suporte nativo do Swift,
+o código tende a ser mais difícil de ler.
+Por exemplo, o código a seguir baixa uma lista de nomes de fotos,
+baixa a primeira foto dessa lista,
+e mostra essa foto para o usuário:
 
 ```swift
 listPhotos(inGallery: "Summer Vacation") { photoNames in
@@ -67,11 +67,11 @@ listPhotos(inGallery: "Summer Vacation") { photoNames in
 
 
 
-Even in this simple case,
-because the code has to be written as a series of completion handlers,
-you end up writing nested closures.
-In this style,
-more complex code with deep nesting can quickly become unwieldy.
+Mesmo neste caso simples,
+porque o código deve ser escrito como uma série de _completion handlers_,
+você acaba escrevendo _closures_ aninhadas.
+Neste estilo,
+código mais complexo com muitas closures aninhadas pode rapidamente se tornar inviável, ou difícil de manter.
 
 ## Defining and Calling Asynchronous Functions
 
