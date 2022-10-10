@@ -47,7 +47,7 @@ Você também pode estender um tipo genérico para adicionar funcionalidade cond
 ## Propriedades Computadas
 
 Extensões podem adicionar propriedades computadas de instância e propriedades computadas de tipo a tipos existentes. 
-Este exemplo adiciona cinco propriedades computadas de instância ao tipo built-in `_Double_` do Swift,
+Este exemplo adiciona cinco propriedades computadas de instância ao tipo primitivo `_Double_` do Swift,
 para fornecer suporte básico para trabalhar com unidades de distância:
 
 ```swift
@@ -92,8 +92,8 @@ usado dentro de cálculos matemáticos sempre que um `Double` é aceito:
 
 ```swift
 let aMarathon = 42.km + 195.m
-print("A marathon is \(aMarathon) meters long")
-// Prints "A marathon is 42195.0 meters long"
+print("A maratona é de \(aMarathon) metros")
+// imprime "A maratona é de 42195.0 metros"
 ```
 
 > Note: Extensões podem adicionar novas propriedades computadas, mas não podem adicionar 
