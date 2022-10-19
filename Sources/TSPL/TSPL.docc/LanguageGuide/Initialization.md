@@ -615,10 +615,10 @@ You don't have to provide convenience initializers if your class doesn't require
 Create convenience initializers whenever a shortcut to a common initialization pattern
 will save time or make initialization of the class clearer in intent.
 
-### Syntax for Designated and Convenience Initializers
+### Sintaxe para inicializadores designados e de conveniência
 
-Designated initializers for classes are written in the same way as
-simple initializers for value types:
+Inicializadores designados para classes são escritos da mesma maneira que
+inicializadores simples para tipos de valor:
 
 ```
 init(<#parameters#>) {
@@ -627,9 +627,9 @@ init(<#parameters#>) {
 ```
 
 
-Convenience initializers are written in the same style,
-but with the `convenience` modifier placed before the `init` keyword,
-separated by a space:
+Os inicializadores de conveniência são escritos no mesmo estilo,
+mas com o modificador `_convenience_` colocado antes da palavra-chave `_init_`,
+separados por um espaço:
 
 ```
 convenience init(<#parameters#>) {
