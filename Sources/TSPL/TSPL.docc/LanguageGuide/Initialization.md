@@ -604,16 +604,16 @@ Em alguns casos, este requisito é satisfeito
 herdando um ou mais inicializadores designados de uma superclasse,
 conforme descrito em <doc:Initialization#Automatic-Initializer-Inheritance> abaixo.
 
-*Convenience initializers* are secondary, supporting initializers for a class.
-You can define a convenience initializer to call a designated initializer
-from the same class as the convenience initializer
-with some of the designated initializer's parameters set to default values.
-You can also define a convenience initializer to create
-an instance of that class for a specific use case or input value type.
+*Inicializadores de conveniência* são secundários, fornecendo suporte para os inicializadores para uma classe.
+Você pode definir um inicializador de conveniência para chamar um inicializador designado
+da mesma classe que o inicializador de conveniência
+com alguns dos parâmetros do inicializador designados definidos com valores padrão.
+Você também pode definir um inicializador de conveniência para criar
+uma instância dessa classe para um caso de uso específico ou tipo de valor de entrada.
 
-You don't have to provide convenience initializers if your class doesn't require them.
-Create convenience initializers whenever a shortcut to a common initialization pattern
-will save time or make initialization of the class clearer in intent.
+Você não precisa fornecer inicializadores de conveniência se sua classe não os exigir.
+Crie inicializadores de conveniência quando um atalho para um padrão de inicialização comum
+fará você economizar tempo ou tornará a inicialização da classe mais clara na intenção.
 
 ### Syntax for Designated and Convenience Initializers
 
