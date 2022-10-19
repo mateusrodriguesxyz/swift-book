@@ -577,15 +577,15 @@ that already provides exactly that functionality.
 > the `init()` and `init(origin:size:)` initializers yourself,
 > see <doc:Extensions>.
 
-## Class Inheritance and Initialization
+## Herança e Inicialização de Classe
 
-All of a class's stored properties ---
-including any properties the class inherits from its superclass ---
-*must* be assigned an initial value during initialization.
+Todas as propriedades armazenadas de uma classe ---
+incluindo quaisquer propriedades que a classe herda de sua superclasse ---
+*deve* ser atribuído um valor inicial durante a inicialização.
 
-Swift defines two kinds of initializers for class types
-to help ensure all stored properties receive an initial value.
-These are known as designated initializers and convenience initializers.
+Swift define dois tipos de inicializadores para tipos de classe
+para ajudar a garantir que todas as propriedades armazenadas recebam um valor inicial.
+Eles são conhecidos como inicializadores designados e inicializadores de conveniência.
 
 ### Designated Initializers and Convenience Initializers
 
