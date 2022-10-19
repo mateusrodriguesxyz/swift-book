@@ -587,22 +587,22 @@ Swift defines two kinds of initializers for class types
 to help ensure all stored properties receive an initial value.
 These are known as designated initializers and convenience initializers.
 
-### Designated Initializers and Convenience Initializers
+### Inicializadores designados e inicializadores de conveniência
 
-*Designated initializers* are the primary initializers for a class.
-A designated initializer fully initializes all properties introduced by that class
-and calls an appropriate superclass initializer
-to continue the initialization process up the superclass chain.
+*Inicializadores designados* são os inicializadores primários de uma classe.
+Um inicializador designado inicializa todas as propriedades introduzidas por essa classe
+e chama um inicializador de superclasse apropriado
+para continuar o processo de inicialização na cadeia de superclasses.
 
-Classes tend to have very few designated initializers,
-and it's quite common for a class to have only one.
-Designated initializers are “funnel” points through which initialization takes place,
-and through which the initialization process continues up the superclass chain.
+As classes tendem a ter muito poucos inicializadores designados,
+e é bastante comum que uma classe tenha apenas um.
+Inicializadores designados são pontos de “funil” através dos quais a inicialização ocorre,
+e através do qual o processo de inicialização continua na cadeia da superclasse.
 
-Every class must have at least one designated initializer.
-In some cases, this requirement is satisfied
-by inheriting one or more designated initializers from a superclass,
-as described in <doc:Initialization#Automatic-Initializer-Inheritance> below.
+Toda classe deve ter pelo menos um inicializador designado.
+Em alguns casos, este requisito é satisfeito
+herdando um ou mais inicializadores designados de uma superclasse,
+conforme descrito em <doc:Initialization#Automatic-Initializer-Inheritance> abaixo.
 
 *Convenience initializers* are secondary, supporting initializers for a class.
 You can define a convenience initializer to call a designated initializer
