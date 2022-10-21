@@ -278,27 +278,26 @@ constantString += " and another Highlander"
 > where you choose between two classes (`NSString` and `NSMutableString`)
 > to indicate whether a string can be mutated.
 
-## Strings Are Value Types
+## Strings São Tipos de Valores
 
-Swift's `String` type is a *value type*.
-If you create a new `String` value,
-that `String` value is *copied* when it's passed to a function or method,
-or when it's assigned to a constant or variable.
-In each case, a new copy of the existing `String` value is created,
-and the new copy is passed or assigned, not the original version.
-Value types are described in <doc:ClassesAndStructures#Structures-and-Enumerations-Are-Value-Types>.
+O tipo `String` de Swift é um *tipo de valor*.
+Se você criar um novo valor `String`, esse valor 
+`String` é *copiado* quando é passado para uma função ou método,
+ou quando é atribuído a uma constante ou variável.
+Em cada caso, uma nova cópia do valor `String` existente á criado,
+e a nova cópia é passado ou atribuída, não a versão original.
+Tipos de valores são descritos em <doc:ClassesAndStructures#Structures-and-Enumerations-Are-Value-Types>.
 
-Swift's copy-by-default `String` behavior ensures that
-when a function or method passes you a `String` value,
-it's clear that you own that exact `String` value,
-regardless of where it came from.
-You can be confident that the string you are passed won't be modified
-unless you modify it yourself.
+O comportamento de cópia de `String` por padrão do Swift grarante
+que quando uma função ou método passa um valor `String`, é claro
+que você terá o valor exato da `String`, independente de onde veio.
+Você pode estar confiante que a string que você passou não será modificada
+a não ser que você mesmo modifique.
 
-Behind the scenes, Swift's compiler optimizes string usage
-so that actual copying takes place only when absolutely necessary.
-This means you always get great performance
-when working with strings as value types.
+Nos bastidores, o compilador do Swift otimiza o uso de strings 
+para que a cópia realmente aconteça apenas quando for absolutamente necessário.
+Isso significa que você sempre terá um ótimo desempenho
+quando trabalhar com strings como tipo de valores.
 
 ## Working with Characters
 
