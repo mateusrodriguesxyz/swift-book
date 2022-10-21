@@ -1104,7 +1104,7 @@ Finally, once the subclass's designated initializer is finished,
 the convenience initializer that was originally called
 can perform additional customization.
 
-### Initializer Inheritance and Overriding
+### Herança e substituição do inicializador
 
 Ao contrário das subclasses em Objective-C,
 As subclasses Swift não herdam seus inicializadores de superclasse por padrão.
@@ -1135,104 +1135,12 @@ e valida se os parâmetros do inicializador de substituição foram especificado
 > Nota: Você sempre escreve o modificador `override` ao substituir um inicializador designado de superclasse,
 > mesmo que a implementação do inicializador de sua subclasse seja um inicializador de conveniência.
 
-@Comment {
-  - test: `youHaveToWriteOverrideWhenOverridingADesignatedInitializer`
-  
-  ```swifttest
-  -> class C {
-        init() {}
-     }
-  -> class D1: C {
-        // this is correct
-        override init() {}
-     }
-  -> class D2: C {
-        // this isn't correct
-        init() {}
-     }
-  !$ error: overriding declaration requires an 'override' keyword
-  !! init() {}
-  !! ^
-  !! override
-  !$ note: overridden declaration is here
-  !! init() {}
-  !! ^
-  ```
-}
-
-@Comment {
-  - test: `youHaveToWriteOverrideEvenWhenOverridingADefaultInitializer`
-  
-  ```swifttest
-  -> class C {
-        var i = 0
-     }
-  -> class D1: C {
-        // this is correct
-        override init() {}
-     }
-  -> class D2: C {
-        // this isn't correct
-        init() {}
-     }
-  !$ error: overriding declaration requires an 'override' keyword
-  !! init() {}
-  !! ^
-  !! override
-  !$ note: overridden declaration is here
-  !! class C {
-  !! ^
-  ```
-}
-
 Por outro lado, se você escrever um inicializador de subclasse que corresponda a um inicializador de superclasse *conveniência*,
 esse inicializador de conveniência da superclasse nunca pode ser chamado diretamente por sua subclasse,
 conforme as regras descritas acima em <doc:Initialization#Initializer-Delegation-for-Class-Types>.
 Portanto, sua subclasse não está (estritamente falando) fornecendo uma substituição do inicializador da superclasse.
 Como resultado, você não escreve o modificador `override` ao fornecer
 uma implementação correspondente de um inicializador de conveniência de superclasse.
-
-@Comment {
-  - test: `youDoNotAndCannotWriteOverrideWhenOverridingAConvenienceInitializer`
-  
-  ```swifttest
-  -> class C {
-        var i: Int
-        init(someInt: Int) {
-           i = someInt
-        }
-        convenience init() {
-           self.init(someInt: 42)
-        }
-     }
-  -> class D1: C {
-        // override for designated, so needs the override modifier
-        override init(someInt: Int) {
-           super.init(someInt: someInt)
-        }
-        // not technically an override, so doesn't need the override modifier
-        convenience init() {
-           self.init(someInt: 42)
-        }
-     }
-  -> class D2: C {
-        // override for designated, so needs the override modifier
-        override init(someInt: Int) {
-           super.init(someInt: someInt)
-        }
-        // this isn't correct - "override" isn't required
-        override convenience init() {
-           self.init(someInt: 42)
-        }
-     }
-  !$ error: initializer does not override a designated initializer from its superclass
-  !! override convenience init() {
-  !! ~~~~~~~~             ^
-  !$ note: attempt to override convenience initializer here
-  !! convenience init() {
-  !! ^
-  ```
-}
 
 O exemplo abaixo define uma classe base chamada `Vehicle`.
 Esta classe base declara uma propriedade armazenada chamada `numberOfWheels`,
@@ -1249,20 +1157,6 @@ class Vehicle {
 }
 ```
 
-
-@Comment {
-  - test: `initializerInheritance`
-  
-  ```swifttest
-  -> class Vehicle {
-        var numberOfWheels = 0
-        var description: String {
-           return "\(numberOfWheels) wheel(s)"
-        }
-     }
-  ```
-}
-
 A classe `Vehicle` fornece um valor padrão para sua única propriedade armazenada,
 e não fornece nenhum inicializador personalizado.
 Como resultado, ele recebe automaticamente um inicializador padrão,
@@ -1276,17 +1170,6 @@ print("Vehicle: \(vehicle.description)")
 // Vehicle: 0 wheel(s)
 ```
 
-
-@Comment {
-  - test: `initializerInheritance`
-  
-  ```swifttest
-  -> let vehicle = Vehicle()
-  -> print("Vehicle: \(vehicle.description)")
-  </ Vehicle: 0 wheel(s)
-  ```
-}
-
 O próximo exemplo define uma subclasse de `Vehicle` chamada `Bicycle`:
 
 ```swift
@@ -1297,21 +1180,6 @@ class Bicycle: Vehicle {
    }
 }
 ```
-
-
-@Comment {
-  - test: `initializerInheritance`
-  
-  ```swifttest
-  -> class Bicycle: Vehicle {
-        override init() {
-           super.init()
-           numberOfWheels = 2
-        }
-     }
-  ```
-}
-
 A subclasse `Bicycle` define um inicializador designado personalizado, `init()`.
 Este inicializador designado corresponde a um inicializador designado da superclasse de `Bicycle`,
 e assim a versão `Bicycle` deste inicializador é marcada com o modificador `override`.
@@ -1332,17 +1200,6 @@ let bicycle = Bicycle()
 print("Bicycle: \(bicycle.description)")
 // Bicycle: 2 wheel(s)
 ```
-
-
-@Comment {
-  - test: `initializerInheritance`
-  
-  ```swifttest
-  -> let bicycle = Bicycle()
-  -> print("Bicycle: \(bicycle.description)")
-  </ Bicycle: 2 wheel(s)
-  ```
-}
 
 Se um inicializador de subclasse não executa nenhuma personalização
 na fase 2 do processo de inicialização,
@@ -1371,24 +1228,6 @@ class Hoverboard: Vehicle {
 }
 ```
 
-
-@Comment {
-  - test: `initializerInheritance`
-  
-  ```swifttest
-  -> class Hoverboard: Vehicle {
-         var color: String
-         init(color: String) {
-             self.color = color
-             // super.init() implicitly called here
-         }
-         override var description: String {
-             return "\(super.description) in a beautiful \(color)"
-         }
-     }
-  ```
-}
-
 Uma instância de `Hoverboard` usa o número padrão de rodas
 fornecido pelo inicializador `Vehicle`.
 
@@ -1399,55 +1238,8 @@ print("Hoverboard: \(hoverboard.description)")
 ```
 
 
-@Comment {
-  - test: `initializerInheritance`
-  
-  ```swifttest
-  -> let hoverboard = Hoverboard(color: "silver")
-  -> print("Hoverboard: \(hoverboard.description)")
-  </ Hoverboard: 0 wheel(s) in a beautiful silver
-  ```
-}
-
 > Nota: Subclasses podem modificar propriedades de variáveis herdadas durante a inicialização,
 > mas não pode modificar propriedades constantes herdadas.
-
-@Comment {
-  - test: `youCantModifyInheritedConstantPropertiesFromASuperclass`
-  
-  ```swifttest
-  -> class C {
-        let constantProperty: Int
-        var variableProperty: Int
-        init() {
-           // this is fine - a class can set its own constant and variable properties during init
-           constantProperty = 0
-           variableProperty = 0
-        }
-     }
-  -> class D1: C {
-        override init() {
-           // this is fine - a subclass can set its superclass's variable properties during init
-           super.init()
-           variableProperty = 0
-        }
-     }
-  -> class D2: C {
-        override init() {
-           // this is wrong - a subclass can't set its superclass's constant properties during init
-           super.init()
-           constantProperty = 0
-        }
-     }
-  !$ error: cannot assign to property: 'constantProperty' is a 'let' constant
-  !! constantProperty = 0
-  !! ^~~~~~~~~~~~~~~~
-  !$ note: change 'let' to 'var' to make it mutable
-  !! let constantProperty: Int
-  !! ^~~
-  !! var
-  ```
-}
 
 ### Automatic Initializer Inheritance
 
