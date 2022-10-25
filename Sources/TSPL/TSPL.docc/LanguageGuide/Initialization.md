@@ -1104,7 +1104,7 @@ Finally, once the subclass's designated initializer is finished,
 the convenience initializer that was originally called
 can perform additional customization.
 
-### Herança e substituição do inicializador
+### Herança e sobrescrita do inicializador
 
 Ao contrário das subclasses em Objective-C,
 As subclasses Swift não herdam seus inicializadores de superclasse por padrão.
@@ -1122,23 +1122,23 @@ um ou mais dos mesmos inicializadores que sua superclasse,
 você pode fornecer uma implementação personalizada desses inicializadores dentro da subclasse.
 
 Quando você escreve um inicializador de subclasse que corresponde a um inicializador *designado* da superclasse,
-você está efetivamente fornecendo uma substituição desse inicializador designado.
+você está efetivamente fornecendo uma sobrescrita desse inicializador designado.
 Portanto, você deve escrever o modificador `override` antes da definição do inicializador da subclasse.
-Isso é verdade mesmo se você estiver substituindo um inicializador padrão fornecido automaticamente,
+Isso é verdade mesmo se você estiver sobrescrevendo um inicializador padrão fornecido automaticamente,
 conforme descrito em <doc:Initialization#Default-Initializers>.
 
-Tal como acontece com uma propriedade, método ou subscrito substituído,
+Tal como acontece com uma propriedade, método ou subscript sobrescrito
 a presença do modificador `override` solicita ao Swift que verifique se
-a superclasse tem um inicializador designado correspondente a ser substituído,
-e valida se os parâmetros do inicializador de substituição foram especificados conforme o esperado.
+a superclasse tem um inicializador designado correspondente a ser sobrescrito,
+e valida se os parâmetros do inicializador sobrescrito foram especificados conforme o esperado.
 
-> Nota: Você sempre escreve o modificador `override` ao substituir um inicializador designado de superclasse,
+> Nota: Você sempre escreve o modificador `override` ao sobrescrever um inicializador designado de superclasse,
 > mesmo que a implementação do inicializador de sua subclasse seja um inicializador de conveniência.
 
 Por outro lado, se você escrever um inicializador de subclasse que corresponda a um inicializador de superclasse *conveniência*,
 esse inicializador de conveniência da superclasse nunca pode ser chamado diretamente por sua subclasse,
 conforme as regras descritas acima em <doc:Initialization#Initializer-Delegation-for-Class-Types>.
-Portanto, sua subclasse não está (estritamente falando) fornecendo uma substituição do inicializador da superclasse.
+Portanto, sua subclasse não está (estritamente falando) fornecendo uma sobrescrita do inicializador da superclasse.
 Como resultado, você não escreve o modificador `override` ao fornecer
 uma implementação correspondente de um inicializador de conveniência de superclasse.
 
