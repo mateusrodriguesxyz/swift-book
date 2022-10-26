@@ -2057,7 +2057,7 @@ as discussed in <doc:Declarations#Top-Level-Code>.
 
 ### unchecked
 
-Aplique esse atributo a um tipo de protocolo
+Aplique esse atributo a um tipo de protocolo  
 como parte da lista de protocolos adotados de uma declaração de tipo
 para desativar a execução dos requisitos desse protocolo.
 
