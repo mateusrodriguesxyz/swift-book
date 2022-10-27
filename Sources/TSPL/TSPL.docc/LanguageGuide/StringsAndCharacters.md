@@ -40,14 +40,14 @@ Uma string literal é uma sequência de caracteres entre aspas duplas (`"`).
 Use uma string literal como um valor inicial para uma constante ou variável:
 
 ```swift
-let algumaString = "Algum valor literal de string"
+let someString = "Some string literal value"
 ```
 
 
 
 
 Note que Swift infere um tipo de `String` para a constante `algumaString` 
-porque é inicializado comum valor literal de string.
+porque é inicializado com um valor literal de string.
 
 ### Multiline String Literals
 
