@@ -302,21 +302,16 @@ when working with strings as value types.
 
 ## Trabalhando com Characteres
 
-Você pode acessa os valores `Character` individuais de uma `String`
+Você pode acessar os valores `Character` individuais de uma `String`
 iterando sobre a string com um laço `for`-`in`:
 
 ```swift
-for caractere in "Cachorro!🐶" {
+for character in "Dog!🐶" {
    print(caractere)
 }
-// C
-// a
-// c
-// h
+// D
 // o
-// r
-// r
-// o
+// g
 // !
 // 🐶
 ```
@@ -330,7 +325,7 @@ Alternativamente, você pode criar uma constante ou variável autônoma `Charact
 de um string literal de caractere único fornecendo uma notação do tipo `Character`:
 
 ```swift
-let pontoDeExclamacao: Character = "!"
+let exclamationMark: Character = "!"
 ```
 
 
@@ -340,10 +335,10 @@ Valores `String` podem ser construídos passando um vetor de valores `Character`
 como um argumento para o inicializador:
 
 ```swift
-let gatoCharacters: [Character] = ["G", "a", "t", "o", "!", "🐱"]
-let gatoString = String(gatoCharacters)
-print(gatoString)
-// Imprime "Gato!🐱"
+let catCharacters: [Character] = ["C", "a", "t", "!", "🐱"]
+let catString = String(catCharacters)
+print(catString)
+// Imprime "Cat!🐱"
 ```
 
 
