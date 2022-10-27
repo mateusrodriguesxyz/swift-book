@@ -37,7 +37,7 @@ and provides support for accessing those characters in various Unicode represent
 Você pode incluir valores `String` predefinidos em seu código como  *string literals*.
 Uma string literal é uma sequência de caracteres entre aspas duplas (`"`).
 
-Use uma string literal como um valor inicial para uma contante ou variável:
+Use uma string literal como um valor inicial para uma constante ou variável:
 
 ```swift
 let algumaString = "Algum valor literal de string"
