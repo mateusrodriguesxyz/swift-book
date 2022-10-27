@@ -577,48 +577,48 @@ that already provides exactly that functionality.
 > the `init()` and `init(origin:size:)` initializers yourself,
 > see <doc:Extensions>.
 
-## Class Inheritance and Initialization
+## Herança e Inicialização de Classe
 
-All of a class's stored properties ---
-including any properties the class inherits from its superclass ---
-*must* be assigned an initial value during initialization.
+Todas as propriedades armazenadas de uma classe ---
+incluindo quaisquer propriedades que a classe herda de sua superclasse ---
+*deve* ser atribuído um valor inicial durante a inicialização.
 
-Swift defines two kinds of initializers for class types
-to help ensure all stored properties receive an initial value.
-These are known as designated initializers and convenience initializers.
+Swift define dois tipos de inicializadores para tipos de classe
+para ajudar a garantir que todas as propriedades armazenadas recebam um valor inicial.
+Eles são conhecidos como inicializadores designados e inicializadores de conveniência.
 
-### Designated Initializers and Convenience Initializers
+### Inicializadores designados e inicializadores de conveniência
 
-*Designated initializers* are the primary initializers for a class.
-A designated initializer fully initializes all properties introduced by that class
-and calls an appropriate superclass initializer
-to continue the initialization process up the superclass chain.
+*Inicializadores designados* são os inicializadores primários de uma classe.
+Um inicializador designado inicializa todas as propriedades introduzidas por essa classe
+e chama um inicializador de superclasse apropriado
+para continuar o processo de inicialização na cadeia de superclasses.
 
-Classes tend to have very few designated initializers,
-and it's quite common for a class to have only one.
-Designated initializers are “funnel” points through which initialization takes place,
-and through which the initialization process continues up the superclass chain.
+As classes tendem a ter muito poucos inicializadores designados,
+e é bastante comum que uma classe tenha apenas um.
+Inicializadores designados são pontos de “funil” através dos quais a inicialização ocorre,
+e através do qual o processo de inicialização continua na cadeia da superclasse.
 
-Every class must have at least one designated initializer.
-In some cases, this requirement is satisfied
-by inheriting one or more designated initializers from a superclass,
-as described in <doc:Initialization#Automatic-Initializer-Inheritance> below.
+Toda classe deve ter pelo menos um inicializador designado.
+Em alguns casos, este requisito é satisfeito
+herdando um ou mais inicializadores designados de uma superclasse,
+conforme descrito em <doc:Initialization#Automatic-Initializer-Inheritance> abaixo.
 
-*Convenience initializers* are secondary, supporting initializers for a class.
-You can define a convenience initializer to call a designated initializer
-from the same class as the convenience initializer
-with some of the designated initializer's parameters set to default values.
-You can also define a convenience initializer to create
-an instance of that class for a specific use case or input value type.
+*Inicializadores de conveniência* são secundários, fornecendo suporte para os inicializadores para uma classe.
+Você pode definir um inicializador de conveniência para chamar um inicializador designado
+da mesma classe que o inicializador de conveniência
+com alguns dos parâmetros do inicializador designados definidos com valores padrão.
+Você também pode definir um inicializador de conveniência para criar
+uma instância dessa classe para um caso de uso específico ou tipo de valor de entrada.
 
-You don't have to provide convenience initializers if your class doesn't require them.
-Create convenience initializers whenever a shortcut to a common initialization pattern
-will save time or make initialization of the class clearer in intent.
+Você não precisa fornecer inicializadores de conveniência se sua classe não os exigir.
+Crie inicializadores de conveniência quando um atalho para um padrão de inicialização comum
+fará você economizar tempo ou tornará a inicialização da classe mais clara na intenção.
 
-### Syntax for Designated and Convenience Initializers
+### Sintaxe para inicializadores designados e de conveniência
 
-Designated initializers for classes are written in the same way as
-simple initializers for value types:
+Inicializadores designados para classes são escritos da mesma maneira que
+inicializadores simples para tipos de valor:
 
 ```
 init(<#parameters#>) {
@@ -627,9 +627,9 @@ init(<#parameters#>) {
 ```
 
 
-Convenience initializers are written in the same style,
-but with the `convenience` modifier placed before the `init` keyword,
-separated by a space:
+Os inicializadores de conveniência são escritos no mesmo estilo,
+mas com o modificador `_convenience_` colocado antes da palavra-chave `_init_`,
+separados por um espaço:
 
 ```
 convenience init(<#parameters#>) {

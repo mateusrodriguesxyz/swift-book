@@ -123,22 +123,22 @@ apenas pelo seus nomes de caso (`.ace` e `.spades`).
 No exemplo acima, a propriedade `description` corretamente reporta que
 o Ás de Espada possui o valor de `1` ou `11`.
 
-## Referring to Nested Types
+## Referenciando Tipos Aninhados
 
-To use a nested type outside of its definition context,
-prefix its name with the name of the type it's nested within:
+Para usar um tipo aninhado fora do seu contexto de definição,
+prefixe seu nome com o nome do tipo em que está aninhado:
 
 ```swift
 let heartsSymbol = BlackjackCard.Suit.hearts.rawValue
-// heartsSymbol is "♡"
+// heartsSymbol é "♡"
 ```
 
 
 
 
-For the example above,
-this enables the names of `Suit`, `Rank`, and `Values` to be kept deliberately short,
-because their names are naturally qualified by the context in which they're defined.
+Para o exemplo acima,
+isso permite que os nomes de `Suit`, `Rank`, e `Values` sejam mantidos curtos de forma deliberada,
+pois seus nomes são naturalmente qualificados pelo contexto os quais eles são definidos.
 
 
 

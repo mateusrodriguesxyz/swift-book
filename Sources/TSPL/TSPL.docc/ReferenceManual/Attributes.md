@@ -1039,11 +1039,11 @@ as discussed in <doc:Declarations#Top-Level-Code>.
 
 ### unchecked
 
-Apply this attribute to a protocol type
-as part of a type declaration's list of adopted protocols
-to turn off enforcement of that protocol's requirements.
+Aplique esse atributo a um tipo de protocolo  
+como parte da lista de protocolos adotados de uma declaração de tipo
+para desativar a execução dos requisitos desse protocolo.
 
-The only supported protocol is [Sendable](https://developer.apple.com/documentation/swift/sendable).
+O único protocolo suportado é [Sendable](https://developer.apple.com/documentation/swift/sendable).
 
 ### usableFromInline
 
