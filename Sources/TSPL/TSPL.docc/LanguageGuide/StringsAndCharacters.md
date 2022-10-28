@@ -33,13 +33,12 @@ e fornece suporte para acessar esses caracteres em várias representações Unic
 > veja [Bridging Between String and NSString](https://developer.apple.com/documentation/swift/string#2919514).
 
 
-## String Literals
+## Strings Literais
 
-You can include predefined `String` values within your code as *string literals*.
-A string literal is a sequence of characters
-surrounded by double quotation marks (`"`).
+Você pode incluir valores `String` predefinidos em seu código como  *string literals*.
+Uma string literal é uma sequência de caracteres entre aspas duplas (`"`).
 
-Use a string literal as an initial value for a constant or variable:
+Use uma string literal como um valor inicial para uma constante ou variável:
 
 ```swift
 let someString = "Some string literal value"
@@ -48,8 +47,8 @@ let someString = "Some string literal value"
 
 
 
-Note that Swift infers a type of `String` for the `someString` constant
-because it's initialized with a string literal value.
+Note que Swift infere um tipo de `String` para a constante `algumaString` 
+porque é inicializado com um valor literal de string.
 
 ### Multiline String Literals
 
