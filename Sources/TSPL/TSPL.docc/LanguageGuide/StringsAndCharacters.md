@@ -300,14 +300,14 @@ so that actual copying takes place only when absolutely necessary.
 This means you always get great performance
 when working with strings as value types.
 
-## Working with Characters
+## Trabalhando com Characteres
 
-You can access the individual `Character` values for a `String`
-by iterating over the string with a `for`-`in` loop:
+Você pode acessar os valores `Character` individuais de uma `String`
+iterando sobre a string com um laço `for`-`in`:
 
 ```swift
 for character in "Dog!🐶" {
-   print(character)
+   print(caracter)
 }
 // D
 // o
@@ -319,10 +319,10 @@ for character in "Dog!🐶" {
 
 
 
-The `for`-`in` loop is described in <doc:ControlFlow#For-In-Loops>.
+O laço `for`-`in` está descrito em <doc:ControlFlow#For-In-Loops>.
 
-Alternatively, you can create a stand-alone `Character` constant or variable
-from a single-character string literal by providing a `Character` type annotation:
+Alternativamente, você pode criar uma constante ou variável autônoma `Character`
+de um string literal de caractere único fornecendo uma notação do tipo `Character`:
 
 ```swift
 let exclamationMark: Character = "!"
@@ -331,14 +331,14 @@ let exclamationMark: Character = "!"
 
 
 
-`String` values can be constructed by passing an array of `Character` values
-as an argument to its initializer:
+Valores `String` podem ser construídos passando um vetor de valores `Character` 
+como um argumento para o inicializador:
 
 ```swift
 let catCharacters: [Character] = ["C", "a", "t", "!", "🐱"]
 let catString = String(catCharacters)
 print(catString)
-// Prints "Cat!🐱"
+// Imprime "Cat!🐱"
 ```
 
 
