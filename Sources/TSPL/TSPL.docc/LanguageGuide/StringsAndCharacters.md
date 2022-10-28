@@ -278,15 +278,15 @@ constantString += " and another Highlander"
 > where you choose between two classes (`NSString` and `NSMutableString`)
 > to indicate whether a string can be mutated.
 
-## Strings São Tipos de Valores
+## Strings São Tipos de Valor
 
 O tipo `String` de Swift é um *tipo de valor*.
 Se você criar um novo valor `String`, esse valor 
 `String` é *copiado* quando é passado para uma função ou método,
 ou quando é atribuído a uma constante ou variável.
-Em cada caso, uma nova cópia do valor `String` existente á criado,
-e a nova cópia é passado ou atribuída, não a versão original.
-Tipos de valores são descritos em <doc:ClassesAndStructures#Structures-and-Enumerations-Are-Value-Types>.
+Em cada caso, uma nova cópia do valor `String` existente é criado,
+e a nova cópia é passada ou atribuída, não a versão original.
+Tipos de valor são descritos em <doc:ClassesAndStructures#Structures-and-Enumerations-Are-Value-Types>.
 
 O comportamento de cópia de `String` por padrão do Swift grarante
 que quando uma função ou método passa um valor `String`, é claro
@@ -297,7 +297,7 @@ a não ser que você mesmo modifique.
 Nos bastidores, o compilador do Swift otimiza o uso de strings 
 para que a cópia realmente aconteça apenas quando for absolutamente necessário.
 Isso significa que você sempre terá um ótimo desempenho
-quando trabalhar com strings como tipo de valores.
+quando trabalhar com strings como tipos de valor.
 
 ## Working with Characters
 
