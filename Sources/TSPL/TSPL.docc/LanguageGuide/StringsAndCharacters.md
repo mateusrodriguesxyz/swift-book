@@ -308,7 +308,7 @@ iterando sobre a string com um laço `for`-`in`:
 
 ```swift
 for character in "Dog!🐶" {
-   print(caractere)
+   print(caracter)
 }
 // D
 // o
