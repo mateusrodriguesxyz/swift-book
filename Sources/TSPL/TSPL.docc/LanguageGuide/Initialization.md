@@ -438,46 +438,46 @@ print(zeroByZero.width, zeroByZero.height)
 
 
 
-## Initializer Delegation for Value Types
+## Delegação do inicializador para tipos de valor
 
-Initializers can call other initializers to perform part of an instance's initialization.
-This process, known as *initializer delegation*,
-avoids duplicating code across multiple initializers.
+Os inicializadores podem chamar outros inicializadores para executar parte da inicialização de uma instância.
+Esse processo, conhecido como *delegação do inicializador*,
+evita a duplicação de código em vários inicializadores.
 
-The rules for how initializer delegation works,
-and for what forms of delegation are allowed,
-are different for value types and class types.
-Value types (structures and enumerations) don't support inheritance,
-and so their initializer delegation process is relatively simple,
-because they can only delegate to another initializer that they provide themselves.
-Classes, however, can inherit from other classes,
-as described in <doc:Inheritance>.
-This means that classes have additional responsibilities for ensuring that
-all stored properties they inherit are assigned a suitable value during initialization.
-These responsibilities are described in
-<doc:Initialization#Class-Inheritance-and-Initialization> below.
+As regras de como a delegação do inicializador funciona,
+e para que formas de delegação são permitidas,
+são diferentes para tipos de valor e tipos de classe.
+Tipos de valor (estruturas e enumerações) não suportam herança,
+e, portanto, o processo de delegação do inicializador é relativamente simples,
+porque eles só podem delegar para outro inicializador que eles mesmos fornecem.
+As classes, no entanto, podem herdar de outras classes,
+conforme descrito em <doc:Inheritance>.
+Isso significa que as classes têm responsabilidades adicionais para garantir que
+todas as propriedades armazenadas que eles herdam recebem um valor adequado durante a inicialização.
+Essas responsabilidades estão descritas em
+<doc:Initialization#Class-Inheritance-and-Initialization> abaixo.
 
-For value types, you use `self.init` to refer to other initializers
-from the same value type when writing your own custom initializers.
-You can call `self.init` only from within an initializer.
+Para tipos de valor, você usa `self.init` para se referir a outros inicializadores
+do mesmo tipo de valor ao escrever seus próprios inicializadores personalizados.
+Você pode chamar `self.init` somente de dentro de um inicializador.
 
-Note that if you define a custom initializer for a value type,
-you will no longer have access to the default initializer
-(or the memberwise initializer, if it's a structure) for that type.
-This constraint prevents a situation in which additional essential setup
-provided in a more complex initializer
-is accidentally circumvented by someone using one of the automatic initializers.
+Observe que, se você definir um inicializador personalizado para um tipo de valor,
+você não terá mais acesso ao inicializador padrão
+(ou o inicializador de membro, se for uma estrutura) para esse tipo.
+Essa restrição evita uma situação em que configurações essenciais adicionais
+fornecido em um inicializador mais complexo
+é acidentalmente contornado por alguém usando um dos inicializadores automáticos.
 
-> Note: If you want your custom value type to be initializable with
-> the default initializer and memberwise initializer,
-> and also with your own custom initializers,
-> write your custom initializers in an extension
-> rather than as part of the value type's original implementation.
-> For more information, see <doc:Extensions>.
+> Nota: Se você quiser que seu tipo de valor personalizado seja inicializável com
+> o inicializador padrão e o inicializador de membro,
+> e também com seus próprios inicializadores personalizados,
+> escreva seus inicializadores personalizados em uma extensão
+> em vez de como parte da implementação original do tipo de valor.
+> Para obter mais informações, consulte <doc:Extensões>.
 
-The following example defines a custom `Rect` structure to represent a geometric rectangle.
-The example requires two supporting structures called `Size` and `Point`,
-both of which provide default values of `0.0` for all of their properties:
+O exemplo a seguir define uma estrutura `Rect` personalizada para representar um retângulo geométrico.
+O exemplo requer duas estruturas de suporte chamadas `Size` e `Point`,
+ambos fornecem valores padrão de `0.0` para todas as suas propriedades:
 
 ```swift
 struct Size {
@@ -491,12 +491,12 @@ struct Point {
 
 
 
-You can initialize the `Rect` structure below in one of three ways ---
-by using its default zero-initialized `origin` and `size` property values,
-by providing a specific origin point and size,
-or by providing a specific center point and size.
-These initialization options are represented by
-three custom initializers that are part of the `Rect` structure's definition:
+Você pode inicializar a estrutura `Rect` abaixo de uma das três maneiras:
+1. Usando seus valores padrão de propriedade `origin` e `size` inicializados com zero;
+2. Fornecendo um ponto de origem e tamanho específicos;
+3. Ou fornecendo um ponto central e tamanho específicos.
+Essas opções de inicialização são representadas por
+três inicializadores personalizados que fazem parte da definição da estrutura `Rect`:
 
 ```swift
 struct Rect {
@@ -518,64 +518,64 @@ struct Rect {
 
 
 
-The first `Rect` initializer, `init()`,
-is functionally the same as the default initializer that the structure would have received
-if it didn't have its own custom initializers.
-This initializer has an empty body,
-represented by an empty pair of curly braces `{}`.
-Calling this initializer returns a `Rect` instance whose
-`origin` and `size` properties are both initialized with
-the default values of `Point(x: 0.0, y: 0.0)`
-and `Size(width: 0.0, height: 0.0)`
-from their property definitions:
+O primeiro inicializador `Rect`, `init()`,
+é funcionalmente igual ao inicializador padrão que a estrutura teria recebido
+se não tivesse seus próprios inicializadores personalizados.
+Este inicializador tem um corpo vazio,
+representado por um par vazio de chaves `{}`.
+Chamar este inicializador retorna uma instância `Rect` cuja
+As propriedades `origin` e `size` são ambas inicializadas com
+os valores padrão de `Point(x: 0.0, y: 0.0)`
+e `Tamanho(largura: 0,0, altura: 0,0)`
+de suas definições de propriedade:
 
 ```swift
 let basicRect = Rect()
-// basicRect's origin is (0.0, 0.0) and its size is (0.0, 0.0)
+// A origem do basicRect é (0.0, 0.0) e seu tamanho é (0.0, 0.0)
 ```
 
 
 
 
-The second `Rect` initializer, `init(origin:size:)`,
-is functionally the same as the memberwise initializer that the structure would have received
-if it didn't have its own custom initializers.
-This initializer simply assigns the `origin` and `size` argument values to
-the appropriate stored properties:
+O segundo inicializador `Rect`, `init(origin:size:)`,
+é funcionalmente igual ao inicializador de membro que a estrutura teria recebido
+se não tivesse seus próprios inicializadores personalizados.
+Este inicializador simplesmente atribui os valores dos argumentos `origin` e `size` para
+as propriedades armazenadas apropriadas:
 
 ```swift
 let originRect = Rect(origin: Point(x: 2.0, y: 2.0),
    size: Size(width: 5.0, height: 5.0))
-// originRect's origin is (2.0, 2.0) and its size is (5.0, 5.0)
+// A origem do basicRect é  (2.0, 2.0) e seu tamanho é (5.0, 5.0)
 ```
 
 
 
 
-The third `Rect` initializer, `init(center:size:)`, is slightly more complex.
-It starts by calculating an appropriate origin point based on
-a `center` point and a `size` value.
-It then calls (or *delegates*) to the `init(origin:size:)` initializer,
-which stores the new origin and size values in the appropriate properties:
+O terceiro inicializador `Rect`, `init(center:size:)`, é um pouco mais complexo.
+Ele começa calculando um ponto de origem apropriado com base em
+um ponto `center` e um valor `size`.
+Ele então chama (ou *delegates*) para o inicializador `init(origin:size:)`,
+que armazena os novos valores de origem e tamanho nas propriedades apropriadas:
 
 ```swift
 let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
    size: Size(width: 3.0, height: 3.0))
-// centerRect's origin is (2.5, 2.5) and its size is (3.0, 3.0)
+// A origem do centerRect é (2.5, 2.5) e seu tamanho é (3.0, 3.0)
 ```
 
 
 
 
-The `init(center:size:)` initializer could have assigned
-the new values of `origin` and `size` to the appropriate properties itself.
-However, it's more convenient (and clearer in intent)
-for the `init(center:size:)` initializer to take advantage of an existing initializer
-that already provides exactly that functionality.
+O inicializador `init(center:size:)` poderia ter atribuído
+os novos valores de `origin` e `size` para as próprias propriedades apropriadas.
+No entanto, é mais conveniente (e mais claro na intenção)
+para o inicializador `init(center:size:)` aproveitar um inicializador existente
+que já fornece exatamente essa funcionalidade.
 
-> Note: For an alternative way to write this example without defining
-> the `init()` and `init(origin:size:)` initializers yourself,
-> see <doc:Extensions>.
+> Nota: Para uma forma alternativa de escrever este exemplo sem definir
+> os inicializadores `init()` e `init(origin:size:)` você mesmo,
+> veja <doc:Extensions>.
 
 ## Herança e Inicialização de Classe
 
