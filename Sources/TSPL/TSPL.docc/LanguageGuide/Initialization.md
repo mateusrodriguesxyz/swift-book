@@ -299,28 +299,28 @@ or “optional `String`”.
 It's automatically assigned a default value of `nil`, meaning “no string yet”,
 when a new instance of `SurveyQuestion` is initialized.
 
-### Assigning Constant Properties During Initialization
+### Atribuindo propriedades constantes durante a inicialização
 
-You can assign a value to a constant property
-at any point during initialization,
-as long as it's set to a definite value by the time initialization finishes.
-Once a constant property is assigned a value,
-it can't be further modified.
-
-
+Você pode atribuir um valor a uma propriedade constante
+a qualquer momento durante a inicialização,
+contanto que seja atribuido um valor definitivo no momento em que a inicialização terminar.
+Uma vez que uma propriedade constante recebe um valor,
+não pode ser mais modificado.
 
 
 
-> Note: For class instances,
-> a constant property can be modified during initialization
-> only by the class that introduces it.
-> It can't be modified by a subclass.
 
-You can revise the `SurveyQuestion` example from above to use
-a constant property rather than a variable property for the `text` property of the question,
-to indicate that the question doesn't change once an instance of `SurveyQuestion` is created.
-Even though the `text` property is now a constant,
-it can still be set within the class's initializer:
+
+> Nota: Para instâncias de classe,
+> uma propriedade constante pode ser modificada durante a inicialização
+> apenas pela classe que o apresenta.
+> Não pode ser modificado por uma subclasse.
+
+Você pode revisar o exemplo `SurveyQuestion` acima para usar
+uma propriedade constante em vez de uma propriedade variável para a propriedade `text` da pergunta,
+para indicar que a pergunta não muda depois que uma instância de `SurveyQuestion` é criada.
+Mesmo que a propriedade `text` seja agora uma constante,
+ele ainda pode ser definido no inicializador da classe:
 
 ```swift
 class SurveyQuestion {
@@ -335,7 +335,7 @@ class SurveyQuestion {
 }
 let beetsQuestion = SurveyQuestion(text: "How about beets?")
 beetsQuestion.ask()
-// Prints "How about beets?"
+// Imprime "How about beets?"
 beetsQuestion.response = "I also like beets. (But not with cheese.)"
 ```
 
