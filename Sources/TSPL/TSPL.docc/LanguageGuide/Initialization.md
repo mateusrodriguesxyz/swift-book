@@ -342,20 +342,20 @@ beetsQuestion.response = "I also like beets. (But not with cheese.)"
 
 
 
-## Default Initializers
+## Inicializadores padrão
 
-Swift provides a *default initializer*
-for any structure or class
-that provides default values for all of its properties
-and doesn't provide at least one initializer itself.
-The default initializer simply creates a new instance
-with all of its properties set to their default values.
+Swift fornece um *inicializador padrão*
+para qualquer estrutura ou classe
+que fornece valores padrão para todas as suas propriedades
+e não fornece pelo menos um inicializador.
+O inicializador padrão simplesmente cria uma nova instância
+com todas as suas propriedades definidas para seus valores padrão.
 
 
 
-This example defines a class called `ShoppingListItem`,
-which encapsulates the name, quantity, and purchase state
-of an item in a shopping list:
+Este exemplo define uma classe chamada `ShoppingListItem`,
+que encapsula o nome, a quantidade e o estado de compra
+de um item em uma lista de compras:
 
 ```swift
 class ShoppingListItem {
@@ -369,17 +369,17 @@ var item = ShoppingListItem()
 
 
 
-Because all properties of the `ShoppingListItem` class have default values,
-and because it's a base class with no superclass,
-`ShoppingListItem` automatically gains a default initializer implementation
-that creates a new instance with all of its properties set to their default values.
-(The `name` property is an optional `String` property,
-and so it automatically receives a default value of `nil`,
-even though this value isn't written in the code.)
-The example above uses the default initializer for the `ShoppingListItem` class
-to create a new instance of the class with initializer syntax,
-written as `ShoppingListItem()`,
-and assigns this new instance to a variable called `item`.
+Como todas as propriedades da classe `ShoppingListItem` têm valores padrão,
+e porque é uma classe base sem superclasse,
+`ShoppingListItem` ganha automaticamente uma implementação de inicializador padrão
+que cria uma nova instância com todas as suas propriedades definidas com seus valores padrão.
+(A propriedade `name` é uma propriedade opcional `String`,
+e assim ele recebe automaticamente um valor padrão de `nil`,
+mesmo que esse valor não esteja escrito no código.)
+O exemplo acima usa o inicializador padrão para a classe `ShoppingListItem`
+para criar uma nova instância da classe com a sintaxe do inicializador,
+escrito como `ShoppingListItem()`,
+e atribui esta nova instância a uma variável chamada `item`.
 
 ### Memberwise Initializers for Structure Types
 
