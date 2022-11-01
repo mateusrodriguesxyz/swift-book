@@ -36,10 +36,9 @@ Os Pull Requests devem ser feitos diretamente para a branch `main`, e utilizar o
 
 ## Motivação
 
-Existe pouco ou nenhum material gratuito em português de Swift. Contribuindo com a tradução desse livro, você pode estar ajudando alguém sem dinheiro para comprar material a estudar. Além disso, você mesmo estará estudando, revisando, e aprendendo recursos da linguagem que você talvez não conheça.
+Existe pouco ou nenhum material gratuito, em Português, sobre Swift. Contribuindo com a tradução deste livro, você estará fomentando a literatura acerca do tema além de viabilizar o acesso de tais conteúdos a um número ainda maior de pessoas. Sem contar que, ao mesmo tempo, você estará estudando, revisando, e aprendendo recursos da linguagem que talvez você ainda não conheça.
 
-Com esforço coletivo, conseguiremos finalizar a tradução e facilitar o aprendizado de Swift para quem não sabe inglês.
-
+Com esforço coletivo, conseguiremos finalizar a tradução e facilitar o aprendizado de Swift em Português.
 
 ## Guia de Tradução
 
