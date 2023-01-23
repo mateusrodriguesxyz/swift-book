@@ -732,13 +732,9 @@ let sideLength = optionalSquare?.sideLength
 
 
 
-## Enumerations and Structures
+## Enumerações e Estruturas
 
-Use `enum` to create an enumeration.
-Like classes and all other named types,
-enumerations can have methods associated with them.
-
-
+Use `enum` para criar uma enumeração. Como as classes e todos os outros tipos nomeados, as enumerações podem ter métodos associados a elas.
 
 ```swift
 enum Rank: Int {
@@ -765,25 +761,11 @@ let ace = Rank.ace
 let aceRawValue = ace.rawValue
 ```
 
+> Experimento: Escreva uma função que compara dois valores `Rank` comparando seus valores brutos (rawValue).
 
+Por padrão, o Swift atribui os valores brutos começando em zero e incrementando em um a cada vez, mas você pode alterar esse comportamento especificando explicitamente os valores. No exemplo acima, `Ace` recebe explicitamente um valor bruto de `1`, e o resto dos valores brutos são atribuídos em ordem. Você também pode usar strings ou números de ponto flutuante como o tipo bruto de uma enumeração. Use a propriedade `rawValue` para acessar o valor bruto de um caso de enumeração.
 
-
-> Experiment: Write a function that compares two `Rank` values
-> by comparing their raw values.
-
-By default, Swift assigns the raw values starting at zero
-and incrementing by one each time,
-but you can change this behavior by explicitly specifying values.
-In the example above, `Ace` is explicitly given a raw value of `1`,
-and the rest of the raw values are assigned in order.
-You can also use strings or floating-point numbers
-as the raw type of an enumeration.
-Use the `rawValue` property to access the raw value of an enumeration case.
-
-Use the `init?(rawValue:)` initializer
-to make an instance of an enumeration from a raw value.
-It returns either the enumeration case matching the raw value
-or `nil` if there's no matching `Rank`.
+Use o inicializador `init?(rawValue:)` para criar uma instância de uma enumeração a partir de um valor bruto. Ele retorna o caso de enumeração correspondente ao valor bruto ou `nil` se não houver `Rank` correspondente.
 
 ```swift
 if let convertedRank = Rank(rawValue: 3) {
@@ -791,14 +773,7 @@ if let convertedRank = Rank(rawValue: 3) {
 }
 ```
 
-
-
-
-The case values of an enumeration are actual values,
-not just another way of writing their raw values.
-In fact,
-in cases where there isn't a meaningful raw value,
-you don't have to provide one.
+Os valores `case` de uma enumeração são valores reais, não apenas outra maneira de escrever seus valores brutos. Na verdade, nos casos em que não há um valor bruto significativo, você não precisa fornecer um.
 
 ```swift
 enum Suit {
@@ -821,42 +796,11 @@ let hearts = Suit.hearts
 let heartsDescription = hearts.simpleDescription()
 ```
 
+> Experimento: Adicione um método `color()` a `Suit` que retorna "black" para espadas e paus, e retorna "red" para copas e ouros.
 
+Observe as duas maneiras como o caso `hearts` da enumeração é referido acima: Ao atribuir um valor à constante `hearts`, o caso de enumeração `Suit.hearts` é referido por seu nome completo porque a constante não tem um tipo explícito especificado. Dentro do switch, o caso de enumeração é referido pela forma abreviada `.hearts` porque o valor de `self` já é conhecido como `Suit`. Você pode usar a forma abreviada sempre que o tipo do valor já for conhecido.
 
-
-> Experiment: Add a `color()` method to `Suit` that returns "black"
-> for spades and clubs, and returns "red" for hearts and diamonds.
-
-
-
-Notice the two ways that the `hearts` case of the enumeration
-is referred to above:
-When assigning a value to the `hearts` constant,
-the enumeration case `Suit.hearts` is referred to by its full name
-because the constant doesn't have an explicit type specified.
-Inside the switch,
-the enumeration case is referred to by the abbreviated form `.hearts`
-because the value of `self` is already known to be a suit.
-You can use the abbreviated form
-anytime the value's type is already known.
-
-If an enumeration has raw values,
-those values are determined as part of the declaration,
-which means every instance of a particular enumeration case
-always has the same raw value.
-Another choice for enumeration cases
-is to have values associated with the case ---
-these values are determined when you make the instance,
-and they can be different for each instance of an enumeration case.
-You can think of the associated values
-as behaving like stored properties of the enumeration case instance.
-For example,
-consider the case of requesting
-the sunrise and sunset times from a server.
-The server either responds with the requested information,
-or it responds with a description of what went wrong.
-
-
+Se uma enumeração tiver valores brutos, esses valores serão determinados como parte da declaração, o que significa que cada instância de um determinado caso de enumeração sempre terá o mesmo valor bruto. Outra opção para casos de enumeração é ter valores associados ao caso --- esses valores são determinados quando você cria a instância e podem ser diferentes para cada instância de um caso de enumeração. Você pode pensar nos valores associados como se comportando como propriedades armazenadas da instância de caso de enumeração. Por exemplo, considere o caso de solicitar os horários do nascer e do pôr do sol de um servidor. O servidor responde com as informações solicitadas ou com uma descrição do que deu errado.
 
 ```swift
 enum ServerResponse {
@@ -873,25 +817,14 @@ switch success {
     case let .failure(message):
         print("Failure...  \(message)")
 }
-// Prints "Sunrise is at 6:00 am and sunset is at 8:09 pm."
+// Imprime "Sunrise is at 6:00 am and sunset is at 8:09 pm."
 ```
 
+> Experimento: Adicione um terceiro caso a `ServerResponse` e ao switch.
 
+Observe como os horários do nascer e do pôr do sol são extraídos do valor `ServerResponse` como parte da comparação do valor com os casos de alternância.
 
-
-> Experiment: Add a third case to `ServerResponse` and to the switch.
-
-Notice how the sunrise and sunset times
-are extracted from the `ServerResponse` value
-as part of matching the value against the switch cases.
-
-Use `struct` to create a structure.
-Structures support many of the same behaviors as classes,
-including methods and initializers.
-One of the most important differences
-between structures and classes is that
-structures are always copied when they're passed around in your code,
-but classes are passed by reference.
+Use `struct` para criar uma estrutura. As estruturas suportam muitos dos mesmos comportamentos das classes, incluindo métodos e inicializadores. Uma das diferenças mais importantes entre estruturas e classes é que as estruturas sempre são copiadas quando são passadas em seu código, mas as classes são passadas por referência.
 
 ```swift
 struct Card {
@@ -905,12 +838,7 @@ let threeOfSpades = Card(rank: .three, suit: .spades)
 let threeOfSpadesDescription = threeOfSpades.simpleDescription()
 ```
 
-
-
-
-> Experiment: Write a function that returns an array containing
-> a full deck of cards,
-> with one card of each combination of rank and suit.
+> Experimento: Escreva uma função que retorne um array contendo um baralho completo de cartas, com uma carta de cada combinação de valor e naipe.
 
 ## Concorrência
 
