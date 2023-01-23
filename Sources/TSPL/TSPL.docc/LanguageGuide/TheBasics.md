@@ -14,114 +14,66 @@ Swift também apresenta tipos opcionais, que lidam com a ausência de um valor. 
 
 Swift é uma linguagem *type-safe*, o que significa que a linguagem ajuda você a ser claro sobre os tipos de valores com os quais seu código pode trabalhar. Se parte do seu código requer um `String`, segurança de tipo impede que você passe um `Int` por engano. Da mesma forma, a segurança de tipo evita que você passe acidentalmente uma `String` opcional para um trecho de código que requer uma `String` não opcional. A segurança de tipo ajuda a detectar e corrigir erros o mais cedo possível no processo de desenvolvimento.
 
-## Constants and Variables
+## Constantes e Variáveis 
 
-Constants and variables associate a name
-(such as `maximumNumberOfLoginAttempts` or `welcomeMessage`)
-with a value of a particular type
-(such as the number `10` or the string `"Hello"`).
-The value of a *constant* can't be changed once it's set,
-whereas a *variable* can be set to a different value in the future.
+Constantes e variáveis associam um nome (como `maximumNumberOfLoginAttempts` ou `welcomeMessage`) com um valor de um tipo específico (como o número `10` ou a string `"Hello"`). O valor de uma *constante* não pode ser alterado depois de definido, enquanto uma *variável* pode ser definida com um valor diferente no futuro.
 
-### Declaring Constants and Variables
+### Declarando Constantes e Variáveis 
 
-Constants and variables must be declared before they're used.
-You declare constants with the `let` keyword
-and variables with the `var` keyword.
-Here's an example of how constants and variables can be used
-to track the number of login attempts a user has made:
+Constantes e variáveis devem ser declaradas antes de serem usadas. Você declara constantes com a palavra-chave `let` e variáveis com a palavra-chave `var`. Aqui está um exemplo de como constantes e variáveis podem ser usadas para rastrear o número de tentativas de login feitas por um usuário:
 
 ```swift
 let maximumNumberOfLoginAttempts = 10
 var currentLoginAttempt = 0
 ```
 
+Esse código pode ser lido como:
 
+“Declare uma nova constante chamada `maximumNumberOfLoginAttempts` e dê a ela um valor de `10`. Em seguida, declare uma nova variável chamada `currentLoginAttempt` e dê a ela um valor inicial de `0`.”
 
+Neste exemplo, o número máximo de tentativas de login permitidas é declarado como uma constante, porque o valor máximo nunca muda. O contador de tentativas de login atual é declarado como uma variável, porque esse valor deve ser incrementado após cada tentativa de login com falha.
 
-This code can be read as:
-
-“Declare a new constant called `maximumNumberOfLoginAttempts`,
-and give it a value of `10`.
-Then, declare a new variable called `currentLoginAttempt`,
-and give it an initial value of `0`.”
-
-In this example,
-the maximum number of allowed login attempts is declared as a constant,
-because the maximum value never changes.
-The current login attempt counter is declared as a variable,
-because this value must be incremented after each failed login attempt.
-
-You can declare multiple constants or multiple variables on a single line,
-separated by commas:
+Você pode declarar várias constantes ou várias variáveis em uma única linha, separadas por vírgulas:
 
 ```swift
 var x = 0.0, y = 0.0, z = 0.0
 ```
 
+> Nota: Se um valor armazenado em seu código não mudar, sempre declare-o como uma constante com a palavra-chave `let`. Use variáveis apenas para armazenar valores que precisam poder mudar.
 
+### Anotações de Tipo
 
+Você pode fornecer uma *anotação de tipo* ao declarar uma constante ou variável, para ser claro sobre o tipo de valores que a constante ou variável pode armazenar. Escreva uma anotação de tipo colocando dois pontos após o nome da constante ou variável, seguido de um espaço, seguido do nome do tipo a ser usado.
 
-> Note: If a stored value in your code won't change,
-> always declare it as a constant with the `let` keyword.
-> Use variables only for storing values that need to be able to change.
-
-### Type Annotations
-
-You can provide a *type annotation* when you declare a constant or variable,
-to be clear about the kind of values the constant or variable can store.
-Write a type annotation by placing a colon after the constant or variable name,
-followed by a space, followed by the name of the type to use.
-
-This example provides a type annotation for a variable called `welcomeMessage`,
-to indicate that the variable can store `String` values:
+Este exemplo fornece uma anotação de tipo para uma variável chamada `welcomeMessage`, para indicar que a variável pode armazenar valores `String`:
 
 ```swift
 var welcomeMessage: String
 ```
 
+Os dois pontos na declaração significam “…do tipo…”, então o código acima pode ser lido como:
 
+“Declare uma variável chamada `welcomeMessage` que é do tipo `String`.”
 
+A frase “do tipo `String`” significa “pode armazenar qualquer valor `String`.” Pense nisso como significando “o tipo de coisa” que pode ser armazenado.
 
-The colon in the declaration means “…of type…,”
-so the code above can be read as:
-
-“Declare a variable called `welcomeMessage` that's of type `String`.”
-
-The phrase “of type `String`” means “can store any `String` value.”
-Think of it as meaning “the type of thing” (or “the kind of thing”) that can be stored.
-
-The `welcomeMessage` variable can now be set to any string value without error:
+A variável `welcomeMessage` agora pode ser definida para qualquer valor de string sem erro:
 
 ```swift
 welcomeMessage = "Hello"
 ```
 
-
-
-
-You can define multiple related variables of the same type on a single line,
-separated by commas, with a single type annotation after the final variable name:
+Você pode definir várias variáveis relacionadas do mesmo tipo em uma única linha, separadas por vírgulas, com uma única anotação de tipo após o nome da variável final:
 
 ```swift
 var red, green, blue: Double
 ```
 
+> Nota: É raro que você precise escrever anotações de tipo na prática. Se você fornecer um valor inicial para uma constante ou variável no ponto em que ela é definida, a linguagem quase sempre pode inferir o tipo a ser usado para essa constante ou variável, conforme descrito em <doc:TheBasics#Type-Safety-and-Type- Inferência>. No exemplo `welcomeMessage` acima, nenhum valor inicial é fornecido e, portanto, o tipo da variável `welcomeMessage` é especificado com uma anotação de tipo em vez de ser inferido de um valor inicial.
 
+### Nomeando Constantes e Variáveis 
 
-
-> Note: It's rare that you need to write type annotations in practice.
-> If you provide an initial value for a constant or variable at the point that it's defined,
-> Swift can almost always infer the type to be used for that constant or variable,
-> as described in <doc:TheBasics#Type-Safety-and-Type-Inference>.
-> In the `welcomeMessage` example above, no initial value is provided,
-> and so the type of the `welcomeMessage` variable is specified with a type annotation
-> rather than being inferred from an initial value.
-
-### Naming Constants and Variables
-
-Constant and variable names can contain almost any character,
-including Unicode characters:
+Os nomes de constantes e variáveis podem conter praticamente qualquer caractere, incluindo caracteres Unicode:
 
 ```swift
 let π = 3.14159
@@ -129,97 +81,48 @@ let 你好 = "你好世界"
 let 🐶🐮 = "dogcow"
 ```
 
+Os nomes de constantes e variáveis não podem conter caracteres de espaço em branco, símbolos matemáticos, setas, valores escalares Unicode de uso privado ou caracteres de desenho de linha e caixa. Eles também não podem começar com um número, embora os números possam ser incluídos em outro lugar dentro do nome.
 
+Depois de declarar uma constante ou variável de um determinado tipo, você não pode declará-la novamente com o mesmo nome ou alterá-la para armazenar valores de um tipo diferente. Nem você pode transformar uma constante em uma variável ou uma variável em uma constante.
 
+> Nota: Se você precisar dar a uma constante ou variável o mesmo nome de uma palavra-chave reservada do Swift, coloque a palavra-chave entre crases (```) ao usá-la como um nome. No entanto, evite usar palavras-chave como nomes, a menos que você não tenha escolha.
 
-Constant and variable names can't contain
-whitespace characters, mathematical symbols, arrows, private-use Unicode scalar values,
-or line- and box-drawing characters.
-Nor can they begin with a number,
-although numbers may be included elsewhere within the name.
-
-Once you've declared a constant or variable of a certain type,
-you can't declare it again with the same name,
-or change it to store values of a different type.
-Nor can you change a constant into a variable
-or a variable into a constant.
-
-> Note: If you need to give a constant or variable the same name as a reserved Swift keyword,
-> surround the keyword with backticks (```) when using it as a name.
-> However, avoid using keywords as names unless you have absolutely no choice.
-
-You can change the value of an existing variable to another value of a compatible type.
-In this example, the value of `friendlyWelcome` is changed from
-`"Hello!"` to `"Bonjour!"`:
+Você pode alterar o valor de uma variável existente para outro valor de tipo compatível. Neste exemplo, o valor de `friendlyWelcome` é alterado de `"Hello!"` para `"Bonjour!"`:
 
 ```swift
 var friendlyWelcome = "Hello!"
 friendlyWelcome = "Bonjour!"
-// friendlyWelcome is now "Bonjour!"
+// friendlyWelcome agora é "Bonjour!"
 ```
 
-
-
-
-Unlike a variable, the value of a constant can't be changed after it's set.
-Attempting to do so is reported as an error when your code is compiled:
+Ao contrário de uma variável, o valor de uma constante não pode ser alterado depois de definido. Tentar fazer isso é indicado como um erro quando seu código é compilado:
 
 ```swift
 let languageName = "Swift"
 languageName = "Swift++"
-// This is a compile-time error: languageName cannot be changed.
+// Este é um erro de tempo de compilação: languageName não pode ser alterado.
 ```
 
+### Imprimindo Constantes e Variáveis
 
-
-
-### Printing Constants and Variables
-
-You can print the current value of a constant or variable with the `print(_:separator:terminator:)` function:
+Você pode imprimir o valor atual de uma constante ou variável com a função `print(_:separator:terminator:)`:
 
 ```swift
 print(friendlyWelcome)
-// Prints "Bonjour!"
+// Imprime "Bonjour!"
 ```
 
+A função `print(_:separator:terminator:)` é uma função global que imprime um ou mais valores para uma saída apropriada. No Xcode, por exemplo, a função `print(_:separator:terminator:)` imprime sua saída no painel “console” do Xcode. Os parâmetros `separator` e `terminator` possuem valores padrão, então você pode omiti-los quando chamar esta função. Por padrão, a função termina a linha que imprime adicionando uma quebra de linha. Para imprimir um valor sem uma quebra de linha após ele, passe uma string vazia como terminador --- por exemplo, `print(someValue, terminator: "")`. Para obter informações sobre parâmetros com valores padrão, consulte <doc:Functions#Default-Parameter-Values>.
 
 
-
-The `print(_:separator:terminator:)` function
-is a global function that prints one or more values
-to an appropriate output.
-In Xcode, for example,
-the `print(_:separator:terminator:)` function prints its output in Xcode's “console” pane.
-The `separator` and `terminator` parameter have default values,
-so you can omit them when you call this function.
-By default, the function terminates the line it prints by adding a line break.
-To print a value without a line break after it,
-pass an empty string as the terminator --- for example,
-`print(someValue, terminator: "")`.
-For information about parameters with default values,
-see <doc:Functions#Default-Parameter-Values>.
-
-
-
-
-
-
-
-Swift uses *string interpolation* to include the name of a constant or variable
-as a placeholder in a longer string,
-and to prompt Swift to replace it with the current value of that constant or variable.
-Wrap the name in parentheses and escape it with a backslash before the opening parenthesis:
+O Swift usa *interpolação de string* para incluir o nome de uma constante ou variável como um espaço reservado em uma string mais longa e para solicitar ao Swift que o substitua pelo valor atual dessa constante ou variável. Coloque o nome entre parênteses e escape com uma barra invertida antes do parêntese de abertura:
 
 ```swift
 print("The current value of friendlyWelcome is \(friendlyWelcome)")
-// Prints "The current value of friendlyWelcome is Bonjour!"
+// Imprime "The current value of friendlyWelcome is Bonjour!"
 ```
 
-
-
-
-> Note: All options you can use with string interpolation
-> are described in <doc:StringsAndCharacters#String-Interpolation>.
+> Nota: Todas as opções que você pode usar com a interpolação de strings são descritas em <doc:StringsAndCharacters#String-Interpolation>.
 
 ## Comments
 
