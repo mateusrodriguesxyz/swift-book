@@ -1,46 +1,18 @@
 
 
-# The Basics
+# O Básico
 
-Swift is a new programming language for iOS, macOS, watchOS, and tvOS app development.
-Nonetheless, many parts of Swift will be familiar
-from your experience of developing in C and Objective-C.
+Swift é uma linguagem de programação para desenvolvimento de aplicativos iOS, macOS, watchOS e tvOS. Se você tem experiência em desenvolvimento em C ou Objective-C, muitas partes do Swift serão familiares para você.
 
-Swift provides its own versions of all fundamental C and Objective-C types,
-including `Int` for integers, `Double` and `Float` for floating-point values,
-`Bool` for Boolean values, and `String` for textual data.
-Swift also provides powerful versions of the three primary collection types,
-`Array`, `Set`, and `Dictionary`,
-as described in <doc:CollectionTypes>.
+Swift fornece suas próprias versões de todos os tipos fundamentais de C e Objective-C, incluindo `Int` para inteiros, `Double` e `Float` para valores de ponto flutuante, `Bool` para valores booleanos e `String` para dados textuais. Swift também fornece versões poderosas dos três tipos principais de coleção, `Array`, `Set` e `Dictionary`, conforme descrito em <doc:CollectionTypes>.
 
-Like C, Swift uses variables to store and refer to values by an identifying name.
-Swift also makes extensive use of variables whose values can't be changed.
-These are known as constants, and are much more powerful than constants in C.
-Constants are used throughout Swift to make code safer and clearer in intent
-when you work with values that don't need to change.
+Como C, Swift usa variáveis para armazenar e referir-se a valores por um nome identificador. Swift também faz uso extensivo de variáveis cujos valores não podem ser alterados. Elas são conhecidas como constantes e são muito mais poderosas do que as constantes em C. As constantes são usadas para tornar o código mais seguro e mais claro na intenção quando você trabalha com valores que não precisam ser alterados.
 
-In addition to familiar types,
-Swift introduces advanced types not found in Objective-C, such as tuples.
-Tuples enable you to create and pass around groupings of values.
-You can use a tuple to return multiple values from a function as a single compound value.
+Além dos tipos familiares, Swift apresenta tipos avançados não encontrados em Objective-C, como tuplas. As tuplas permitem que você crie e transmita agrupamentos de valores. Você pode usar uma tupla para retornar vários valores de uma função como um único valor composto.
 
-Swift also introduces optional types,
-which handle the absence of a value.
-Optionals say either “there *is* a value, and it equals *x*”
-or “there *isn't* a value at all”.
-Using optionals is similar to using `nil` with pointers in Objective-C,
-but they work for any type, not just classes.
-Not only are optionals safer and more expressive than `nil` pointers in Objective-C,
-they're at the heart of many of Swift's most powerful features.
+Swift também apresenta tipos opcionais, que lidam com a ausência de um valor. Os opcionais dizem “*há* um valor e é igual a *x*” ou “*não há* nenhum valor”. Usar opcionais é semelhante a usar `nil` com ponteiros em Objective-C, mas eles funcionam para qualquer tipo, não apenas para classes. Os opcionais não são apenas mais seguros e expressivos do que os ponteiros `nil` em Objective-C, eles estão no centro de muitos dos recursos mais poderosos de Swift.
 
-Swift is a *type-safe* language,
-which means the language helps you to be clear about the types of values your code can work with.
-If part of your code requires a `String`,
-type safety prevents you from passing it an `Int` by mistake.
-Likewise, type safety prevents you from
-accidentally passing an optional `String`
-to a piece of code that requires a non-optional `String`.
-Type safety helps you catch and fix errors as early as possible in the development process.
+Swift é uma linguagem *type-safe*, o que significa que a linguagem ajuda você a ser claro sobre os tipos de valores com os quais seu código pode trabalhar. Se parte do seu código requer um `String`, segurança de tipo impede que você passe um `Int` por engano. Da mesma forma, a segurança de tipo evita que você passe acidentalmente uma `String` opcional para um trecho de código que requer uma `String` não opcional. A segurança de tipo ajuda a detectar e corrigir erros o mais cedo possível no processo de desenvolvimento.
 
 ## Constants and Variables
 
