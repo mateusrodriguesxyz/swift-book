@@ -229,70 +229,33 @@ Esse exemplo também mostra como os tipos de referência podem ser mais difícei
 Note que `tenEighty` e `alsoTenEighty` são declarados como *constantes*, em vez de variáveis. No entanto, você ainda pode alterar `tenEighty.frameRate` e `alsoTenEighty.frameRate` porque os valores das constantes `tenEighty` e `alsoTenEighty` não mudam. `tenEighty` e `alsoTenEighty` não “armazenam” a instância `VideoMode` --- em vez disso, ambos *referem-se* a uma instância `VideoMode` nos bastidores. É a propriedade `frameRate` do `VideoMode` subjacente que foi alterada, não os valores das referências constantes a esse `VideoMode`.
 
 
-### Identity Operators
+### Operadores de Identidade
 
-Because classes are reference types,
-it's possible for multiple constants and variables to refer to
-the same single instance of a class behind the scenes.
-(The same isn't true for structures and enumerations,
-because they're always copied when they're assigned to a constant or variable,
-or passed to a function.)
+Como as classes são tipos de referência, é possível que várias constantes e variáveis se refiram à mesma instância única de uma classe. (O mesmo não é verdade para estruturas e enumerações, porque elas sempre são copiadas quando são atribuídas a uma constante ou variável ou passadas para uma função.)
 
 
+Às vezes pode ser útil descobrir se duas constantes ou variáveis se referem exatamente à mesma instância de uma classe. Para permitir isso, o Swift fornece dois operadores de identidade:
 
+- Idêntico a (`===`)
+- Não idêntico a (`!==`)
 
-
-It can sometimes be useful to find out whether two constants or variables refer to
-exactly the same instance of a class.
-To enable this, Swift provides two identity operators:
-
-- Identical to (`===`)
-- Not identical to (`!==`)
-
-Use these operators to check whether two constants or variables refer to the same single instance:
+Use esses operadores para verificar se duas constantes ou variáveis se referem à mesma instância única:
 
 ```swift
 if tenEighty === alsoTenEighty {
    print("tenEighty and alsoTenEighty refer to the same VideoMode instance.")
 }
-// Prints "tenEighty and alsoTenEighty refer to the same VideoMode instance."
+// Imprime "tenEighty and alsoTenEighty refer to the same VideoMode instance."
 ```
 
+Note que *idêntico a* (representado por três sinais de igual, ou `===`) não significa a mesma coisa que *igual a* (representado por dois sinais de igual, ou `==`). *Idêntico a* significa que duas constantes ou variáveis do tipo de classe referem-se exatamente à mesma instância de classe. *Igual a* significa que duas instâncias são consideradas iguais ou equivalentes em valor, para algum significado apropriado de *igual*, conforme definido pelo designer do tipo.
+
+Ao definir suas próprias estruturas e classes personalizadas, é sua responsabilidade decidir o que se qualifica como duas instâncias iguais. O processo de definir suas próprias implementações dos operadores `==` e `!=` é descrito em <doc:AdvancedOperators#Equivalence-Operators>.
 
 
+### Ponteiros
 
-Note that *identical to* (represented by three equals signs, or `===`)
-doesn't mean the same thing as *equal to* (represented by two equals signs, or `==`).
-*Identical to* means that
-two constants or variables of class type refer to exactly the same class instance.
-*Equal to* means that
-two instances are considered equal or equivalent in value,
-for some appropriate meaning of *equal*, as defined by the type's designer.
-
-When you define your own custom structures and classes,
-it's your responsibility to decide what qualifies as two instances being equal.
-The process of defining your own implementations of the `==` and `!=` operators
-is described in <doc:AdvancedOperators#Equivalence-Operators>.
-
-
-
-
-
-
-
-### Pointers
-
-If you have experience with C, C++, or Objective-C,
-you may know that these languages use *pointers* to refer to addresses in memory.
-A Swift constant or variable that refers to an instance of some reference type
-is similar to a pointer in C,
-but isn't a direct pointer to an address in memory,
-and doesn't require you to write an asterisk (`*`)
-to indicate that you are creating a reference.
-Instead, these references are defined like any other constant or variable in Swift.
-The standard library provides pointer and buffer types
-that you can use if you need to interact with pointers directly ---
-see [Manual Memory Management](https://developer.apple.com/documentation/swift/swift_standard_library/manual_memory_management).
+Se você tiver experiência com C, C++ ou Objective-C, talvez saiba que essas linguagens usam *ponteiros* para se referir a endereços na memória. Uma constante ou variável Swift que se refere a uma instância de algum tipo de referência é semelhante a um ponteiro em C, mas não é um ponteiro direto para um endereço na memória e não exige que você escreva um asterisco (`*`) para indicar que você está criando uma referência. Em vez disso, essas referências são definidas como qualquer outra constante ou variável no Swift. A biblioteca padrão fornece tipos de ponteiro e buffer que você pode usar se precisar interagir diretamente com os ponteiros --- consulte [Manual Memory Management](https://developer.apple.com/documentation/swift/swift_standard_library/manual_memory_management).
 
 
 
