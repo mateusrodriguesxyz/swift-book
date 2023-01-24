@@ -1,96 +1,57 @@
 
 
-# Structures and Classes
+# Estruturas e Classes
 
-*Structures* and *classes* are general-purpose,
-flexible constructs that become the building blocks of your program's code.
-You define properties and methods to add functionality to your structures and classes
-using the same syntax you use to define constants, variables, and functions.
+*Estruturas* e *classes* são construções flexíveis de propósito geral que se tornam os blocos de construção do código do seu programa. Você define propriedades e métodos para adicionar funcionalidade às suas estruturas e classes usando a mesma sintaxe usada para definir constantes, variáveis e funções.
 
-Unlike other programming languages,
-Swift doesn't require you to create separate interface and implementation files
-for custom structures and classes.
-In Swift, you define a structure or class in a single file,
-and the external interface to that class or structure is
-automatically made available for other code to use.
+Ao contrário de outras linguagens de programação, Swift não exige que você crie arquivos separados de interface e implementação para estruturas e classes personalizadas. Em Swift, você define uma estrutura ou classe em um único arquivo, e a interface externa para essa classe ou estrutura é automaticamente disponibilizada para outro código usar.
 
-> Note: An instance of a class is traditionally known as an *object*.
-> However, Swift structures and classes
-> are much closer in functionality than in other languages,
-> and much of this chapter describes functionality that applies to
-> instances of *either* a class or a structure type.
-> Because of this, the more general term *instance* is used.
+> Nota: Uma instância de uma classe é tradicionalmente conhecida como um *objeto*. No entanto, as estruturas e classes do Swift são muito mais próximas em funcionalidade do que em outras linguagens, e muito deste capítulo descreve a funcionalidade que se aplica a instâncias de um *tipo*, seja uma classe ou uma estrutura. Por causa disso, o termo mais geral *instância* é usado.
 
-## Comparing Structures and Classes
+## Comparando Estruturas e Classes
 
-Structures and classes in Swift have many things in common.
-Both can:
+Estruturas e classes em Swift têm muitas coisas em comum. Ambas podem:
 
-- Define properties to store values
-- Define methods to provide functionality
-- Define subscripts to provide access to their values using subscript syntax
-- Define initializers to set up their initial state
-- Be extended to expand their functionality beyond a default implementation
-- Conform to protocols to provide standard functionality of a certain kind
+- Definir propriedades para armazenar valores
+- Definir métodos para fornecer funcionalidade
+- Definir subscritos para fornecer acesso a seus valores usando a sintaxe de subscritos
+- Definir inicializadores para configurar seu estado inicial
+- Ser estendido para expandir sua funcionalidade além de uma implementação padrão
+- Conformar com protocolos para fornecer funcionalidade padrão de um determinado tipo
 
-For more information, see
-<doc:Properties>, <doc:Methods>, <doc:Subscripts>, <doc:Initialization>,
-<doc:Extensions>, and <doc:Protocols>.
+Para mais informações, veja <doc:Properties>, <doc:Methods>, <doc:Subscripts>, <doc:Initialization>, <doc:Extensions>, e <doc:Protocols>.
 
-Classes have additional capabilities that structures don't have:
+As classes têm recursos adicionais que as estruturas não possuem:
 
-- Inheritance enables one class to inherit the characteristics of another.
-- Type casting enables you to check and interpret the type of a class instance at runtime.
-- Deinitializers enable an instance of a class to free up any resources it has assigned.
-- Reference counting allows more than one reference to a class instance.
+- A herança permite que uma classe herde as características de outra.
+- A conversão de tipo permite que você verifique e interprete o tipo de uma instância de classe em tempo de execução.
+- Desinicializadores permitem que uma instância de uma classe libere todos os recursos atribuídos a ela.
+- A contagem de referências permite mais de uma referência a uma instância de classe.
 
-For more information, see
-<doc:Inheritance>, <doc:TypeCasting>, <doc:Deinitialization>,
-and <doc:AutomaticReferenceCounting>.
+Para mais informações, veja <doc:Inheritance>, <doc:TypeCasting>, <doc:Deinitialization>, e <doc:AutomaticReferenceCounting>.
 
-The additional capabilities that classes support
-come at the cost of increased complexity.
-As a general guideline,
-prefer structures because they're easier to reason about,
-and use classes when they're appropriate or necessary.
-In practice, this means most of the custom data types you define
-will be structures and enumerations.
-For a more detailed comparison,
-see [Choosing Between Structures and Classes](https://developer.apple.com/documentation/swift/choosing_between_structures_and_classes).
+Os recursos adicionais que as classes suportam vêm com o custo de maior complexidade. Como diretriz geral, prefira estruturas porque são mais fáceis de raciocinar sobre elas e use classes quando forem apropriadas ou necessárias. Na prática, isso significa que a maioria dos tipos de dados personalizados que você definir serão estruturas e enumerações.
 
-> Note: Classes and actors share many of the same characteristics and behaviors.
-> For information about actors, see <doc:Concurrency>.
+Para uma comparação mais detalhada, consulte [Choosing Between Structures and Classes (https://developer.apple.com/documentation/swift/choosing_between_structures_and_classes).
 
-### Definition Syntax
+> Nota: Classes e atores compartilham muitas das mesmas características e comportamentos. Para obter informações sobre atores, consulte <doc:Concurrency>.
 
-Structures and classes have a similar definition syntax.
-You introduce structures with the `struct` keyword
-and classes with the `class` keyword.
-Both place their entire definition within a pair of braces:
+### Sintaxe de Definição
+
+Estruturas e classes têm uma sintaxe de definição semelhante. Você introduz estruturas com a palavra-chave `struct` e classes com a palavra-chave `class`. Ambas colocam toda a sua definição dentro de um par de chaves:
 
 ```swift
 struct SomeStructure {
-   // structure definition goes here
+   // definição da estrutura vai aqui
 }
 class SomeClass {
-   // class definition goes here
+   // definição de classe vai aqui
 }
 ```
 
+> Nota: Sempre que você define uma nova estrutura ou classe, você define um novo tipo de Swift. Dê nomes aos tipos `UpperCamelCase` (como `SomeStructure` e `SomeClass` aqui) para corresponder à capitalização dos tipos Swift padrão (como `String`, `Int` e `Bool`). Dê nomes às propriedades e métodos `lowerCamelCase` (como `frameRate` e `incrementCount`) para diferenciá-los dos nomes de tipo.
 
-
-
-> Note: Whenever you define a new structure or class,
-> you define a new Swift type.
-> Give types `UpperCamelCase` names
-> (such as `SomeStructure` and `SomeClass` here)
-> to match the capitalization of standard Swift types
-> (such as `String`, `Int`, and `Bool`).
-> Give properties and methods `lowerCamelCase` names
-> (such as `frameRate` and `incrementCount`)
-> to differentiate them from type names.
-
-Here's an example of a structure definition and a class definition:
+Aqui está um exemplo de uma definição de estrutura e uma definição de classe:
 
 ```swift
 struct Resolution {
@@ -105,115 +66,61 @@ class VideoMode {
 }
 ```
 
+O exemplo acima define uma nova estrutura chamada `Resolution`, para descrever uma resolução de exibição baseada em pixels. Esta estrutura tem duas propriedades armazenadas chamadas `width` e `height`. Propriedades armazenadas são constantes ou variáveis agrupadas e armazenadas como parte da estrutura ou classe. Essas duas propriedades são inferidas como sendo do tipo `Int` definindo-as como um valor inteiro inicial de `0`.
 
+O exemplo acima também define uma nova classe chamada `VideoMode`, para descrever um modo de vídeo específico para exibição de vídeo. Essa classe tem quatro propriedades armazenadas variáveis. A primeira, `resolution`, é inicializada com uma nova instância da estrutura `Resolution`, que infere um tipo de propriedade de `Resolution`. Para as outras três propriedades, as novas instâncias `VideoMode` serão inicializadas com uma configuração `interlaced` de `false` (que significa “vídeo não entrelaçado”), uma propriedade frameRate` de `0,0` e um valor `String` opcional chamado  `name`. A propriedade `name` recebe automaticamente um valor padrão de `nil`, ou “nenhum valor `name`”, porque é de um tipo opcional.
 
+### Instâncias de Estruturas e Classes
 
-The example above defines a new structure called `Resolution`,
-to describe a pixel-based display resolution.
-This structure has two stored properties called `width` and `height`.
-Stored properties are constants or variables that are bundled up and stored
-as part of the structure or class.
-These two properties are inferred to be of type `Int`
-by setting them to an initial integer value of `0`.
+A definição da estrutura `Resolution` e a definição da classe `VideoMode` descrevem apenas como será a aparência de um instancia do tipo `Resolution` ou `VideoMode`. Elas próprias não descrevem uma resolução específica ou modo de vídeo. Para fazer isso, você precisa criar uma instância da estrutura ou classe.
 
-The example above also defines a new class called `VideoMode`,
-to describe a specific video mode for video display.
-This class has four variable stored properties.
-The first, `resolution`, is initialized with a new `Resolution` structure instance,
-which infers a property type of `Resolution`.
-For the other three properties,
-new `VideoMode` instances will be initialized with
-an `interlaced` setting of `false` (meaning “noninterlaced video”),
-a playback frame rate of `0.0`,
-and an optional `String` value called `name`.
-The `name` property is automatically given a default value of `nil`,
-or “no `name` value”, because it's of an optional type.
-
-### Structure and Class Instances
-
-The `Resolution` structure definition and the `VideoMode` class definition
-only describe what a `Resolution` or `VideoMode` will look like.
-They themselves don't describe a specific resolution or video mode.
-To do that, you need to create an instance of the structure or class.
-
-The syntax for creating instances is very similar for both structures and classes:
+A sintaxe para criar instâncias é muito semelhante para estruturas e classes:
 
 ```swift
 let someResolution = Resolution()
 let someVideoMode = VideoMode()
 ```
 
+Estruturas e classes usam sintaxe inicializadora para novas instâncias. A forma mais simples de sintaxe do inicializador usa o nome do tipo da classe ou estrutura
+seguido por parênteses vazios, como `Resolution()` ou `VideoMode()`. Isso cria uma nova instância da classe ou estrutura, com todas as propriedades inicializadas com seus valores padrão. A inicialização de classe e estrutura é descrita com mais detalhes em <doc:Initialization>.
 
 
+### Acessando Propriedades
 
-Structures and classes both use initializer syntax for new instances.
-The simplest form of initializer syntax uses the type name of the class or structure
-followed by empty parentheses, such as `Resolution()` or `VideoMode()`.
-This creates a new instance of the class or structure,
-with any properties initialized to their default values.
-Class and structure initialization is described in more detail
-in <doc:Initialization>.
-
-
-
-### Accessing Properties
-
-You can access the properties of an instance using *dot syntax*.
-In dot syntax, you write the property name immediately after the instance name,
-separated by a period (`.`), without any spaces:
+Você pode acessar as propriedades de uma instância usando a *sintaxe de ponto*. Na sintaxe de ponto, você escreve o nome da propriedade imediatamente após o nome da instância, separado por um ponto (`.`), sem espaços:
 
 ```swift
 print("The width of someResolution is \(someResolution.width)")
-// Prints "The width of someResolution is 0"
+// Imprime "The width of someResolution is 0"
 ```
 
+Neste exemplo, `someResolution.width` refere-se à propriedade `width` de `someResolution` e retorna seu valor inicial padrão de `0`.
 
-
-
-In this example,
-`someResolution.width` refers to the `width` property of `someResolution`,
-and returns its default initial value of `0`.
-
-You can drill down into subproperties,
-such as the `width` property in the `resolution` property of a `VideoMode`:
+Você pode acessar as subpropriedades, como a propriedade `width` na propriedade `resolution` de um `VideoMode`:
 
 ```swift
 print("The width of someVideoMode is \(someVideoMode.resolution.width)")
-// Prints "The width of someVideoMode is 0"
+// Imprime "The width of someVideoMode is 0"
 ```
 
-
-
-
-You can also use dot syntax to assign a new value to a variable property:
+Você também pode usar a sintaxe de ponto para atribuir um novo valor a uma propriedade variável:
 
 ```swift
 someVideoMode.resolution.width = 1280
 print("The width of someVideoMode is now \(someVideoMode.resolution.width)")
-// Prints "The width of someVideoMode is now 1280"
+// Imprime "The width of someVideoMode is now 1280"
 ```
 
 
+### Inicializadores de Membros para Tipos de Estrutura
 
-
-### Memberwise Initializers for Structure Types
-
-All structures have an automatically generated *memberwise initializer*,
-which you can use to initialize the member properties of new structure instances.
-Initial values for the properties of the new instance
-can be passed to the memberwise initializer by name:
+Todas as estruturas têm um *inicializador de membros* gerado automaticamente, que você pode usar para inicializar as propriedades de membro de novas instâncias de estrutura. Os valores iniciais para as propriedades da nova instância podem ser passados para o inicializador de membro por nome:
 
 ```swift
 let vga = Resolution(width: 640, height: 480)
 ```
 
-
-
-
-Unlike structures, class instances don't receive a default memberwise initializer.
-Initializers are described in more detail in <doc:Initialization>.
-
-
+Ao contrário das estruturas, as instâncias de classe não recebem um inicializador de membros padrão. Os inicializadores são descritos com mais detalhes em <doc:Initialization>.
 
 ## Structures and Enumerations Are Value Types
 
