@@ -189,14 +189,11 @@ print("The remembered direction is \(rememberedDirection)")
 
 Quando `rememberedDirection` recebe o valor de `currentDirection`, ele é definido como uma cópia desse valor. Alterar o valor de `currentDirection` posteriormente não afeta a cópia do valor original que foi armazenado em `rememberedDirection`.
 
-## Classes Are Reference Types
+## Classes são Tipos de Referência
 
-Unlike value types, *reference types* are *not* copied
-when they're assigned to a variable or constant,
-or when they're passed to a function.
-Rather than a copy, a reference to the same existing instance is used.
+Ao contrário dos tipos de valor, os *tipos de referência* *não* são copiados quando são atribuídos a uma variável ou constante, ou quando são passados para uma função. Em vez de uma cópia, é usada uma referência à mesma instância existente.
 
-Here's an example, using the `VideoMode` class defined above:
+Aqui está um exemplo, usando a classe `VideoMode` definida acima:
 
 ```swift
 let tenEighty = VideoMode()
@@ -206,68 +203,30 @@ tenEighty.name = "1080i"
 tenEighty.frameRate = 25.0
 ```
 
+Esse exemplo declara uma nova constante chamada `tenEighty` e a define para se referir a uma nova instância da classe `VideoMode`. A propriedade `resolution` recebe uma cópia da instância `hd` de `1920` por `1080` definida anteriormente. A propriedade `interlaced` é configurada para `true`, `name` é definido como `"1080i"` e `frameRate` é definida como `25,0` quadros por segundo.
 
-
-
-This example declares a new constant called `tenEighty`
-and sets it to refer to a new instance of the `VideoMode` class.
-The video mode is assigned a copy of the HD resolution of `1920` by `1080` from before.
-It's set to be interlaced,
-its name is set to `"1080i"`,
-and its frame rate is set to `25.0` frames per second.
-
-Next, `tenEighty` is assigned to a new constant, called `alsoTenEighty`,
-and the frame rate of `alsoTenEighty` is modified:
+Em seguida, `tenEighty` é atribuído a uma nova constante, chamada `alsoTenEighty`, e a taxa de quadros de `alsoTenEighty` é modificada:
 
 ```swift
 let alsoTenEighty = tenEighty
 alsoTenEighty.frameRate = 30.0
 ```
 
-
-
-
-Because classes are reference types,
-`tenEighty` and `alsoTenEighty` actually both refer to the *same* `VideoMode` instance.
-Effectively, they're just two different names for the same single instance,
-as shown in the figure below:
+Como as classes são tipos de referência, `tenEighty` e `alsoTenEighty` na verdade se referem à *mesma* instância `VideoMode`. Efetivamente, eles são apenas dois nomes diferentes para a mesma instância, conforme mostrado na figura abaixo:
 
 ![](sharedStateClass)
 
-
-Checking the `frameRate` property of `tenEighty`
-shows that it correctly reports the new frame rate of `30.0`
-from the underlying `VideoMode` instance:
+Verificar a propriedade `frameRate` de `tenEighty` mostra que ela retorna corretamente a nova taxa de quadros de `30.0` da instância `VideoMode` subjacente:
 
 ```swift
 print("The frameRate property of tenEighty is now \(tenEighty.frameRate)")
-// Prints "The frameRate property of tenEighty is now 30.0"
+// Imprime "The frameRate property of tenEighty is now 30.0"
 ```
 
 
+Esse exemplo também mostra como os tipos de referência podem ser mais difíceis de raciocinar. Se `tenEighty` e `alsoTenEighty` estiverem muito distantes no código do seu programa, pode ser difícil encontrar todas as maneiras pelas quais o modo de vídeo é alterado. Onde quer que você use `tenEighty`, você também deve pensar no código que usa `alsoTenEighty`, e vice versa. Em contraste, os tipos de valor são mais fáceis de raciocinar porque todo o código que interage com o mesmo valor está próximo em seus arquivos de origem.
 
-
-This example also shows how reference types can be harder to reason about.
-If `tenEighty` and `alsoTenEighty` were far apart in your program's code,
-it could be difficult to find all the ways that the video mode is changed.
-Wherever you use `tenEighty`,
-you also have to think about the code that uses `alsoTenEighty`,
-and vice versa.
-In contrast, value types are easier to reason about
-because all of the code that interacts with the same value
-is close together in your source files.
-
-Note that `tenEighty` and `alsoTenEighty` are declared as *constants*,
-rather than variables.
-However, you can still change `tenEighty.frameRate` and `alsoTenEighty.frameRate` because
-the values of the `tenEighty` and `alsoTenEighty` constants themselves don't actually change.
-`tenEighty` and `alsoTenEighty` themselves don't “store” the `VideoMode` instance ---
-instead, they both *refer* to a `VideoMode` instance behind the scenes.
-It's the `frameRate` property of the underlying `VideoMode` that's changed,
-not the values of the constant references to that `VideoMode`.
-
-
-
+Note que `tenEighty` e `alsoTenEighty` são declarados como *constantes*, em vez de variáveis. No entanto, você ainda pode alterar `tenEighty.frameRate` e `alsoTenEighty.frameRate` porque os valores das constantes `tenEighty` e `alsoTenEighty` não mudam. `tenEighty` e `alsoTenEighty` não “armazenam” a instância `VideoMode` --- em vez disso, ambos *referem-se* a uma instância `VideoMode` nos bastidores. É a propriedade `frameRate` do `VideoMode` subjacente que foi alterada, não os valores das referências constantes a esse `VideoMode`.
 
 
 ### Identity Operators
