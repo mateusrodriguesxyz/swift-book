@@ -122,104 +122,53 @@ let vga = Resolution(width: 640, height: 480)
 
 Ao contrário das estruturas, as instâncias de classe não recebem um inicializador de membros padrão. Os inicializadores são descritos com mais detalhes em <doc:Initialization>.
 
-## Structures and Enumerations Are Value Types
+## Estruturas e Enumerações São Tipos de Valor
 
-A *value type* is a type whose value is *copied*
-when it's assigned to a variable or constant,
-or when it's passed to a function.
+Um *tipo de valor* é um tipo cujo valor é *copiado* quando é atribuído a uma variável ou constante, ou quando é passado para uma função.
 
+Na verdade, você usou tipos de valor extensivamente nos capítulos anteriores. Na verdade, todos os tipos básicos em Swift --- inteiros, números de ponto flutuante, booleanos, strings, arrays e dicionários --- são tipos de valor e são implementados como estruturas.
 
+Todas as estruturas e enumerações são tipos de valor em Swift. Isso significa que qualquer instância de estrutura e enumeração que você criar --- e quaisquer tipos de valor que eles tenham como propriedades --- são sempre copiados quando são passados em seu código.
 
-You've actually been using value types extensively throughout the previous chapters.
-In fact, all of the basic types in Swift ---
-integers, floating-point numbers, Booleans, strings, arrays and dictionaries ---
-are value types, and are implemented as structures behind the scenes.
+> Nota: as coleções definidas pela biblioteca padrão, como arrays, dicionários e strings, usam uma otimização para reduzir o custo de desempenho ao fazer cópias. Em vez de fazer uma cópia imediatamente, essas coleções compartilham a memória onde os elementos são armazenados entre a instância original e quaisquer cópias. Se uma das cópias da coleção for modificada, os elementos são copiados imediatamente antes da modificação. O comportamento que você vê em seu código é sempre como se uma cópia ocorresse imediatamente.
 
-All structures and enumerations are value types in Swift.
-This means that any structure and enumeration instances you create ---
-and any value types they have as properties ---
-are always copied when they're passed around in your code.
-
-> Note: Collections defined by the standard library
-> like arrays, dictionaries, and strings
-> use an optimization to reduce the performance cost of copying.
-> Instead of making a copy immediately,
-> these collections share the memory where the elements are stored
-> between the original instance and any copies.
-> If one of the copies of the collection is modified,
-> the elements are copied just before the modification.
-> The behavior you see in your code
-> is always as if a copy took place immediately.
-
-Consider this example, which uses the `Resolution` structure from the previous example:
+Considere este exemplo, que usa a estrutura `Resolution` do exemplo anterior:
 
 ```swift
 let hd = Resolution(width: 1920, height: 1080)
 var cinema = hd
 ```
 
+Este exemplo declara uma constante chamada `hd` e a define como uma instância `Resolution` inicializada com a largura e a altura do vídeo full HD (1920 pixels de largura por 1080 pixels de altura).
 
+Em seguida, é declarada uma variável chamada `cinema` e definida com o valor atual de `hd`. Como `Resolution` é uma estrutura, uma *cópia* da instância existente é feita e esta nova cópia é atribuída a `cinema`. Mesmo que `hd` e `cinema` agora tenham a mesma largura e altura, eles são duas instâncias completamente diferentes nos bastidores.
 
-
-This example declares a constant called `hd`
-and sets it to a `Resolution` instance initialized with
-the width and height of full HD video
-(1920 pixels wide by 1080 pixels high).
-
-It then declares a variable called `cinema`
-and sets it to the current value of `hd`.
-Because `Resolution` is a structure,
-a *copy* of the existing instance is made,
-and this new copy is assigned to `cinema`.
-Even though `hd` and `cinema` now have the same width and height,
-they're two completely different instances behind the scenes.
-
-Next, the `width` property of `cinema` is amended to be
-the width of the slightly wider 2K standard used for digital cinema projection
-(2048 pixels wide and 1080 pixels high):
+Em seguida, a propriedade `width` de `cinema` é alterada para ser a largura do padrão 2K ligeiramente mais amplo usado para projeção de cinema digital (2048 pixels de largura e 1080 pixels de altura):
 
 ```swift
 cinema.width = 2048
 ```
 
-
-
-
-Checking the `width` property of `cinema`
-shows that it has indeed changed to be `2048`:
+Verificar a propriedade `width` de `cinema` mostra que ela realmente mudou para `2048`:
 
 ```swift
 print("cinema is now \(cinema.width) pixels wide")
-// Prints "cinema is now 2048 pixels wide"
+// Imprime "cinema is now 2048 pixels wide"
 ```
 
-
-
-
-However, the `width` property of the original `hd` instance
-still has the old value of `1920`:
+No entanto, a propriedade `width` da instância `hd` original ainda tem o valor antigo de `1920`:
 
 ```swift
 print("hd is still \(hd.width) pixels wide")
-// Prints "hd is still 1920 pixels wide"
+// Imprime "hd is still 1920 pixels wide"
 ```
 
-
-
-
-When `cinema` was given the current value of `hd`,
-the *values* stored in `hd` were copied into the new `cinema` instance.
-The end result was two completely separate instances
-that contained the same numeric values.
-However, because they're separate instances,
-setting the width of `cinema` to `2048`
-doesn't affect the width stored in `hd`,
-as shown in the figure below:
+Quando `cinema` recebeu o valor atual de `hd`, os *valores* armazenados em `hd` foram copiados para a nova instância `cinema`. O resultado final foram duas instâncias completamente separadas que continham os mesmos valores numéricos. No entanto, por serem instâncias separadas, definir a largura de `cinema` para `2048` não afeta a largura armazenada em `hd`, conforme mostrado na figura abaixo:
 
 ![](sharedStateStruct)
 
 
-The same behavior applies to enumerations:
+O mesmo comportamento se aplica a enumerações:
 
 ```swift
 enum CompassPoint {
@@ -234,19 +183,11 @@ currentDirection.turnNorth()
 
 print("The current direction is \(currentDirection)")
 print("The remembered direction is \(rememberedDirection)")
-// Prints "The current direction is north"
-// Prints "The remembered direction is west"
+// Imprime "The current direction is north"
+// Imprime "The remembered direction is west"
 ```
 
-
-
-
-When `rememberedDirection` is assigned the value of `currentDirection`,
-it's actually set to a copy of that value.
-Changing the value of `currentDirection` thereafter doesn't affect
-the copy of the original value that was stored in `rememberedDirection`.
-
-
+Quando `rememberedDirection` recebe o valor de `currentDirection`, ele é definido como uma cópia desse valor. Alterar o valor de `currentDirection` posteriormente não afeta a cópia do valor original que foi armazenado em `rememberedDirection`.
 
 ## Classes Are Reference Types
 
