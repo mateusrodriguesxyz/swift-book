@@ -1,136 +1,73 @@
 
 
-# Collection Types
+# Tipos de Coleção
 
-Swift provides three primary *collection types*,
-known as arrays, sets, and dictionaries,
-for storing collections of values.
-Arrays are ordered collections of values.
-Sets are unordered collections of unique values.
-Dictionaries are unordered collections of key-value associations.
+Swift oferece três *tipos de coleção* primários, conhecidos como arrays, sets e dicionários, para armazenar coleções de valores. Arrays são coleções ordenadas de valores. Sets são coleções não ordenadas de valores únicos. Os dicionários são coleções não ordenadas de associações chave-valor.
 
 ![](CollectionTypes_intro)
 
+Arrays, sets e dicionários em Swift são sempre claros sobre os tipos de valores e chaves que podem armazenar. Isso significa que você não pode inserir um valor do tipo errado em uma coleção por engano. Isso também significa que você pode ter certeza sobre o tipo de valores que recuperará de uma coleção.
 
-Arrays, sets, and dictionaries in Swift are always clear about
-the types of values and keys that they can store.
-This means that you can't insert a value of the wrong type
-into a collection by mistake.
-It also means you can be confident about the type of values
-you will retrieve from a collection.
+> Nota: Os tipos de array, sets e dicionário em Swift são implementados como *coleções genéricas*. Para saber mais sobre tipos genéricos e coleções, consulte <doc:Generics>.
 
-> Note: Swift's array, set, and dictionary types are implemented as *generic collections*.
-> For more about generic types and collections, see <doc:Generics>.
+## Mutabilidade de Coleções
 
+Se você criar um array, um set ou um dicionário e atribuí-lo a uma variável, a coleção criada será *mutável*. Isso significa que você pode alterar (ou *mutar*) a coleção depois de criada adicionando, removendo ou alterando itens na coleção. Se você atribuir um array, um set ou um dicionário a uma constante,
+essa coleção é *imutável* e seu tamanho e conteúdo não podem ser alterados.
 
-
-
-
-
-
-## Mutability of Collections
-
-If you create an array, a set, or a dictionary, and assign it to a variable,
-the collection that's created will be *mutable*.
-This means that you can change (or *mutate*) the collection after it's created
-by adding, removing, or changing items in the collection.
-If you assign an array, a set, or a dictionary to a constant,
-that collection is *immutable*,
-and its size and contents can't be changed.
-
-> Note: It's good practice to create immutable collections
-> in all cases where the collection doesn't need to change.
-> Doing so makes it easier for you to reason about your code
-> and enables the Swift compiler to optimize the performance of
-> the collections you create.
+> Nota: É uma boa prática criar coleções imutáveis em todos os casos em que a coleção não precisa ser alterada. Fazer isso torna mais fácil raciocinar sobre seu código e permite que o compilador Swift otimize o desempenho das coleções que você cria.
 
 ## Arrays
 
-An *array* stores values of the same type in an ordered list.
-The same value can appear in an array multiple times at different positions.
+Um *array* armazena valores do mesmo tipo em uma lista ordenada. O mesmo valor pode aparecer em um array várias vezes em posições diferentes.
 
-> Note: Swift's `Array` type is bridged to Foundation's `NSArray` class.For more information about using `Array` with Foundation and Cocoa,
-> see [Bridging Between Array and NSArray](https://developer.apple.com/documentation/swift/array#2846730).
+> Nota: o tipo `Array` de Swift é uma ponte para a classe `NSArray` do Foundation. Para obter mais informações sobre como usar `Array` com Foundation e Cocoa, consulte [Bridging Between Array and NSArray](https://developer.apple.com/documentation/swift/array#2846730).
 
-### Array Type Shorthand Syntax
+### Sintaxe Abreviada de Array
 
-The type of a Swift array is written in full as `Array<Element>`,
-where `Element` is the type of values the array is allowed to store.
-You can also write the type of an array in shorthand form as `[Element]`.
-Although the two forms are functionally identical,
-the shorthand form is preferred
-and is used throughout this guide when referring to the type of an array.
+O tipo de uma array Swift é escrito por completo como `Array<Element>`, onde `Element` é o tipo de valores que a array pode armazenar. Você também pode escrever o tipo de uma array de forma abreviada como `[Element]`. Embora as duas formas sejam funcionalmente idênticas, a forma abreviada é preferida e é usada ao longo deste guia ao se referir ao tipo de uma array.
 
-### Creating an Empty Array
+### Criando uma Array vazia
 
-You can create an empty array of a certain type
-using initializer syntax:
+Você pode criar uma matriz vazia de um determinado tipo usando a sintaxe do inicializador:
 
 ```swift
 var someInts: [Int] = []
 print("someInts is of type [Int] with \(someInts.count) items.")
-// Prints "someInts is of type [Int] with 0 items."
+// Imprime "someInts is of type [Int] with 0 items."
 ```
 
+Note que o tipo da variável `someInts` é inferido como `[Int]` a partir do tipo do inicializador.
 
-
-
-Note that the type of the `someInts` variable is inferred to be `[Int]`
-from the type of the initializer.
-
-Alternatively, if the context already provides type information,
-such as a function argument or an already typed variable or constant,
-you can create an empty array with an empty array literal,
-which is written as `[]`
-(an empty pair of square brackets):
+Alternativamente, se o contexto já fornece informações de tipo, como um argumento de função ou uma variável ou constante já digitada, você pode criar uma array vazia com um literal de array vazio, que é escrito como `[]` (um par vazio de colchetes):
 
 ```swift
 someInts.append(3)
-// someInts now contains 1 value of type Int
+// someInts agora contém um valor do tipo Int
 someInts = []
-// someInts is now an empty array, but is still of type [Int]
+// someInts agora é uma array vazia, mas ainda é do tipo [Int]
 ```
 
+### Criando um Array com um Valor Padrão
 
-
-
-### Creating an Array with a Default Value
-
-Swift's `Array` type also provides
-an initializer for creating an array of a certain size
-with all of its values set to the same default value.
-You pass this initializer
-a default value of the appropriate type (called `repeating`):
-and the number of times that value is repeated in the new array (called `count`):
+O tipo `Array` do Swift também fornece um inicializador para criar uma array de um determinado tamanho com todos os seus valores definidos como mesmo valor padrão. Você passa a esse inicializador um valor padrão do tipo apropriado (chamado `repeating`) e o número de vezes que esse valor é repetido (chamado `count`):
 
 ```swift
 var threeDoubles = Array(repeating: 0.0, count: 3)
-// threeDoubles is of type [Double], and equals [0.0, 0.0, 0.0]
+// threeDoubles é do tipo [Double], e igual a [0.0, 0.0, 0.0]
 ```
 
+### Criando um Array para Somar Dois Arrays
 
-
-
-### Creating an Array by Adding Two Arrays Together
-
-You can create a new array by adding together two existing arrays with compatible types
-with the addition operator (`+`).
-The new array's type is inferred from the type of the two arrays you add together:
+Você pode criar um novo array adicionando doiss arrays existentes com tipos compatíveis com o operador de adição (`+`). O tipo do novo array é inferido a partir do tipo dos dois arrays que você adiciona:
 
 ```swift
 var anotherThreeDoubles = Array(repeating: 2.5, count: 3)
-// anotherThreeDoubles is of type [Double], and equals [2.5, 2.5, 2.5]
+// anotherThreeDoubles é do tipo [Double], e igual a [2.5, 2.5, 2.5]
 
 var sixDoubles = threeDoubles + anotherThreeDoubles
-// sixDoubles is inferred as [Double], and equals [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
+// sixDoubles é inferido como [Double], e igual a [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
 ```
-
-
-
-
-
-
-
 
 ### Creating an Array with an Array Literal
 
