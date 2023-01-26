@@ -32,7 +32,7 @@ Para mais informações, veja <doc:Inheritance>, <doc:TypeCasting>, <doc:Deiniti
 
 Os recursos adicionais que as classes suportam vêm com o custo de maior complexidade. Como diretriz geral, prefira estruturas porque são mais fáceis de raciocinar sobre elas e use classes quando forem apropriadas ou necessárias. Na prática, isso significa que a maioria dos tipos de dados personalizados que você definir serão estruturas e enumerações.
 
-Para uma comparação mais detalhada, consulte [Choosing Between Structures and Classes (https://developer.apple.com/documentation/swift/choosing_between_structures_and_classes).
+Para uma comparação mais detalhada, consulte [Choosing Between Structures and Classes](https://developer.apple.com/documentation/swift/choosing_between_structures_and_classes).
 
 > Nota: Classes e atores compartilham muitas das mesmas características e comportamentos. Para obter informações sobre atores, consulte <doc:Concurrency>.
 
