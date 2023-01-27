@@ -25,11 +25,11 @@ Um *array* armazena valores do mesmo tipo em uma lista ordenada. O mesmo valor p
 
 ### Sintaxe Abreviada de Array
 
-O tipo de uma array Swift é escrito por completo como `Array<Element>`, onde `Element` é o tipo de valores que a array pode armazenar. Você também pode escrever o tipo de uma array de forma abreviada como `[Element]`. Embora as duas formas sejam funcionalmente idênticas, a forma abreviada é preferida e é usada ao longo deste guia ao se referir ao tipo de uma array.
+O tipo de um array Swift é escrito por completo como `Array<Element>`, onde `Element` é o tipo de valores que a array pode armazenar. Você também pode escrever o tipo de um array de forma abreviada como `[Element]`. Embora as duas formas sejam funcionalmente idênticas, a forma abreviada é preferida e é usada ao longo deste guia ao se referir ao tipo de um array.
 
-### Criando uma Array vazia
+### Criando um Array vazio
 
-Você pode criar uma matriz vazia de um determinado tipo usando a sintaxe do inicializador:
+Você pode criar um array vazio de um determinado tipo usando a sintaxe de inicialização:
 
 ```swift
 var someInts: [Int] = []
@@ -39,7 +39,7 @@ print("someInts is of type [Int] with \(someInts.count) items.")
 
 Note que o tipo da variável `someInts` é inferido como `[Int]` a partir do tipo do inicializador.
 
-Alternativamente, se o contexto já fornece informações de tipo, como um argumento de função ou uma variável ou constante já digitada, você pode criar uma array vazia com um literal de array vazio, que é escrito como `[]` (um par vazio de colchetes):
+Alternativamente, se o contexto já fornece informações de tipo, como um argumento de função ou uma variável ou constante já digitada, você pode criar um array vazio com um literal de array vazio, que é escrito como `[]` (um par vazio de colchetes):
 
 ```swift
 someInts.append(3)
@@ -59,7 +59,7 @@ var threeDoubles = Array(repeating: 0.0, count: 3)
 
 ### Criando um Array para Somar Dois Arrays
 
-Você pode criar um novo array adicionando doiss arrays existentes com tipos compatíveis com o operador de adição (`+`). O tipo do novo array é inferido a partir do tipo dos dois arrays que você adiciona:
+Você pode criar um novo array adicionando dois arrays existentes com tipos compatíveis com o operador de adição (`+`). O tipo do novo array é inferido a partir do tipo dos dois arrays que você adiciona:
 
 ```swift
 var anotherThreeDoubles = Array(repeating: 2.5, count: 3)
@@ -84,7 +84,7 @@ var shoppingList: [String] = ["Eggs", "Milk"]
 // shoppingList inicializado com dois items iniciais
 ```
 
-A variável `shoppingList` é declarada como “um array de valores de string”, escrita como `[String]`. Comoo esse array especificou um tipo de valor `String`, é permitido armazenar apenas valores `String`. Aqui, o array `shoppingList` é inicializado com dois valores `String` (`"Eggs"` e `"Milk"`), escritos dentro de um  literal de array.
+A variável `shoppingList` é declarada como “um array de valores de string”, escrita como `[String]`. Como esse array especificou um tipo de valor `String`, é permitido armazenar apenas valores `String`. Aqui, o array `shoppingList` é inicializado com dois valores `String` (`"Eggs"` e `"Milk"`), escritos dentro de um  literal de array.
 
 > Nota: O array `shoppingList` é declarado como uma variável (com o introdutor `var`) e não uma constante (com o introdutor `let`) porque mais itens são adicionados à lista de compras nos exemplos abaixo.
 
