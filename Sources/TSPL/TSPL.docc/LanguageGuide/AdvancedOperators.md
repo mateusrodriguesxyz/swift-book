@@ -489,21 +489,21 @@ Veja [Operator Declarations](https://developer.apple.com/documentation/swift/ope
 > Tenha cuidado em garantir que as interações dos operadores ainda se comportem da maneira esperada
 > ao portar um código para o Swift.
 
-## Operator Methods
+## Métodos de operadores
 
-Classes and structures can provide their own implementations of existing operators.
-This is known as *overloading* the existing operators.
+Classes e estruturas podem fornecer implementações próprias de operadores existentes.
+Isso se chama *sobrecarregar* os operadores existentes.
 
-The example below shows how to implement
-the arithmetic addition operator (`+`) for a custom structure.
-The arithmetic addition operator is a binary operator
-because it operates on two targets
-and it's an infix operator because it appears between those two targets.
+O exemplo abaixo mostra como implementar 
+o operador aritmético de adição (`+`) em uma estrutura personalizada. 
+O operador aritmético de adição é um operador binário 
+porque opera sobre duas coisas 
+e é um operador infixo pois aparece entre essas duas coisas.
 
-The example defines a `Vector2D` structure for
-a two-dimensional position vector `(x, y)`,
-followed by a definition of an *operator method*
-to add together instances of the `Vector2D` structure:
+O exemplo define a estrutura `Vector2D` para
+um vetor bidimensional de posição `(x, y)`,
+em seguida define um *método de operador*
+para fazer a soma de duas instâncias da estrutura `Vector2D`:
 
 ```swift
 struct Vector2D {
@@ -517,28 +517,26 @@ extension Vector2D {
 }
 ```
 
+O método de operador é definido no exemplo como um método do tipo `Vector2D` 
+com um nome igual ao do operador em que será feita a sobrecarga. 
+Porque adição não é uma parte essencial do comportamento de um vetor, 
+o método do tipo é definido em uma extensão de `Vector2D` 
+ao invés de ser definido diretamente na declaração da estrutura `Vector2D`. 
+Porque o operador aritmético de adição é um operador binário, 
+esse método de operador recebe dois parâmetros de entrada do tipo `Vector2D` 
+e retorna um único valor de saída, também do tipo `Vector2D`.
 
 
+Nessa implementação, os parâmetros de entrada são chamados `left` e `right` 
+para representar as instâncias de `Vector2D` que estarão no 
+lado esquerdo e no lado direito do operador `+`. 
+Esse método recebe uma nova instância de `Vector2D`, 
+da qual as propriedades `x` e `y` são 
+inicializadas como uma soma das propriedades `x` e `y` das 
+duas instâncias de `Vector2D` que foram somadas.
 
-The operator method is defined as a type method on `Vector2D`,
-with a method name that matches the operator to be overloaded (`+`).
-Because addition isn't part of the essential behavior for a vector,
-the type method is defined in an extension of `Vector2D`
-rather than in the main structure declaration of `Vector2D`.
-Because the arithmetic addition operator is a binary operator,
-this operator method takes two input parameters of type `Vector2D`
-and returns a single output value, also of type `Vector2D`.
-
-In this implementation, the input parameters are named `left` and `right`
-to represent the `Vector2D` instances that will be on
-the left side and right side of the `+` operator.
-The method returns a new `Vector2D` instance,
-whose `x` and `y` properties are
-initialized with the sum of the `x` and `y` properties from
-the two `Vector2D` instances that are added together.
-
-The type method
-can be used as an infix operator between existing `Vector2D` instances:
+O método do tipo pode ser usado como um operador infixo entre duas instâncias
+existentes de `Vector2D`:
 
 ```swift
 let vector = Vector2D(x: 3.0, y: 1.0)
@@ -548,10 +546,8 @@ let combinedVector = vector + anotherVector
 ```
 
 
-
-
-This example adds together the vectors `(3.0, 1.0)` and `(2.0, 4.0)`
-to make the vector `(5.0, 5.0)`, as illustrated below.
+Esse exemplo soma os vetores `(3.0, 1.0)` e `(2.0, 4.0)`
+para gerar o vetor `(5.0, 5.0)`, como é mostrado na figura abaixo.
 
 ![](vectorAddition)
 
