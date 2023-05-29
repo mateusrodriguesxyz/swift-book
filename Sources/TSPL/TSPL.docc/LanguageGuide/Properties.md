@@ -517,25 +517,13 @@ and the default name of `oldValue` is used instead.
 
 ## Property Wrappers
 
-A property wrapper adds a layer of separation
-between code that manages how a property is stored
-and the code that defines a property.
-For example,
-if you have properties that
-provide thread-safety checks
-or store their underlying data in a database,
-you have to write that code on every property.
-When you use a property wrapper,
-you write the management code once when you define the wrapper,
-and then reuse that management code by applying it to multiple properties.
-
-To define a property wrapper,
-you make a structure, enumeration, or class
-that defines a `wrappedValue` property.
-In the code below,
-the `TwelveOrLess` structure ensures that
-the value it wraps always contains a number less than or equal to 12.
-If you ask it to store a larger number, it stores 12 instead.
+Um property wrapper adiciona uma camada de separação
+entre o código que gerencia como uma propriedade é armazenada e o código que define uma propriedade.
+Por exemplo, se você tiver várias propriedades que fornecem verificações de thread-safety ou armazenam seus dados subjacentes em um banco de dados, você tem que escrever o código para isso em cada uma das propriedades.
+Quando você usa um property wrapper, você escreve o código de gerenciamento uma vez ao definir o wrapper, e, em seguida, reutiliza esse código de gerenciamento aplicando-o a várias propriedades.
+Para definir um property wrapper, você cria uma estrutura, enumeração ou classe que define uma propriedade `wrappedValue`. 
+No código abaixo, a estrutura `TwelveOrLess` garante que
+o valor que ele embrulha sempre contém um número menor ou igual a 12. Se você pedir para armazenar um número maior, ele armazena 12.
 
 ```swift
 @propertyWrapper
@@ -548,33 +536,23 @@ struct TwelveOrLess {
 }
 ```
 
+O setter garante que os novos valores sejam menores ou iguais a 12, e o getter retorna o valor armazenado.
 
+> Nota: A declaração para `number` no exemplo acima
+> marca a variável como `private`,
+> que garante que `number` seja usado apenas
+> na implementação de `TwelveOrLess`.
+> Código que está escrito em qualquer outro lugar
+> acessa o valor usando o getter e o setter para `wrappedValue`,
+> e não pode usar `number` diretamente.
+> Para informações sobre `private`, consulte <doc:AccessControl>.
 
-
-
-
-The setter ensures that new values are less than or equal to 12,
-and the getter returns the stored value.
-
-> Note: The declaration for `number` in the example above
-> marks the variable as `private`,
-> which ensures `number` is used only
-> in the implementation of `TwelveOrLess`.
-> Code that's written anywhere else
-> accesses the value using the getter and setter for `wrappedValue`,
-> and can't use `number` directly.
-> For information about `private`, see <doc:AccessControl>.
-
-
-
-
-
-You apply a wrapper to a property
-by writing the wrapper's name before the property
-as an attribute.
-Here's a structure that stores a rectangle
-that uses the `TwelveOrLess` property wrapper
-to ensure its dimensions are always 12 or less:
+Você aplica um wrapper a uma propriedade
+escrevendo o nome do wrapper antes da propriedade
+como um atributo.
+Aqui está uma estrutura que armazena um retângulo
+que usa o wrapper de propriedade `TwelveOrLess`
+para garantir que suas dimensões sejam sempre 12 ou menos:
 
 ```swift
 struct SmallRectangle {
@@ -584,41 +562,27 @@ struct SmallRectangle {
 
 var rectangle = SmallRectangle()
 print(rectangle.height)
-// Prints "0"
+// Imprime "0"
 
 rectangle.height = 10
 print(rectangle.height)
-// Prints "10"
+// Imprime "10"
 
 rectangle.height = 24
 print(rectangle.height)
-// Prints "12"
+// Imprime "12"
 ```
 
+As propriedades `height` e `width` obtêm seus valores iniciais da definição de `TwelveOrLess`, que define `TwelveOrLess.number` como zero.
+O setter em `TwelveOrLess` trata 10 como um valor válido
+portanto, armazenar o número 10 em `rectangle.height` continua como está escrito.
+No entanto, 24 é maior do que `TwelveOrLess` permite,
+então tentar armazenar 24 acaba definindo `rectangle.height` para 12, o maior valor permitido.
 
-
-
-The `height` and `width` properties get their initial values
-from the definition of `TwelveOrLess`,
-which sets `TwelveOrLess.number` to zero.
-The setter in `TwelveOrLess` treats 10 as a valid value
-so storing the number 10 in `rectangle.height` proceeds as written.
-However, 24 is larger than `TwelveOrLess` allows,
-so trying to store 24 end up setting `rectangle.height`
-to 12 instead, the largest allowed value.
-
-When you apply a wrapper to a property,
-the compiler synthesizes code that provides storage for the wrapper
-and code that provides access to the property through the wrapper.
-(The property wrapper is responsible for storing the wrapped value,
-so there's no synthesized code for that.)
-You could write code that uses the behavior of a property wrapper,
-without taking advantage of the special attribute syntax.
-For example,
-here's a version of `SmallRectangle`
-from the previous code listing
-that wraps its properties in the `TwelveOrLess` structure explicitly,
-instead of writing `@TwelveOrLess` as an attribute:
+Quando você aplica um wrapper a uma propriedade, o compilador sintetiza o código que fornece armazenamento para o wrapper e o código que fornece acesso à propriedade por meio do wrapper. (O property wrapper é responsável por armazenar o valor embrulhado, então não há código sintetizado para isso.)
+Você pode escrever código que usa o comportamento de um property wrapper, sem aproveitar a sintaxe de atributo especial.
+Por exemplo, aqui está uma versão de `SmallRectangle`
+da listagem de código anterior que embrulha suas propriedades na estrutura `TwelveOrLess` explicitamente, em vez de escrever `@TwelveOrLess` como um atributo:
 
 ```swift
 struct SmallRectangle {
@@ -635,29 +599,14 @@ struct SmallRectangle {
 }
 ```
 
+As propriedades `_height` e `_width` armazenam instâncias do property wrapper, `TwelveOrLess`. O getter e setter para `height` e `width` embrulham (wrap) o acesso à propriedade `wrappedValue`.
 
+### Definindo valores iniciais para Propriedades Embrulhadas (Wrapped Properties)
 
-
-The `_height` and `_width` properties
-store an instance of the property wrapper, `TwelveOrLess`.
-The getter and setter for `height` and `width`
-wrap access to the `wrappedValue` property.
-
-### Setting Initial Values for Wrapped Properties
-
-The code in the examples above
-sets the initial value for the wrapped property
-by giving `number` an initial value in the definition of `TwelveOrLess`.
-Code that uses this property wrapper
-can't specify a different initial value for a property
-that's wrapped by `TwelveOrLess` ---
-for example,
-the definition of `SmallRectangle`
-can't give `height` or `width` initial values.
-To support setting an initial value or other customization,
-the property wrapper needs to add an initializer.
-Here's an expanded version of `TwelveOrLess` called `SmallNumber`
-that defines initializers that set the wrapped and maximum value:
+O código nos exemplos acima define o valor inicial para a propriedade embrulhada dando a `number` um valor inicial na definição de `TwelveOrLess`.
+Um código que usa este property wrapper não pode especificar um valor inicial diferente para uma propriedade que é embrulhado por `TwelveOrLess` --- por exemplo, a definição de `SmallRectangle` não pode dar valores iniciais `height` ou `width`.
+Para oferecer suporte à configuração de um valor inicial ou outra personalização, o property wrapper precisa adicionar um inicializador.
+Aqui está uma versão expandida de `TwelveOrLess` chamada `SmallNumber` que define inicializadores que definem o valor máximo e embrulhado:
 
 ```swift
 @propertyWrapper
@@ -685,21 +634,11 @@ struct SmallNumber {
 }
 ```
 
+A definição de `SmallNumber` inclui três inicializadores --- `init()`, `init(wrappedValue:)`, e `init(wrappedValue:maximum:)` --- que os exemplos abaixo usam para definir o valor embrulhado e o valor máximo.
+Para obter informações sobre inicialização e sintaxe do inicializador, consulte <doc:Inicialização>.
 
-
-
-
-
-The definition of `SmallNumber` includes three initializers ---
-`init()`, `init(wrappedValue:)`, and `init(wrappedValue:maximum:)` ---
-which the examples below use
-to set the wrapped value and the maximum value.
-For information about initialization and initializer syntax,
-see <doc:Initialization>.
-
-When you apply a wrapper to a property and you don't specify an initial value,
-Swift uses the `init()` initializer to set up the wrapper.
-For example:
+Quando você aplica um wrapper a uma propriedade e não especifica um valor inicial, o Swift usa o inicializador `init()` para configurar o wrapper.
+Por exemplo:
 
 ```swift
 struct ZeroRectangle {
@@ -709,28 +648,16 @@ struct ZeroRectangle {
 
 var zeroRectangle = ZeroRectangle()
 print(zeroRectangle.height, zeroRectangle.width)
-// Prints "0 0"
+// Imprime "0 0"
 ```
 
-
-
-
-
-
-The instances of `SmallNumber` that wrap `height` and `width`
-are created by calling `SmallNumber()`.
-The code inside that initializer
-sets the initial wrapped value and the initial maximum value,
-using the default values of zero and 12.
-The property wrapper still provides all of the initial values,
-like the earlier example that used `TwelveOrLess` in `SmallRectangle`.
-Unlike that example,
-`SmallNumber` also supports writing those initial values
-as part of declaring the property.
-
-When you specify an initial value for the property,
-Swift uses the `init(wrappedValue:)` initializer to set up the wrapper.
-For example:
+As instâncias de `SmallNumber` que embrulham `height` e `width` são criadas chamando `SmallNumber()`.
+O código dentro desse inicializador define o valor inicial embrulhado e o valor máximo inicial,
+usando os valores padrão de zero e 12.
+O property wrapper ainda fornece todos os valores iniciais, como o exemplo anterior que usou `TwelveOrLess` em `SmallRectangle`.
+Ao contrário desse exemplo, `SmallNumber` também suporta escrever esses valores iniciais como parte da declaração de propriedade.
+Quando você especifica um valor inicial para a propriedade, o Swift usa o inicializador `init(wrappedValue:)` para configurar o wrapper.
+Por exemplo:
 
 ```swift
 struct UnitRectangle {
@@ -740,25 +667,16 @@ struct UnitRectangle {
 
 var unitRectangle = UnitRectangle()
 print(unitRectangle.height, unitRectangle.width)
-// Prints "1 1"
+// Imprime "1 1"
 ```
 
-
-
-
-
-
-When you write `= 1` on a property with a wrapper,
-that's translated into a call to the `init(wrappedValue:)` initializer.
-The instances of `SmallNumber` that wrap `height` and `width`
-are created by calling `SmallNumber(wrappedValue: 1)`.
-The initializer uses the wrapped value that's specified here,
-and it uses the default maximum value of 12.
-
-When you write arguments in parentheses after the custom attribute,
-Swift uses the initializer that accepts those arguments to set up the wrapper.
-For example, if you provide an initial value and a maximum value,
-Swift uses the `init(wrappedValue:maximum:)` initializer:
+Quando você escreve `= 1` em uma propriedade com um wrapper, que é traduzido em uma chamada para o inicializador `init(wrappedValue:)`.
+As instâncias de `SmallNumber` que embrulham `height` e `width` são criadas chamando `SmallNumber(wrappedValue: 1)`.
+O inicializador usa o valor embrulhado especificado aqui,
+e usa o valor máximo padrão de 12.
+Quando você escreve argumentos entre parênteses após o atributo personalizado,
+O Swift usa o inicializador que aceita esses argumentos para configurar o wrapper.
+Por exemplo, se você fornecer um valor inicial e um valor máximo, Swift usa o inicializador `init(wrappedValue:maximum:)`:
 
 ```swift
 struct NarrowRectangle {
@@ -768,36 +686,26 @@ struct NarrowRectangle {
 
 var narrowRectangle = NarrowRectangle()
 print(narrowRectangle.height, narrowRectangle.width)
-// Prints "2 3"
+// Imprime "2 3"
 
 narrowRectangle.height = 100
 narrowRectangle.width = 100
 print(narrowRectangle.height, narrowRectangle.width)
-// Prints "5 4"
+// Imprime "5 4"
 ```
 
+A instância de `SmallNumber` que embrulha `height`
+é criada chamando `SmallNumber(wrappedValue: 2, maximum: 5)`, e a instância que embrulha `width`
+é criada chamando `SmallNumber(wrappedValue: 3, maximum: 4)`.
 
-
-
-
-
-The instance of `SmallNumber` that wraps `height`
-is created by calling `SmallNumber(wrappedValue: 2, maximum: 5)`,
-and the instance that wraps `width`
-is created by calling `SmallNumber(wrappedValue: 3, maximum: 4)`.
-
-By including arguments to the property wrapper,
-you can set up the initial state in the wrapper
-or pass other options to the wrapper when it's created.
-This syntax is the most general way to use a property wrapper.
-You can provide whatever arguments you need to the attribute,
-and they're passed to the initializer.
-
-When you include property wrapper arguments,
-you can also specify an initial value using assignment.
-Swift treats the assignment like a `wrappedValue` argument
-and uses the initializer that accepts the arguments you include.
-For example:
+Ao incluir argumentos no property wrapper,
+você pode configurar o estado inicial no wrapper ou passar outras opções para o wrapper quando ele for criado.
+Essa sintaxe é a maneira mais geral de usar um property wrapper.
+Você pode fornecer quaisquer argumentos necessários para o atributo, e eles são passados para o inicializador.
+Quando você inclui argumentos de property wrapper, você também pode especificar um valor inicial usando atribuição.
+Swift trata a atribuição como um argumento `wrappedValue`
+e usa o inicializador que aceita os argumentos incluídos.
+Por exemplo:
 
 ```swift
 struct MixedRectangle {
@@ -807,40 +715,30 @@ struct MixedRectangle {
 
 var mixedRectangle = MixedRectangle()
 print(mixedRectangle.height)
-// Prints "1"
+// Imprime "1"
 
 mixedRectangle.height = 20
 print(mixedRectangle.height)
-// Prints "12"
+// Imprime "12"
 ```
 
+A instância de `SmallNumber` que embrulha `height`
+é criada chamando `SmallNumber(wrappedValue: 1)`,
+que usa o valor máximo padrão de 12.
+A instância que embrulha `width`
+é criada chamando `SmallNumber(wrappedValue: 2, máximo: 9)`.
 
+### Projetando um valor de um Property Wrapper
 
-
-The instance of `SmallNumber` that wraps `height`
-is created by calling `SmallNumber(wrappedValue: 1)`,
-which uses the default maximum value of 12.
-The instance that wraps `width`
-is created by calling `SmallNumber(wrappedValue: 2, maximum: 9)`.
-
-### Projecting a Value From a Property Wrapper
-
-In addition to the wrapped value,
-a property wrapper can expose additional functionality
-by defining a *projected value* ---
-for example, a property wrapper that manages access to a database
-can expose a `flushDatabaseConnection()` method on its projected value.
-The name of the projected value is the same as the wrapped value,
-except it begins with a dollar sign (`$`).
-Because your code can't define properties that start with `$`
-the projected value never interferes with properties you define.
-
-In the `SmallNumber` example above,
-if you try to set the property to a number that's too large,
-the property wrapper adjusts the number before storing it.
-The code below adds a `projectedValue` property to the `SmallNumber` structure
-to keep track of whether the property wrapper
-adjusted the new value for the property before storing that new value.
+Além do valor embrulhado,
+um wrapper de propriedade pode expor funcionalidades adicionais definindo um *valor projetado* ---
+por exemplo, um property wrapper que gerencia o acesso a um banco de dados pode expor um método `flushDatabaseConnection()` em seu valor projetado.
+O nome do valor projetado é o mesmo do valor embrulhado,
+exceto que começa com um cifrão (`$`).
+Porque seu código não pode definir propriedades que começam com `$` o valor projetado nunca interfere nas propriedades definidas por você.
+No exemplo `SmallNumber` acima,
+se você tentar definir a propriedade para um número muito grande, o property wrapper ajusta o número antes de armazená-lo.
+O código abaixo adiciona uma propriedade `projectedValue` à estrutura `SmallNumber` para acompanhar se o property wrapper ajustou o novo valor para a propriedade antes de armazenar esse novo valor.
 
 ```swift
 @propertyWrapper
@@ -873,39 +771,21 @@ var someStructure = SomeStructure()
 
 someStructure.someNumber = 4
 print(someStructure.$someNumber)
-// Prints "false"
+// Imprime "false"
 
 someStructure.someNumber = 55
 print(someStructure.$someNumber)
-// Prints "true"
+// Imprime "true"
 ```
 
-
-
-
-Writing `someStructure.$someNumber` accesses the wrapper's projected value.
-After storing a small number like four,
-the value of `someStructure.$someNumber` is `false`.
-However,
-the projected value is `true`
-after trying to store a number that's too large, like 55.
-
-A property wrapper can return a value of any type as its projected value.
-In this example,
-the property wrapper exposes only one piece of information ---
-whether the number was adjusted ---
-so it exposes that Boolean value as its projected value.
-A wrapper that needs to expose more information
-can return an instance of some other data type,
-or it can return `self`
-to expose the instance of the wrapper as its projected value.
-
-When you access a projected value from code that's part of the type,
-like a property getter or an instance method,
-you can omit `self.` before the property name,
-just like accessing other properties.
-The code in the following example refers to the projected value
-of the wrapper around `height` and `width` as `$height` and `$width`:
+Escrever `someStructure.$someNumber` acessa o valor projetado do wrapper. Depois de armazenar um pequeno número como quatro, o valor de `someStructure.$someNumber` é `false`.
+No entanto, o valor projetado é `true` depois de tentar armazenar um número muito grande, como 55.
+Um property wrapper pode retornar um valor de qualquer tipo como seu valor projetado.
+Neste exemplo, o property wrapper expõe apenas uma informação --- se o número foi ajustado --- portanto, expõe esse valor booleano como seu valor projetado.
+Um wrapper que precisa expor mais informações pode retornar uma instância de algum outro tipo de dados, ou pode retornar `self` para expor a instância do wrapper como seu valor projetado.
+Quando você acessa um valor projetado do código que faz parte do tipo, como um getter de propriedade ou um método de instância, você pode omitir `self.` antes do nome da propriedade, assim como acessa outras propriedades.
+O código no exemplo a seguir refere-se ao valor projetado
+do wrapper em torno de `height` e `width` como `$height` e `$width`:
 
 ```swift
 enum Size {
@@ -930,26 +810,13 @@ struct SizedRectangle {
 }
 ```
 
-
-
-
-Because property wrapper syntax is just syntactic sugar
-for a property with a getter and a setter,
-accessing `height` and `width`
-behaves the same as accessing any other property.
-For example,
-the code in `resize(to:)` accesses `height` and `width`
-using their property wrapper.
-If you call `resize(to: .large)`,
-the switch case for `.large` sets the rectangle's height and width to 100.
-The wrapper prevents the value of those properties
-from being larger than 12,
-and it sets the projected value to `true`,
-to record the fact that it adjusted their values.
-At the end of `resize(to:)`,
-the return statement checks `$height` and `$width`
-to determine whether
-the property wrapper adjusted either `height` or `width`.
+Porque a sintaxe do property wrapper é apenas açúcar sintático para uma propriedade com um getter e um setter, acessar `height` e `width` se comporta da mesma forma que acessar qualquer outra propriedade.
+Por exemplo, o código em `resize(to:)` acessa `height` e `width` usando seu property wrapper.
+Se você chamar `resize(to: .large)`, a caixa de opção para `.large` define a altura e a largura do retângulo como 100.
+O wrapper impede que o valor dessas propriedades
+de ser maior que 12, e define o valor projetado como `true`, para registrar o fato de que ajustou seus valores. 
+No final de `resize(to:)`, a declaração de retorno verifica `$height` e `$width` para determinar se
+o property wrapper ajustou `height` ou `width`.
 
 ## Global and Local Variables
 
