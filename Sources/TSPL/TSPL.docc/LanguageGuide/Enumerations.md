@@ -35,21 +35,19 @@ For more about these capabilities, see
 
 
 
-## Enumeration Syntax
+## Sintaxe de Enumeração
 
-You introduce enumerations with the `enum` keyword
-and place their entire definition within a pair of braces:
+Você dá início à uma enumeração com a palavra chave `enum`
+e coloca sua definição entre um par de chaves:
 
 ```swift
 enum SomeEnumeration {
-   // enumeration definition goes here
+   // definição da enumeração fica aqui
 }
 ```
 
-
-
-
-Here's an example for the four main points of a compass:
+Aqui está um exemplo para os quatro pontos principais
+de uma bússola:
 
 ```swift
 enum CompassPoint {
@@ -63,21 +61,21 @@ enum CompassPoint {
 
 
 
-The values defined in an enumeration
-(such as `north`, `south`, `east`, and `west`)
-are its *enumeration cases*.
-You use the `case` keyword to introduce new enumeration cases.
+Os valores definidos em uma enumeração 
+(como `north`, `south`, `east`, e `west`)
+são os *casos de enumeração* 
+Você usa a palavra chave `case` para introduzir novos casos de enumeração.
 
-> Note: Swift enumeration cases don't have an integer value set by default,
-> unlike languages like C and Objective-C.
-> In the `CompassPoint` example above,
-> `north`, `south`, `east` and `west`
-> don't implicitly equal
-> `0`, `1`, `2` and `3`.
-> Instead, the different enumeration cases are values in their own right,
-> with an explicitly defined type of `CompassPoint`.
+> Nota: Casos de enumeração em Swift não tem um valor inteiro definido por padrão,
+> diferentemente de linguagens como C e Objective-C.
+> No exemplo `CompassPoint` acima,
+> `north`, `south`, `east` e `west`
+> não são implicitamente equivalentes a
+> `0`, `1`, `2` e `3`.
+> Em vez disso, os diferentes casos de enumeração são valores por si só,
+> com um tipo explicito definido `CompassPoint`.
 
-Multiple cases can appear on a single line, separated by commas:
+Múltiplos casos podem aparecer em uma única linha, separado por vírgulas:
 
 ```swift
 enum Planet {
@@ -88,12 +86,12 @@ enum Planet {
 
 
 
-Each enumeration definition defines a new type.
-Like other types in Swift, their names
-(such as `CompassPoint` and `Planet`)
-start with a capital letter.
-Give enumeration types singular rather than plural names,
-so that they read as self-evident:
+Cada definição de enumeração define um novo tipo.
+Como outros tipos em Swift, seus nomes
+(como `CompassPoint` e `Planet`)
+começam com uma letra maiúscula.
+Dê aos tipos de enumeração nomes no singular ao invés de plural,
+para que sua leitura seja evidente:
 
 ```swift
 var directionToHead = CompassPoint.west
@@ -102,10 +100,11 @@ var directionToHead = CompassPoint.west
 
 
 
-The type of `directionToHead` is inferred
-when it's initialized with one of the possible values of `CompassPoint`.
-Once `directionToHead` is declared as a `CompassPoint`,
-you can set it to a different `CompassPoint` value using a shorter dot syntax:
+O tipo de `directionToHead` é inferido quando ela é inicializada
+com um dos possíveis valores de `CompassPoint`.
+Quando `directionToHead` é declarada como um `CompassPoint`,
+você pode definí-la como um valor diferente de `CompassPoint` usando
+uma sintaxe curta de ponto:
 
 ```swift
 directionToHead = .east
@@ -114,9 +113,10 @@ directionToHead = .east
 
 
 
-The type of `directionToHead` is already known,
-and so you can drop the type when setting its value.
-This makes for highly readable code when working with explicitly typed enumeration values.
+O tipo de `directionToHead` já é conhecido,
+então você já pode ocultar o tipo ao definir seu valor.
+Isso torna o código altamente legível ao trabalhar 
+com valores de enumeração tipificados explicitamente.
 
 ## Matching Enumeration Values with a Switch Statement
 
