@@ -1580,46 +1580,46 @@ postfix-expression --> optional-chaining-expression
 ```
 
 
-### Function Call Expression
+### Expressões de chamada de função
 
 
 
-A *function call expression* consists of a function name
-followed by a comma-separated list of the function's arguments in parentheses.
-Function call expressions have the following form:
+Uma **expressão de chamada de função** consiste em um nome de função
+seguido por uma lista separada por vírgulas dos argumentos da função entre parênteses.
+Elas têm a seguinte forma:
 
 ```
 <#function name#>(<#argument value 1#>, <#argument value 2#>)
 ```
 
 
-The *function name* can be any expression whose value is of a function type.
+O **nome da função** pode ser qualquer expressão cujo valor seja um de tipo função.
 
-If the function definition includes names for its parameters,
-the function call must include names before its argument values,
-separated by a colon (`:`).
-This kind of function call expression has the following form:
+Se a definição da função incluir nomes para seus parâmetros,
+a chamada de função deve incluir nomes antes de seus valores de argumento,
+separados por dois pontos (`:`).
+Esse tipo de expressão de chamada de função tem a seguinte forma:
 
 ```
 <#function name#>(<#argument name 1#>: <#argument value 1#>, <#argument name 2#>: <#argument value 2#>)
 ```
 
 
-A function call expression can include trailing closures
-in the form of closure expressions immediately after the closing parenthesis.
-The trailing closures are understood as arguments to the function,
-added after the last parenthesized argument.
-The first closure expression is unlabeled;
-any additional closure expressions are preceded by their argument labels.
-The example below shows the equivalent version of function calls
-that do and don't use trailing closure syntax:
+Uma expressão de chamada de função pode incluir *closures* à direita
+na forma de expressões do tipo *closures* imediatamente após o parêntese de fechamento.
+Esse tipo de argumento à direita é entendido como argumento para a função,
+adicionado após o último argumento entre parênteses.
+A primeira *closure* não é rotulada;
+quaisquer *closures* adicionais são precedidas por seus rótulos de argumento.
+O exemplo abaixo mostra a versão equivalente de chamadas de função
+que usam e não usam *closures* à direita:
 
 ```swift
-// someFunction takes an integer and a closure as its arguments
+// 'someFunction' recebe um inteiro e uma closure como seus argumentos
 someFunction(x: x, f: { $0 == 13 })
 someFunction(x: x) { $0 == 13 }
 
-// anotherFunction takes an integer and two closures as its arguments
+// 'anotherFunction' recebe um inteiro e duas closures como seus argumentos
 anotherFunction(x: x, f: { $0 == 13 }, g: { print(99) })
 anotherFunction(x: x) { $0 == 13 } g: { print(99) }
 ```
@@ -1629,11 +1629,11 @@ anotherFunction(x: x) { $0 == 13 } g: { print(99) }
 
 
 
-If the trailing closure is the function's only argument,
-you can omit the parentheses.
+Se a *closure* à direita for o único argumento da função,
+você pode omitir os parênteses.
 
 ```swift
-// someMethod takes a closure as its only argument
+// 'someMethod' recebe uma closure como seu único argumento
 myData.someMethod() { $0 == 13 }
 myData.someMethod { $0 == 13 }
 ```
@@ -1643,57 +1643,57 @@ myData.someMethod { $0 == 13 }
 
 
 
-To include the trailing closures in the arguments,
-the compiler examines the function's parameters from left to right as follows:
+Para incluir as *closures* à direita nos argumentos,
+o compilador examina os parâmetros da função da esquerda para a direita da seguinte forma:
 
 
-| Trailing Closure | Parameter | Action |
-| ---------------- | --------- | ------ |
-| Labeled | Labeled | If the labels are the same, the closure matches the parameter; otherwise, the parameter is skipped. |
-| Labeled | Unlabeled | The parameter is skipped. |
-| Unlabeled | Labeled or unlabeled | If the parameter structurally resembles a function type, as defined below, the closure matches the parameter; otherwise, the parameter is skipped. |
+| Closure à direita | Parâmetro |  Ação  |
+| ----------------- | --------- | ------ |
+| Rotulada | Rotulada | Se os rótulos forem iguais, a *closure* corresponde ao parâmetro; caso contrário, o parâmetro é ignorado. |
+| Rotulada | Rotulada | O parâmetro é ignorado. |
+| Não rotulada | Rotulado ou não rotulado | Se o parâmetro se assemelhar estruturalmente a um tipo de função, conforme definido abaixo, o encerramento corresponde ao parâmetro; caso contrário, o parâmetro é ignorado. |
 
-The trailing closure is passed as the argument for the parameter that it matches.
-Parameters that were skipped during the scanning process
-don't have an argument passed to them ---
-for example, they can use a default parameter.
-After finding a match, scanning continues
-with the next trailing closure and the next parameter.
-At the end of the matching process,
-all trailing closures must have a match.
+A *closure* é passada como o argumento para o parâmetro ao qual ele corresponde.
+Parâmetros que foram ignorados durante o processo de digitalização
+não tem um argumento passado para eles ---
+por exemplo, eles podem usar um parâmetro padrão.
+Depois de encontrar uma correspondência, a varredura continua
+com a próxima *closure* e o próximo parâmetro.
+Ao final do processo de correspondência,
+todos os fechamentos à direita devem ter uma correspondência.
 
-A parameter *structurally resembles* a function type
-if the parameter isn't an in-out parameter,
-and the parameter is one of the following:
+Um parâmetro **se assemelha estruturalmente** a um tipo de função
+se o parâmetro não for um parâmetro de entrada e saída,
+assumindo uma das seguintes formas
 
-- A parameter whose type is a function type,
-  like `(Bool) -> Int`
-- An autoclosure parameter
-  whose wrapped expression's type is a function type,
-  like `@autoclosure () -> ((Bool) -> Int)`
-- A variadic parameter
-  whose array element type is a function type,
-  like `((Bool) -> Int)...`
-- A parameter whose type is wrapped in one or more layers of optional,
-  like `Optional<(Bool) -> Int>`
-- A parameter whose type combines these allowed types,
-  like `(Optional<(Bool) -> Int>)...`
+- Um parâmetro cujo tipo é um tipo de função,
+   como `(Bool) -> Int`
+- Um parâmetro de fechamento automático
+   cujo tipo de expressão encapsulada é um tipo de função,
+   como `@autoclosure () -> ((Bool) -> Int)`
+- Um parâmetro variável
+   cujo tipo de elemento de matriz é um tipo de função,
+   como `((Bool) -> Int)...`
+- Um parâmetro cujo tipo é envolvido em uma ou mais camadas de opcionais,
+   como `Opcional<(Bool) -> Int>`
+- Um parâmetro cujo tipo combina esses tipos permitidos,
+   como `(Opcional<(Bool) -> Int>)...`
 
-When a trailing closure is matched to a parameter
-whose type structurally resembles a function type, but isn't a function,
-the closure is wrapped as needed.
-For example, if the parameter's type is an optional type,
-the closure is wrapped in `Optional` automatically.
+Quando uma *closure* corresponde a um parâmetro
+cujo tipo se assemelha estruturalmente a um tipo de função, mas não é uma função,
+a *closure* é abstraída conforme necessário.
+Por exemplo, se o tipo do parâmetro for um tipo opcional,
+o fechamento é encapsulado em `Optional` automaticamente.
 
 
 
-To ease migration of code from versions of Swift prior to 5.3 ---
-which performed this matching from right to left ---
-the compiler checks both the left-to-right and right-to-left orderings.
-If the scan directions produce different results,
-the old right-to-left ordering is used
-and the compiler generates a warning.
-A future version of Swift will always use the left-to-right ordering.
+Para facilitar a migração de código de versões do Swift anteriores a 5.3 ---
+que realizou esta correspondência da direita para a esquerda ---
+o compilador verifica as ordenações da esquerda para a direita e da direita para a esquerda.
+Se as direções de varredura produzirem resultados diferentes,
+a antiga ordenação da direita para a esquerda é usada
+e o compilador gera um aviso.
+Uma versão futura do Swift sempre usará a ordenação da esquerda para a direita
 
 ```swift
 typealias Callback = (Int) -> Int
@@ -1704,25 +1704,25 @@ func someFunction(firstClosure: Callback? = nil,
     print(first ?? "-", second ?? "-")
 }
 
-someFunction()  // Prints "- -"
-someFunction { return $0 + 100 }  // Ambiguous
-someFunction { return $0 } secondClosure: { return $0 }  // Prints "10 20"
+someFunction()  // Imprime "- -"
+someFunction { return $0 + 100 }  // Ambíguo
+someFunction { return $0 } secondClosure: { return $0 }  // Imprime "10 20"
 ```
 
 
 
 
-In the example above,
-the function call marked "Ambiguous"
-prints "- 120" and produces a compiler warning on Swift 5.3.
-A future version of Swift will print “110 -”.
+No exemplo acima,
+a chamada de função marcada como "Ambígua"
+imprime "- 120" e produz um aviso do compilador no Swift 5.3.
+Uma versão futura do Swift imprimirá “110 -”.
 
 
 
-A class, structure, or enumeration type
-can enable syntactic sugar for function call syntax
-by declaring one of several methods,
-as described in <doc:Declarations#Methods-with-Special-Names>.
+Uma classe, estrutura ou tipo de enumeração
+pode habilitar um tipo especial de sintaxe para chamada de função
+declarando um dos vários métodos,
+como descrito em <doc:Declarations#Methods-with-Special-Names>.
 
 #### Implicit Conversion to a Pointer Type
 
