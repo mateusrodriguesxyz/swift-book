@@ -381,29 +381,29 @@ para criar uma nova instância da classe com a sintaxe do inicializador,
 escrito como `ShoppingListItem()`,
 e atribui esta nova instância a uma variável chamada `item`.
 
-### Memberwise Initializers for Structure Types
+### Inicializadores Membro a Membro para Tipos de Estrutura
 
-Structure types automatically receive a *memberwise initializer*
-if they don't define any of their own custom initializers.
-Unlike a default initializer,
-the structure receives a memberwise initializer
-even if it has stored properties that don't have default values.
+Tipos de estrutura recebem automaticamente um *inicializador membro a membro*
+se eles não definirem nenhum de seus próprios inicializadores personalizados.
+Ao contrário de um inicializador padrão,
+a estrutura recebe um inicializador de membro
+mesmo que tenha propriedades armazenadas que não tenham valores padrão.
 
 
 
-The memberwise initializer is a shorthand way
-to initialize the member properties of new structure instances.
-Initial values for the properties of the new instance
-can be passed to the memberwise initializer by name.
+O inicializador membro a membro é uma forma abreviada
+para inicializar as propriedades de membro de novas instâncias de estrutura.
+Valores iniciais para as propriedades da nova instância
+pode ser passado para o inicializador membro a membro por nome.
 
-The example below defines a structure called `Size`
-with two properties called `width` and `height`.
-Both properties are inferred to be of type `Double`
-by assigning a default value of `0.0`.
+O exemplo abaixo define uma estrutura chamada `Size`
+com duas propriedades chamadas `width` e `height`.
+Ambas as propriedades são inferidas como sendo do tipo `Double`
+atribuindo um valor padrão de `0.0`.
 
-The `Size` structure automatically receives an `init(width:height:)`
-memberwise initializer,
-which you can use to initialize a new `Size` instance:
+A estrutura `Size` recebe automaticamente um `init(width:height:)`
+inicializador de membro,
+que você pode usar para inicializar uma nova instância `Size`:
 
 ```swift
 struct Size {
@@ -415,24 +415,24 @@ let twoByTwo = Size(width: 2.0, height: 2.0)
 
 
 
-When you call a memberwise initializer,
-you can omit values for any properties
-that have default values.
-In the example above,
-the `Size` structure has a default value
-for both its `height` and `width` properties.
-You can omit either property or both properties,
-and the initializer uses the default value for anything you omit.
-For example:
+Quando você chama um inicializador de membro a membro,
+você pode omitir valores para qualquer propriedade
+que possuem valores padrão.
+No exemplo acima,
+a estrutura `Size` tem um valor padrão
+para suas propriedades `height` e `width`.
+Você pode omitir uma propriedade ou ambas as propriedades,
+e o inicializador usa o valor padrão para qualquer coisa que você omitir.
+Por exemplo:
 
 ```swift
 let zeroByTwo = Size(height: 2.0)
 print(zeroByTwo.width, zeroByTwo.height)
-// Prints "0.0 2.0"
+// Imprime "0.0 2.0"
 
 let zeroByZero = Size()
 print(zeroByZero.width, zeroByZero.height)
-// Prints "0.0 0.0"
+// Imprime "0.0 0.0"
 ```
 
 
