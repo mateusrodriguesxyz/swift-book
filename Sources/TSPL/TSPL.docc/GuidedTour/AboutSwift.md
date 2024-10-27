@@ -1,37 +1,38 @@
-# About Swift
+# Sobre Swift
+Entenda os objetivos principais da linguagem.
 
-A Swift é uma maneira fantástica de desenvolver _softwares_
-seja para _mobile_, _desktops_, servidores
+Swift é uma maneira fantástica de desenvolver _softwares_
+seja para celulares, _tablets_, _desktops_, servidores
 ou qualquer outro dispositivo que use código.
-É uma linguagem de programação segura, rápida e interativa
-que combina o melhor do raciocínio da linguagem moderna 
-com conhecimentos da ampla _Apple Engineering Culture_
-e as diversas contribuições da sua comunidade open-source.
-O compilador é otimizado para performance
-e a linguagem é otimizada para desenvolvimento
-sem um comprometer o outro.
+É uma linguagem de programação segura e rápida 
+que combina o melhor do pensamento linguístico moderno 
+com a sabedoria de uma comunidade diversificada de código aberto.
 
-A Swift é receptiva para novos programadores.
-É uma linguagem de programação com qualidade industrial
-Escrever em Swift em um _playground_
-faz você experimentar com código e ver seus resultados imediatamente.
+Swift é amigável para novos programadores, 
+sem sacrificar o poder e a flexibilidade 
+que programadores experientes precisam.
+É uma linguagem de programação de qualidade industrial 
+que é tão expressiva e agradável quanto uma linguagem de _script_. 
+O compilador é otimizado para desempenho
+e a linguagem é otimizada para desenvolvimento,
+sem comprometer nenhum dos dois.
 
-A Swift define grandes classes de erros de programações comuns
-adotando padrões modernos de programação: 
+Swift elimina grandes classes de erros comuns de programação
+ao adotar padrões modernos de programação.
 
-- Variáveis sempre são iniciadas antes do uso.
-- Índices _Array_ são verificados por erros _out-of-bounds_.
-- Inteiros são verificados por _overflow_.
-- Opcionais garante que valores  ‘nil’ são manipulados explicitamente.
-- Memória é gerenciada automaticamente;
-- _Error handling_ permite recuperações controladas em caso de falhas inesperadas.
+- Variáveis sempre são inicializadas antes do uso.
+- Índices de _Array_ são verificados por erros _out-of-bounds_.
+- Inteiros são verificados para _overflow_.
+- Opcionais garantem que valores nulos são manipulados explicitamente.
+- Memória é gerenciada automaticamente.
+- Tratamento de erro permite recuperações controladas em caso de falhas inesperadas.
 
-A linguagem Swift é copilada e otimizada para funcionar na maioria dos _hardwares_ modernos.
-A sintaxe e a biblioteca padrão foram desenhadas
-baseado no princípio-guia que
-a maneira mais direta de escrever seu código também deve fazê-lo ter o melhor desempenho.
-É uma combinação de segurança com velocidade que faz da Swift uma excelente escolha para
-todos, desde “Hello, word!” até a operação total do sistema.
+Código Swift é compilado e otimizado para obter o máximo de _hardware_ moderno.
+A sintaxe e a biblioteca padrão foram projetadas
+com base no princípio orientador de que
+a maneira óbvia de escrever seu código também deve ter o melhor desempenho.
+Sua combinação de segurança e velocidade faz de Swift uma excelente escolha para
+tudo, desde "Hello, world!" até um sistema operacional inteiro.
 
 A Swift mistura poderosas inferências de tipo e padrões combinados com
 uma sintaxe moderna e leve
@@ -39,10 +40,15 @@ permitindo ideias complexas serem expressas em uma maneira clara e concisa.
 Como resultado, o código não é somente fácil de escrever,
 mas de ler e manter também.
 
-A Swift foi construida em anos de trabalho,
-e continua a evoluir om novos recursos e capacidades.
-Nossa meta para a Swift é ambiciosa.
-Mal podemos esperar para ver o que você pode criar com ela.
+Swift combina uma sintaxe moderna e leve
+que é familiar para desenvolvedores vindos de outras linguagens populares
+com recursos poderosos como inferência de tipo e correspondência de padrões,
+permitindo que ideias complexas sejam expressas de forma clara e concisa.
+Como resultado, o código é mais fácil de ler, escrever e manter.
 
+Swift continua evoluindo com novos recursos bem pensados
+​​e capacidades poderosas.
+As metas da lingasugem são ambiciosas.
+Mal podemos esperar para ver o que você criará com ela.
 
 

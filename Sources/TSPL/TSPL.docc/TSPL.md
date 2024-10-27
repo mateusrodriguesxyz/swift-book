@@ -1,18 +1,23 @@
 # ``TSPL``
 
 @Metadata {
-  @DisplayName("The Swift Programming Language")
+  @DisplayName("A Linguagem de Programação Swift")
 }
 
-## Topics
+@Options(scope: global) {
+   @AutomaticArticleSubheading(disabled)
+}
 
-### Guided Tour
+
+## Tópicos
+
+### Boas Vindas
 
 - <doc:AboutSwift>
 - <doc:Compatibility>
 - <doc:GuidedTour>
 
-### Language Guide
+### Guia da Linguagem
 
 - <doc:TheBasics>
 - <doc:BasicOperators>
@@ -43,7 +48,7 @@
 - <doc:AccessControl>
 - <doc:AdvancedOperators>
 
-### Language Reference
+### Referência da Linguagem
 
 - <doc:AboutTheLanguageReference>
 - <doc:LexicalStructure>
@@ -55,9 +60,13 @@
 - <doc:Patterns>
 - <doc:GenericParametersAndArguments>
 
-### Revision History
+### Histórico de Revisão
 
 - <doc:RevisionHistory>
+
+\
+\
+Traduzido de [The Swift Programming Language](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/)
 
 
 

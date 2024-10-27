@@ -1,35 +1,63 @@
-
-
 # Tipos de Coleção
 
-Swift oferece três *tipos de coleção* primários, conhecidos como arrays, sets e dicionários, para armazenar coleções de valores. Arrays são coleções ordenadas de valores. Sets são coleções não ordenadas de valores únicos. Os dicionários são coleções não ordenadas de associações chave-valor.
+Organize dados usando _arrays_, _sets_, e dicionários.
+
+Swift oferece três *tipos de coleção* primários, 
+conhecidos como _arrays_, _sets_ e dicionários, 
+para armazenar coleções de valores. 
+_Arrays_ são coleções ordenadas de valores. 
+_Sets_ são coleções não ordenadas de valores únicos. 
+Dicionários são coleções não ordenadas de associações chave-valor.
 
 ![](CollectionTypes_intro)
 
-Arrays, sets e dicionários em Swift são sempre claros sobre os tipos de valores e chaves que podem armazenar. Isso significa que você não pode inserir um valor do tipo errado em uma coleção por engano. Isso também significa que você pode ter certeza sobre o tipo de valores que recuperará de uma coleção.
+_Arrays_, _sets_ e dicionários em Swift são sempre claros sobre 
+os tipos de valores e chaves que podem armazenar. 
+Isso significa que você não pode inserir um valor do tipo errado 
+em uma coleção por engano. 
+Isso também significa que você pode ter certeza sobre o tipo de valores
+que recuperará de uma coleção.
 
-> Nota: Os tipos de array, sets e dicionário em Swift são implementados como *coleções genéricas*. Para saber mais sobre tipos genéricos e coleções, consulte <doc:Generics>.
+> Nota: Os tipos `Array`, `Set` e `Dictionary` em Swift são implementados como **coleções genéricas**. 
+> Para saber mais sobre tipos genéricos e coleções, consulte <doc:Generics>.
 
 ## Mutabilidade de Coleções
 
-Se você criar um array, um set ou um dicionário e atribuí-lo a uma variável, a coleção criada será *mutável*. Isso significa que você pode alterar (ou *mutar*) a coleção depois de criada adicionando, removendo ou alterando itens na coleção. Se você atribuir um array, um set ou um dicionário a uma constante,
-essa coleção é *imutável* e seu tamanho e conteúdo não podem ser alterados.
+Se você criar um _array_, um _set_ ou um dicionário e atribuí-lo a uma variável,
+a coleção criada será **mutável**. 
+Isso significa que você pode alterar (ou **mutar**) a coleção depois de criada
+adicionando, removendo ou alterando itens na coleção. 
+Se você atribuir um _array_, um _set_ ou um dicionário a uma constante,
+essa coleção é **imutável** e seu tamanho e conteúdo não podem ser alterados.
 
-> Nota: É uma boa prática criar coleções imutáveis em todos os casos em que a coleção não precisa ser alterada. Fazer isso torna mais fácil raciocinar sobre seu código e permite que o compilador Swift otimize o desempenho das coleções que você cria.
+> Nota: É uma boa prática criar coleções imutáveis
+> em todos os casos em que a coleção não precisa ser alterada.
+> Fazer isso torna mais fácil raciocinar sobre seu código 
+> e permite que o compilador otimize o desempenho
+> das coleções que você cria.
 
 ## Arrays
 
-Um *array* armazena valores do mesmo tipo em uma lista ordenada. O mesmo valor pode aparecer em um array várias vezes em posições diferentes.
+Um *array* armazena valores do mesmo tipo em uma lista ordenada.
+O mesmo valor pode aparecer em um _array_ várias vezes em posições diferentes.
 
-> Nota: o tipo `Array` de Swift é uma ponte para a classe `NSArray` do Foundation. Para obter mais informações sobre como usar `Array` com Foundation e Cocoa, consulte [Bridging Between Array and NSArray](https://developer.apple.com/documentation/swift/array#2846730).
+> Nota: o tipo `Array` em Swift é uma ponte para a classe `NSArray` do Foundation.
+> Para obter mais informações sobre como usar `Array` com Foundation e Cocoa,
+> veja [Bridging Between Array and NSArray](https://developer.apple.com/documentation/swift/array#2846730).
 
 ### Sintaxe Abreviada de Array
 
-O tipo de um array Swift é escrito por completo como `Array<Element>`, onde `Element` é o tipo de valores que a array pode armazenar. Você também pode escrever o tipo de um array de forma abreviada como `[Element]`. Embora as duas formas sejam funcionalmente idênticas, a forma abreviada é preferida e é usada ao longo deste guia ao se referir ao tipo de um array.
+O tipo de um array em Swift é escrito por completo como `Array<Element>`,
+onde `Element` é o tipo de valores que o _array_ pode armazenar. 
+Você também pode escrever o tipo de um _array_ de forma abreviada como `[Element]`.
+Embora as duas formas sejam funcionalmente idênticas, 
+a forma abreviada é preferida 
+e é usada ao longo deste guia ao se referir ao tipo de um _array_.
 
-### Criando um Array vazio
+### Criando um _Array_ vazio
 
-Você pode criar um array vazio de um determinado tipo usando a sintaxe de inicialização:
+Você pode criar um array vazio de um determinado tipo 
+usando a sintaxe de inicialização:
 
 ```swift
 var someInts: [Int] = []
@@ -37,54 +65,73 @@ print("someInts is of type [Int] with \(someInts.count) items.")
 // Imprime "someInts is of type [Int] with 0 items."
 ```
 
-Note que o tipo da variável `someInts` é inferido como `[Int]` a partir do tipo do inicializador.
+Note que o tipo da variável `someInts` é inferido como `[Int]`
+a partir do tipo do inicializador.
 
-Alternativamente, se o contexto já fornece informações de tipo, como um argumento de função ou uma variável ou constante já digitada, você pode criar um array vazio com um literal de array vazio, que é escrito como `[]` (um par vazio de colchetes):
+Alternativamente, se o contexto já fornece informações sobre o tipo,
+como um argumento de função ou uma variável ou constante já digitada,
+você pode criar um _array_ vazio com um literal de array vazio,
+que é escrito como `[]` (um par vazio de colchetes):
 
 ```swift
 someInts.append(3)
-// someInts agora contém um valor do tipo Int
+// `someInts` agora contém um valor do tipo `Int`
 someInts = []
-// someInts agora é uma array vazia, mas ainda é do tipo [Int]
+// `someInts` agora é uma array vazia, mas ainda é do tipo `[Int]`
 ```
 
-### Criando um Array com um Valor Padrão
+### Criando um _Array_ com um Valor Padrão
 
-O tipo `Array` do Swift também fornece um inicializador para criar uma array de um determinado tamanho com todos os seus valores definidos como mesmo valor padrão. Você passa a esse inicializador um valor padrão do tipo apropriado (chamado `repeating`) e o número de vezes que esse valor é repetido (chamado `count`):
+O tipo `Array` em Swift também fornece
+um inicializador para criar uma _array_ de um determinado tamanho
+com todos os seus valores definidos como mesmo valor padrão.
+Você passa a esse inicializador 
+um valor padrão do tipo apropriado (`repeating`) 
+e o número de vezes que esse valor é repetido (`count`):
 
 ```swift
 var threeDoubles = Array(repeating: 0.0, count: 3)
-// threeDoubles é do tipo [Double], e igual a [0.0, 0.0, 0.0]
+// `threeDoubles` é do tipo `[Double]`, e igual a [0.0, 0.0, 0.0]
 ```
 
-### Criando um Array para Somar Dois Arrays
+### Criando um _Array_ Somando Dois _Arrays_
 
-Você pode criar um novo array adicionando dois arrays existentes com tipos compatíveis com o operador de adição (`+`). O tipo do novo array é inferido a partir do tipo dos dois arrays que você adiciona:
+Você pode criar um novo array adicionando dois arrays existentes com tipos compatíveis
+com o operador de adição (`+`). O tipo do novo array é inferido
+a partir do tipo dos dois _arrays_ que você adiciona:
 
 ```swift
 var anotherThreeDoubles = Array(repeating: 2.5, count: 3)
-// anotherThreeDoubles é do tipo [Double], e igual a [2.5, 2.5, 2.5]
+// `anotherThreeDoubles` é do tipo `[Double]`, e igual a [2.5, 2.5, 2.5]
 
 var sixDoubles = threeDoubles + anotherThreeDoubles
-// sixDoubles é inferido como [Double], e igual a [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
+// `sixDoubles` é inferido como `[Double]`, e igual a [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
 ```
 
 ### Criando um Array com um Literal de Array 
 
-Você também pode inicializar um array com um *literal de array*, que é uma forma abreviada de escrever um ou mais valores como uma coleção de array. Um literal de array é escrito como uma lista de valores, separados por vírgulas, entre colchetes:
+Você também pode inicializar um array com um *literal de array*,
+que é uma forma abreviada de escrever um ou mais valores como uma coleção de array.
+Um literal de array é escrito como uma lista de valores,
+separados por vírgulas, entre colchetes:
 
 ```
 [<#value 1#>, <#value 2#>, <#value 3#>]
 ```
 
-O exemplo abaixo cria um array chamado `shoppingList` para armazenar valores `String`:
+O exemplo abaixo cria um _array_ chamado `shoppingList` para armazenar valores `String`:
 
 ```swift
 var shoppingList: [String] = ["Eggs", "Milk"]
-// shoppingList inicializado com dois items iniciais
+// `shoppingList` inicializado com dois items iniciais
 ```
 
-A variável `shoppingList` é declarada como “um array de valores de string”, escrita como `[String]`. Como esse array especificou um tipo de valor `String`, é permitido armazenar apenas valores `String`. Aqui, o array `shoppingList` é inicializado com dois valores `String` (`"Eggs"` e `"Milk"`), escritos dentro de um  literal de array.
+A variável `shoppingList` é declarada como
+“um array de valores de string”, escrita como `[String]`.
+Como esse _array_ especificou um tipo de valor `String`, 
+é permitido armazenar apenas valores `String`.
+Aqui, o _array_ `shoppingList` é inicializado com dois valores `String` (`"Eggs"` e `"Milk"`),
+escritos dentro de um literal de array.
 
 > Nota: O array `shoppingList` é declarado como uma variável (com o introdutor `var`) e não uma constante (com o introdutor `let`) porque mais itens são adicionados à lista de compras nos exemplos abaixo.
 

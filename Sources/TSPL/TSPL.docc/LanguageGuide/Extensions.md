@@ -2,11 +2,19 @@
 
 # Extensões
 
-*Extensões* adicionam novas funcionalidades a uma classe, estrutura, enumeração ou tipo de protocolo existente. Isso inclui a capacidade de estender tipos para os quais você não tem acesso ao código-fonte original (conhecido como *modelagem retroativa*). As extensões são semelhantes às categorias em Objective-C. (Ao contrário das categorias de Objective-C, as extensões Swift não têm nomes.)
+Adicione funcionalidade a um tipo existente.
 
-Extensões no Swift podem:
+*Extensões* adicionam novas funcionalidades a 
+uma classe, estrutura, enumeração ou tipo de protocolo existente.
+Isso inclui a capacidade de estender tipos
+para os quais você não tem acesso ao código-fonte original
+(conhecido como **modelagem retroativa**).
+As extensões são semelhantes às categorias em Objective-C. 
+(Diferente das categorias de Objective-C, as extensões em Swift não têm nomes.)
 
-- Adicionar propriedades de instância computadas e propriedades de tipo computado
+Extensões em Swift podem:
+
+- Adicionar propriedades computadas de instância e propriedades computados de tipo 
 - Definir métodos de instância e métodos de tipo
 - Fornecer novos inicializadores
 - Definir subscritos
@@ -14,9 +22,11 @@ Extensões no Swift podem:
 - Deixar um tipo existente em conformidade com um protocolo
 
 Em Swift, você pode, inclusive, estender um protocolo para fornecer implementações de seus requisitos
-ou adicionar funcionalidades extras que os tipos em conformidade podem aproveitar. Para mais detalhes, consulte <doc:Protocols#Protocol-Extensions>.
+ou adicionar funcionalidades extras que os tipos em conformidade podem aproveitar.
+Para mais detalhes, consulte <doc:Protocols#Protocol-Extensions>.
 
-> Nota: As extensões podem adicionar novas funcionalidades a um tipo, mas eles não podem substituir a funcionalidade existente.
+> Nota: As extensões podem adicionar novas funcionalidades a um tipo, 
+> mas eles não podem substituir a funcionalidade existente.
 
 
 ## Sintaxe de Extensão
@@ -29,7 +39,10 @@ extension SomeType {
 }
 ```
 
-Uma extensão pode estender um tipo existente para que ele adote um ou mais protocolos. Para adicionar conformidade de protocolo, você escreve os nomes dos protocolos da mesma maneira que você os escreve para uma classe ou estrutura:
+Uma extensão pode estender um tipo existente para que ele adote um ou mais protocolos. 
+Para adicionar conformidade de protocolo, 
+você escreve os nomes dos protocolos da mesma maneira que 
+você os escreve para uma classe ou estrutura:
 
 ```swift
 extension SomeType: SomeProtocol, AnotherProtocol {
@@ -37,17 +50,22 @@ extension SomeType: SomeProtocol, AnotherProtocol {
 }
 ```
 
-A adição de conformidade de protocolo dessa maneira é descrita em <doc:Protocols#Adding-Protocol-Conformance-with-an-Extension>.
+A adição de conformidade de protocolo dessa maneira 
+é descrita em <doc:Protocols#Adding-Protocol-Conformance-with-an-Extension>.
 
-Uma extensão pode ser usada para estender um tipo genérico existente, como descrito em <doc:Generics#Extending-a-Generic-Type>.
-Você também pode estender um tipo genérico para adicionar funcionalidade condicionalmente, conforme descrito em <doc:Generics#Extensions-with-a-Generic-Where-Clause>.
+Uma extensão pode ser usada para estender um tipo genérico existente,
+como descrito em <doc:Generics#Extending-a-Generic-Type>.
+Você também pode estender um tipo genérico para adicionar funcionalidade condicionalmente, 
+conforme descrito em <doc:Generics#Extensions-with-a-Generic-Where-Clause>.
 
-> Nota: Se você definir uma extensão para adicionar uma nova funcionalidade a um tipo existente, a nova funcionalidade estará disponível em todas as instâncias existentes desse tipo, mesmo que tenham sido criadas antes da definição da extensão.
+> Nota: Se você definir uma extensão para adicionar uma nova funcionalidade a um tipo existente, 
+> a nova funcionalidade estará disponível em todas as instâncias existentes desse tipo,
+> mesmo que tenham sido criadas antes da definição da extensão.
 
 ## Propriedades Computadas
 
 Extensões podem adicionar propriedades computadas de instância e propriedades computadas de tipo a tipos existentes. 
-Este exemplo adiciona cinco propriedades computadas de instância ao tipo primitivo `_Double_` do Swift,
+Este exemplo adiciona cinco propriedades computadas de instância ao tipo primitivo `_Double_`,
 para fornecer suporte básico para trabalhar com unidades de distância:
 
 ```swift
@@ -59,14 +77,14 @@ extension Double {
    var ft: Double { return self / 3.28084 }
 }
 let oneInch = 25.4.mm
-print("Uma polegada é \(oneInch) metros")
-// imprime "Uma polegada é 0.0254 metros"
+print("One inch is \(oneInch) meters")
+// Imprime "One inch is 0.0254 meters"
 let threeFeet = 3.ft
-print("Três pés é \(threeFeet) metros")
-// Imprime "Três pés é 0.914399970739201 metros"
+print("Three feet is \(threeFeet) meters")
+// Imprime "Three feet is 0.914399970739201 meters"
 ```
 
-Estas propriedades computadas expressam que o valor de um `_Double_`
+Essas propriedades computadas expressam que o valor de um `_Double_`
 deve ser considerado como uma certa unidade de comprimento.
 Apesar de serem implementadas como propriedades computadas,
 os nomes destas propriedades podem ser anexados a um
@@ -74,16 +92,16 @@ literal de ponto flutuante com sintaxe de ponto,
 como uma forma de usar aquele valor literal para realizar conversões de distância.
 
 Neste exemplo, um `Double` de valor `1.0` é coonsiderado para representar "um metro".
-E é por isso que a propriedade computada `m` reforta `self` ---
-a expressão `1.m` é considerada para calcular um `Double`de valor `1.0`.
+E é por isso que a propriedade computada `m` retorna `self` ---
+a expressão `1.m` é considerada para calcular um `Double` de valor `1.0`.
 
 Outras unidades requerem alguma conversão para serem expressas como um valor medido em metros. 
 Um quilometro é mesma coisa de 1.000 metros,
 então a propriedade computada `km` multiplica o valor por `1_000.00`
 para convertê-lo em um numero expresso em metros. 
 Similarmente, temos 3,28084 pés em metros,
-e então a propriedade computada `ft` divide o valor "Double" subjacente
-por  `3.28084` para convertê-lo de pés para metros. 
+e então a propriedade computada `ft` divide o valor `Double` subjacente
+por `3.28084` para convertê-lo de pés para metros. 
 
 Essas propriedades são propriedades computadas apenas para leitura,
 então elas são expressadas sem a palavra-chave `_get_`, para fins de abreviação. 
@@ -92,18 +110,18 @@ usado dentro de cálculos matemáticos sempre que um `Double` é aceito:
 
 ```swift
 let aMarathon = 42.km + 195.m
-print("A maratona é de \(aMarathon) metros")
-// imprime "A maratona é de 42195.0 metros"
+print("A marathon is \(aMarathon) meters long")
+// Imprime "A marathon is 42195.0 meters long"
 ```
 
-> Note: Extensões podem adicionar novas propriedades computadas, mas não podem adicionar 
-> propriedades guardadas, ou adicionar observadores em propriedades existentes.
+> Nota: Extensões podem adicionar novas propriedades computadas, mas não podem adicionar 
+> propriedades armazenadas, ou adicionar observadores em propriedades existentes.
 
 
 ## Inicializadores
 
 Extensões podem adicionar novos inicializadores a tipos existentes.
-Isso permite você extender outros tipos para aceitar
+Isso permite você estender outros tipos para aceitar
 seus próprios tipos personalizados como parâmetros de inicialização,
 ou então para providenciar opções adicionais de inicialização
 que antes não eram parte da implementação original do tipo. 
@@ -159,7 +177,7 @@ let memberwiseRect = Rect(origin: Point(x: 2.0, y: 2.0),
 ```
 
 
-Você pode extender a estrutura `Rect` para prover um inicializador adicional
+Você pode estender a estrutura `Rect` para prover um inicializador adicional
 que recebe um tamanho e ponto central específico:
 
 ```swift
@@ -171,8 +189,6 @@ extension Rect {
    }
 }
 ```
-
-
 
 Esse novo inicializador inicia calculando um ponto de origem apropriados baseado 
 no ponto `center` e valor `size` dados. 

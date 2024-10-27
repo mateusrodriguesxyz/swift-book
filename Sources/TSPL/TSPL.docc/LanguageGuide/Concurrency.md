@@ -1,17 +1,17 @@
-
-
 # Concorrência
+
+Execute operações assíncronas.
 
 Swift tem suporte por padrão para escrita de código assíncrono e paralelo
 de forma estruturada.
-*Código assíncrono* pode ser suspenso e retomado posteriormente,
+**Código assíncrono** pode ser suspenso e retomado posteriormente,
 embora apenas uma parte do programa seja executada por vez.
 Suspender e retomar código em seu programa
 permite que ele continue a progredir
 em operações de curto prazo, como atualizar a interface do usuário,
 enquanto continua a trabalhar em operações de longa duração
 como buscar dados pela rede ou analisar arquivos.
-*Código paralelo* significa vários pedaços de código executando simultaneamente ---
+**Código paralelo** significa vários pedaços de código executando simultaneamente ---
 por exemplo, um computador com um processador de quatro núcleos
 pode executar quatro pedaços de código ao mesmo tempo,
 com cada núcleo realizando uma das tarefas.
@@ -24,31 +24,31 @@ A flexibilidade adicional de agendamento de código paralelo ou assíncrono
 também vem com um custo de maior complexidade.
 Swift permite que você expresse sua intenção
 de uma forma que permite que haja verificação em tempo de compilação ---
-por exemplo, você pode usar _actors_ para acessar com segurança um estado mutável.
+por exemplo, você pode usar atores para acessar com segurança um estado mutável.
 No entanto, adicionar concorrência a um código lento ou com bugs
 não é uma garantia de que se tornará rápido ou correto.
-Na verdade, adicionar concorrência pode até tornar seu código mais difícil de depurar.
+Na verdade, adicionar concorrência pode até tornar seu código mais difícil de debugar.
 No entanto, usar o suporte da linguagem para concorrência
 em um código que precisa ser concorrente
-permite que o Swift te ajude a detectar problemas em tempo de compilação.
+permite que a linguagem te ajude a detectar problemas em tempo de compilação.
 
-O resto desse capitulo usa o termo *concorrência*
-para se referir a essa combinação frequente de código assícnrono e paralelo.
+O resto desse capitulo usa o termo **concorrência**
+para se referir a essa combinação frequente de código assíncrono e paralelo.
 
 > Nota: Se você já escreveu código concorrente antes,
-> você pode ter o costume de trabalhar com threads.
-> O modelo de concorrência em Swift é construído em cima de threads,
+> você pode ter o costume de trabalhar com _threads_.
+> O modelo de concorrência em Swift é construído em cima de _threads_,
 > mas você não interage diretamente com elas.
 > Uma função assíncrona em Swift
-> pode desistir da thread em que está sendo executada,
-> o que permite que outra função assíncrona seja executada nessa thread
+> pode desistir da _thread_ em que está sendo executada,
+> o que permite que outra função assíncrona seja executada nessa _thread_
 > enquanto a primeira função está bloqueada.
 > Quando uma função assíncrona é retomada,
-> Swift não garante qual thread
+> não é garantido em qual _thread_
 > essa função será executada.
 
 Embora seja possível escrever código concorrente
-sem usar o suporte nativo do Swift,
+sem usar o suporte nativo da linguagem,
 o código tende a ser mais difícil de ler.
 Por exemplo, o código a seguir baixa uma lista de nomes de fotos,
 baixa a primeira foto dessa lista,
@@ -64,20 +64,18 @@ listPhotos(inGallery: "Summer Vacation") { photoNames in
 }
 ```
 
-
-
-
 Mesmo neste caso simples,
 porque o código deve ser escrito como uma série de _completion handlers_,
 você acaba escrevendo _closures_ aninhadas.
 Neste estilo,
-código mais complexo com muitas closures aninhadas pode rapidamente se tornar inviável, ou difícil de manter.
+código mais complexo com muitas _closures_ aninhadas pode rapidamente
+se tornar inviável, ou difícil de manter.
 
 ## Definindo e Chamando Funções Assíncronas
 
-Uma *função assíncrona* ou *método assíncrono*
+Uma **função assíncrona** ou **método assíncrono**
 é um tipo especial de função ou método
-que pode ser suspenso enquanto está no meio da execução.
+que pode ser suspenso no meio da sua execução.
 Isso está em contraste com funções e métodos síncronos comuns,
 que são executados até a conclusão, geram um erro ou nunca retornam.
 Uma função ou método assíncrono ainda faz uma dessas três coisas,
@@ -100,12 +98,8 @@ func listPhotos(inGallery name: String) async -> [String] {
 }
 ```
 
-
-
-
 Para uma função ou método que é assíncrono e também pode lançar erros,
 você deve escrever `async` antes de `throws`.
-
 
 
 Ao chamar um método assíncrono,
@@ -115,7 +109,7 @@ para marcar o possível ponto de suspensão.
 Isso é como escrever `try` ao chamar uma função que lança um erro,
 para marcar a possível mudança no fluxo do programa se houver um erro.
 Dentro de um método assíncrono,
-o fluxo de execução é suspenso *somente* quando você chama outro método assíncrono ---
+o fluxo de execução é suspenso **somente** quando você chama outro método assíncrono ---
 a suspensão nunca é implícita ou preventiva ---
 o que significa que todos os pontos de suspensão possíveis são marcados com `await`.
 
@@ -131,49 +125,46 @@ let photo = await downloadPhoto(named: name)
 show(photo)
 ```
 
-
-
-
 Porque as funções `listPhotos(inGallery:)` e `downloadPhoto(named:)`
-ambas precisam fazer requisicoes web,
+ambas precisam fazer requisições web,
 elas podem levar um tempo significativo para serem finalizadas.
 Tornando ambas funções assíncronas escrevendo `async` antes da seta de retorno
-permite que o resto do código do App continue executando
+permite que o resto do código da aplicação continue executando
 enquanto esse código assíncrono espera até que a imagem esteja pronta.
 
 Para entender a natureza concorrente do exemplo acima, aqui está uma possível ordem de execução:
 
-- O código começa a ser executado a partir da primeira linha
+1. O código começa a ser executado a partir da primeira linha
    e vai até o primeiro `await`.
    Ele chama a função `listPhotos(inGallery:)`
    e suspende a execução enquanto aguarda o retorno dessa função.
-- Enquanto a execução deste código estiver suspensa,
+2. Enquanto a execução deste código estiver suspensa,
    algum outro código concorrente no mesmo programa é executado.
    Por exemplo, talvez uma tarefa em segundo plano de longa duração
    continua atualizando uma lista de novas galerias de fotos.
    Esse código também é executado até o próximo ponto de suspensão, marcado por `await`,
    ou até terminar.
-- Após o retorno de `listPhotos(inGallery:)`,
+3. Após o retorno de `listPhotos(inGallery:)`,
    esse código continua a execução a partir desse ponto.
    Ele atribui o valor que foi retornado para `photoNames`.
-- As linhas que definem `sortedNames` e `name`
+4. As linhas que definem `sortedNames` e `name`
    são códigos regulares e síncronos.
    Como nada está marcado como `await` nessas linhas,
    não há pontos de suspensão possíveis.
-- O próximo `await` marca a chamada para a função `downloadPhoto(named:)`.
+5. O próximo `await` marca a chamada para a função `downloadPhoto(named:)`.
    Este código pausa a execução novamente até que a função retorne,
    dando a outro código concorrente a oportunidade de ser executado.
-- Após o retorno de `downloadPhoto(named:)`,
+6. Após o retorno de `downloadPhoto(named:)`,
    seu valor de retorno é atribuído a `photo`
    e então passado como argumento ao chamar a função `show(_:)`.
 
 Os possíveis pontos de suspensão em seu código marcados com `await`
 indicam que o trecho de código atual pode pausar a execução
 enquanto aguarda o retorno da função ou método assíncrono.
-Isso também é chamado de *yielding the thread*
+Isso também é chamado de **ceder a _thread_**
 porque, nos bastidores,
-Swift suspende a execução do seu código na thread atual
-e executa algum outro código nessa thread.
+Swift suspende a execução do seu código na _thread_ atual
+e executa algum outro código nessa _thread_.
 Como o código com `await` precisa ser capaz de suspender a execução,
 apenas alguns lugares em seu programa podem chamar funções ou métodos assíncronos:
 
@@ -192,7 +183,7 @@ Por exemplo, o código abaixo move uma imagem de uma galeria para outra.
 ```swift
 let firstPhoto = await listPhotos(inGallery: "Summer Vacation")[0]
 add(firstPhoto toGallery: "Road Trip")
-// Nesse ponto, firstPhoto está temporariamente em ambas galerias.
+// Nesse ponto, `firstPhoto` está temporariamente em ambas galerias.
 remove(firstPhoto fromGallery: "Summer Vacation")
 ```
 
@@ -222,10 +213,7 @@ você garante que nunca poderá conter possíveis pontos de suspensão.
 No futuro,
 se você tentar adicionar código concorrente a esta função,
 introduzindo um possível ponto de suspensão,
-você verá um erro em tempo de compilação em vez de introduzir um bug.
-
-
-
+você verá um erro em tempo de compilação em vez de introduzir um _bug_.
 
 
 > Nota: o método [Task.sleep(until:tolerance:clock:)](https://developer.apple.com/documentation/swift/task/sleep(until:tolerance:clock:))
@@ -242,11 +230,6 @@ você verá um erro em tempo de compilação em vez de introduzir um bug.
 >     return ["IMG001", "IMG99", "IMG0404"]
 > }
 > ```
-> 
-> 
-> 
-
-
 
 ## Asynchronous Sequences
 
