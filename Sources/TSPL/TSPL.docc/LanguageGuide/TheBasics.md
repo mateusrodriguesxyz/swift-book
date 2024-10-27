@@ -1,6 +1,6 @@
-
-
 # O Básico
+
+Trabalhe com tipos comuns de dados e escreva sintaxe básica.
 
 Swift é uma linguagem de programação para desenvolvimento de aplicativos iOS, macOS, watchOS e tvOS. Se você tem experiência em desenvolvimento em C ou Objective-C, muitas partes do Swift serão familiares para você.
 

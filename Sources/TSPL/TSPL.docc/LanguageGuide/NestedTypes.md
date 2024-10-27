@@ -2,39 +2,39 @@
 
 # Tipos Aninhados
 
+Defina tipos dentro do escopo de outro tipo.
+
 Enumerações são frequentemente criadas para dar suporte a uma funcionalidade especifica de uma classe ou estrutura.
 Similarmente, pode ser conveniente definir classes e estruturas de utilidade
-puramente para o uso dentro de um contexto de um tipo mais complexo.
-Para fazer isso, o Swift permite que você defina *tipos aninhados*,
+puramente para o uso dentro do contexto de um tipo mais complexo.
+Para fazer isso, Swift permite que você defina **tipos aninhados**,
 nos quais você aninha enumerações, classes e estruturas de suporte
 dentro da definição do tipo que elas suportam.
 
-## Overview
-
 Para aninhar um tipo dentro de outro tipo,
-escreva sua definição dentro das chaves externas do tipo que ele suporta.
+escreva sua definição dentro das chaves do tipo que ele suporta.
 Os tipos podem ser aninhados em até quantos níveis forem necessários.
 
 ## Tipos Aninhados em Ação
 
 O exemplo abaixo define a estrutura chamada `BlackjackCard`,
-que modela uma carta de baralho usada no jogo de Blackjack.
+que modela uma carta de baralho usada no jogo de _Blackjack_.
 A estrutra `BlackjackCard` contém dois tipos enumerados aninhados
 chamados de `Suit` e `Rank`.
 
-Em Blackjack, as cartas de Ás têm o valor de um ou onze.
+Em _Blackjack_, as cartas de Ás têm o valor de um ou onze.
 Este recurso é representado por uma estrutura chamada `Values`,
 que está aninhada dentro da enumeração `Rank`:
 
 ```swift
 struct BlackjackCard {
 
-   // enumeração Suit aninhada
+   // enumeração `Suit` aninhada
    enum Suit: Character {
       case spades = "♠", hearts = "♡", diamonds = "♢", clubs = "♣"
    }
 
-   // enumeração Rank aninhada
+   // enumeração `Rank` aninhada
    enum Rank: Int {
       case two = 2, three, four, five, six, seven, eight, nine, ten
       case jack, queen, king, ace
@@ -53,28 +53,23 @@ struct BlackjackCard {
       }
    }
 
-   // propriedades e metodos de BlackjackCard 
+   // propriedades e métodos de `BlackjackCard`
    let rank: Rank, suit: Suit
    var description: String {
-      var output = "naipe é \(suit.rawValue),"
-      output += " valor é \(rank.values.first)"
+      var output = "suit is \(suit.rawValue),"
+      output += " value is \(rank.values.first)"
       if let second = rank.values.second {
-         output += " ou \(second)"
+          output += " or \(second)"
       }
       return output
    }
 }
 ```
 
-
-
-
-
-
 A enumeração `Suit` descreve os quatro naipes comuns em jogos de baralho,
 junto a um valor bruto `Character` para representar seu símbolo.
  
-A enumeração `Rank` descreve as treze categorias de cartas possíveis em jogos de baralho,
+A enumeração `Rank` descreve as treze hierarquias possíveis em jogos de baralho,
 junto a um valor bruto `Int` para representar seu valor nominal.
 (Esse valor bruto `Int` não é usado por cartas Valetes, Rainhas, Reis nem Ás)
  
@@ -85,20 +80,20 @@ mas a carta de Ás possui dois valores.
 A estrutura `Values` define duas propriedades para representar isso:
  
 - `first`, do tipo `Int`
-- `second`, do tipo `Int?`, ou “opcional `Int`”
+- `second`, do tipo `Int?`, ou “`Int` opcional”
 
 `Rank` também define uma propriedade computada, `values`,
 que retorna uma instância da estrutura `Values`.
-Essa propriedade computada considera a categoria da carta
-e inicializa uma nova instância `Values` com valores apropriados baseados na sua própria categoria.
+Essa propriedade computada considera a hierarquia da carta
+e inicializa uma nova instância `Values` com valores apropriados baseados na sua própria hierarquia.
 Ela usa valores especiais para `jack`, `queen`, `king`, e `ace`. 
-Para as cartas numeradas, ela usa o valor bruto `Int` da categoria.
+Para as cartas numeradas, ela usa o valor bruto `Int` da hierarquia.
 
 A própria estrutura `BlackjackCard` possui duas propriedades --- `rank` e `suit`.
 Ela também define uma propriedade computada chamada `description`,
 que usa valores armazenados em `rank` e `suit` para compilar
 uma descrição do nome e valor da carta.
-A propriedade `description` usa ligação opcional para verificar se existe
+A propriedade `description` usa desempacotamento de opcional para verificar se existe
 um segundo valor a ser exibido, e sendo esse o caso,
 insere detalhes descritivos adicionais para o segundo valor.
 
@@ -110,11 +105,8 @@ Você pode usar esse inicializador para inicializar uma nova constante chamada `
 ```swift
 let theAceOfSpades = BlackjackCard(rank: .ace, suit: .spades)
 print("theAceOfSpades: \(theAceOfSpades.description)")
-// Prints "theAceOfSpades: naipe é ♠, valor é 1 ou 11"
+// Imprime "theAceOfSpades: suit is ♠, value is 1 or 11"
 ```
-
-
-
 
 Embora `Rank` e `Suit` estejam aninhados em `BlackjackCard`,
 seus tipos podem ser inferidos pelo contexto,
@@ -130,15 +122,9 @@ prefixe seu nome com o nome do tipo em que está aninhado:
 
 ```swift
 let heartsSymbol = BlackjackCard.Suit.hearts.rawValue
-// heartsSymbol é "♡"
+// `heartsSymbol` é "♡"
 ```
 
-
-
-
-Para o exemplo acima,
+No exemplo acima,
 isso permite que os nomes de `Suit`, `Rank`, e `Values` sejam mantidos curtos de forma deliberada,
 pois seus nomes são naturalmente qualificados pelo contexto os quais eles são definidos.
-
-
-
