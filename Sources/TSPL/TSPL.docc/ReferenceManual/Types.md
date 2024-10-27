@@ -2,6 +2,8 @@
 
 # Tipos
 
+Use built-in named and compound types.
+
 Em Swift, existem dois tipos de dados: tipos nomeados e tipos compostos.
 Um *tipo nomeado* é um tipo que pode receber um nome específico quando é definido.
 Tipos nomeados incluem classes, structs, enums, e protocolos.
