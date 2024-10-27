@@ -2,6 +2,8 @@
 
 # Operadores Avançados
 
+Define custom operators, perform bitwise operations, and use builder syntax.
+
 Além dos operadores descritos no tópico <doc:OperadoresBasicos>,
 a linguagem Swift oferece o tópico Operadores Avançados que fazem manipulação de valores mais complexa. 
 Lá são incluídos operadores bit a bit e operadores com deslocamento que estamos familiarizados em C e Objective-C.
