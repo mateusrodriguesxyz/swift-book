@@ -801,11 +801,6 @@ serverResponseCode = nil
 // `serverResponseCode` agora não contém nenhum valor
 ```
 
-> Note: You can't use `nil` with non-optional constants and variables.
-> If a constant or variable in your code needs to work with
-> the absence of a value under certain conditions,
-> always declare it as an optional value of the appropriate type.
-
 Se você definir uma variável opcional sem fornecer um valor padrão,
 a variável será automaticamente definida como `nil`:
 
@@ -873,11 +868,11 @@ ou usando o operador `?.` descrito em <doc:OptionalChaining>.
 
 Você usa **_binding_ opcional** para descobrir se um opcional contém um valor,
 e se sim, para tornar esse valor disponível como uma constante ou variável temporária.
-Um _binding_ opcional pode ser usada com instruções `if` e `while`
+Um _binding_ opcional pode ser usada com instruções `if`, `guard` e `while`
 para verificar um valor dentro de um opcional,
 e para extrair esse valor em uma constante ou variável,
 como parte de uma única ação.
-As instruções `if` e `while` são descritas em mais detalhes em <doc:ControlFlow>.
+Para mais informações sobre `if`, `guard` e `while`, consulte <doc:ControlFlow>.
 
 Escreva um _binding_ opcional para uma instrução `if` da seguinte maneira:
 
